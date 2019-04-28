@@ -5,10 +5,16 @@
   ],
   "scripts": {
     "test": "jest",
-    "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\" -e \"*.spec.ts\""
+    "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-function-name": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.11",
     "@types/node": "^11.13.8",
+    "babel-jest": "^24.7.1",
     "husky": "^2.1.0",
     "jest": "^24.7.1",
     "lerna": "^3.13.4",

@@ -2,7 +2,7 @@
   "name": "http-mockjs-util",
   "version": "0.0.0",
   "description": "> TODO: description",
-  "author": "刘放 <362512489@qq.com>",
+  "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker#readme",
   "license": "ISC",
   "main": "lib/colo",

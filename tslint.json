@@ -1,6 +1,11 @@
 {
   "defaultSeverity": "error",
   "extends": ["tslint:recommended"],
+  "linterOptions":{
+    "exclude":[
+      "**/*.spec.ts"
+    ]
+  },
   "jsRules": {
     "no-unused-expression": true
   },
@@ -32,7 +37,10 @@
     "one-variable-per-declaration": [false],
     "no-return-await": true,
     "match-default-export-name": true,
-    "prefer-readonly": true
+    "prefer-readonly": true,
+    "semicolon": false,
+    "no-console": false,
+    "no-var-requires": false
   },
   "rulesDirectory": []
 }
