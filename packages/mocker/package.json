@@ -26,6 +26,7 @@
   "dependencies": {
     "cosmiconfig": "^5.2.0",
     "deepmerge": "^3.2.0",
+    "http-mockjs-util": "^0.0.0",
     "semver": "^6.0.0"
   },
   "engines": {
