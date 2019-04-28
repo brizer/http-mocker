@@ -2,6 +2,7 @@ const color = require('../packages/util/color');
 const msgPath = process.env.HUSKY_GIT_PARAMS
 const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()
 
+console.log(msg)
 const commitRE = /^(v\d+\.\d+\.\d+(-(alpha|beta|rc.\d+))?$)|((revert: )?(feat|fix|docs|style|refactor|perf|test|workflow|ci|chore|types|build)(\(.+\))?: .{1,50})/
 
 if (!commitRE.test(msg)) {
