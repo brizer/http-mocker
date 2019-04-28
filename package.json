@@ -8,6 +8,7 @@
     "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\" -e \"*.spec.ts\""
   },
   "devDependencies": {
+    "@types/node": "^11.13.8",
     "husky": "^2.1.0",
     "jest": "^24.7.1",
     "lerna": "^3.13.4",
@@ -15,15 +16,18 @@
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
-  "lint-staged":{
-    "packages/**/*.ts":[
+  "lint-staged": {
+    "packages/**/*.ts": [
       "npm run lint"
     ]
   },
-  "husky":{
-    "hooks":{
+  "husky": {
+    "hooks": {
       "pre-commit": "lint-staged",
-      "commit-meg": "node scripts/verifyCommitMsg.js"
+      "commit-msg": "tsc ./scripts/verifyCommitMsg.ts"
     }
+  },
+  "engines": {
+    "node": ">= 8.9.1"
   }
 }
