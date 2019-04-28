@@ -1,7 +1,4 @@
 "use strict";
-// const color = require('../packages/util/lib/color');
-// const msgPath = process.env.HUSKY_GIT_PARAMS
-// const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()
 exports.__esModule = true;
 var fs = require("fs");
 var color_1 = require("../packages/util/lib/color");
