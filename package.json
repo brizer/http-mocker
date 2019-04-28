@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "tslint -p tsconfig.json -c tslint.json \"packages/**/*.ts\" -e \"*.spec.ts\""
+  },
+  "devDependencies": {
+    "husky": "^2.1.0",
+    "jest": "^24.7.1",
+    "lerna": "^3.13.4",
+    "lint-staged": "^8.1.5",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  },
+  "lint-staged":{
+    "packages/**/*.ts":[
+      "npm run lint"
+    ]
+  },
+  "husky":{
+    "hooks":{
+      "pre-commit": "lint-staged",
+      "commit-meg": "node scripts/verifyCommitMsg.js"
+    }
+  }
+}

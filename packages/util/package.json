@@ -1,0 +1,26 @@
+{
+  "name": "http-mockjs-util",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "刘放 <362512489@qq.com>",
+  "homepage": "https://github.com/brizer/http-mocker#readme",
+  "license": "ISC",
+  "main": "lib/colo",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brizer/http-mocker.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/brizer/http-mocker/issues"
+  }
+}
