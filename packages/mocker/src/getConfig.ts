@@ -1,4 +1,4 @@
-import cosmiconfig from 'cosmiconfig'
+import * as cosmiconfig from 'cosmiconfig';
 import { Config } from '../declations/Config';
 import * as defaultConf from './defaultConfig'
 

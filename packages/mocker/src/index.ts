@@ -1,9 +1,10 @@
-import semver from 'semver'
-import express from 'express'
+import * as semver from 'semver'
+import * as express from 'express'
 import color from 'http-mockjs-util/color'
 import getConfig from './getConfig'
 import proxy from './proxy'
-import * as pkg from '../package.json'
+
+const pkg = require('../package.json')
 const requiredVersion = pkg.engines.node
 
 const out = ()=>{
@@ -20,10 +21,11 @@ const out = ()=>{
   const config = getConfig(__dirname)
 
   app.get('/*',(req, res, next)=>{
-  const proxyURL = `${req.method} ${req.path}`
-  const proxyLists = config;
-  console.log(proxyLists)
+    const proxyURL = `${req.method} ${req.path}`
+    const proxyLists = config.routes;
+    console.log(proxyLists)
   })
+  console.log('hehe')
   app.listen(3000)
 }
 

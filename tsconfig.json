@@ -3,11 +3,9 @@
     "module": "commonjs",
     "target": "es2015",
     "lib": ["es2017"],
-    "resolveJsonModule":true,
+    "resolveJsonModule":false,
+    "allowJs": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "rootDir":"./src",
-    "outDir": "./lib"
-  },
-  "include": ["packages/**/*"]
+    "allowSyntheticDefaultImports": true
+  }
 }
