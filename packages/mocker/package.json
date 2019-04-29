@@ -30,7 +30,8 @@
     "express": "^4.16.4",
     "http-mockjs-util": "^0.0.0",
     "http-proxy": "^1.17.0",
-    "semver": "^6.0.0"
+    "semver": "^6.0.0",
+    "url": "^0.11.0"
   },
   "engines": {
     "node": ">=8.9.1"

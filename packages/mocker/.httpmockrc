@@ -1,13 +1,13 @@
 {
     "mockFileName":"mymocks",
     "routes":{
-        "GET j/getScoreComponentsAndSetting.json":
+        "GET /j/getScoreComponentsAndSetting.json":
         {
-            "path": "api/getScoreComponentsAndSetting.json/data"
+            "path": "/api/get.json"
         },
-        "POST p/postScoreComponentsAndSetting.do":
+        "POST /p/postScoreComponentsAndSetting.do":
         {
-            "path": "api/postScoreComponentsAndSetting.do/data"
+            "path": "/api/post.json"
         }
     }
 }
