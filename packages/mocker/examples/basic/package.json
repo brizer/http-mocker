@@ -1,0 +1,10 @@
+{
+    "httpmock":{
+        "mockFileName":"mymocks",
+        "routes":{
+            "getsomething.do":{
+                "path":"getsomething/data"
+            }
+        }
+    }
+}

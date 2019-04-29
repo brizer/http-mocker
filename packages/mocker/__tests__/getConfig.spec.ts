@@ -8,7 +8,7 @@ let testConf = {
         mockFileName : 'customFile'
     }
 }
-const getConfig = require('../lib/getConfig').default;
+const getConfig = require('../src/getConfig').default;
 describe('getConfig', () => {
     test('with no config, should return default', () => {
         const config = getConfig(path.join(__dirname,'../../'))
@@ -25,14 +25,12 @@ describe('getConfig', () => {
         )
         const config = getConfig(dir)
 
-        expect(config).toEqual(testConf.httpmock)
+        expect(config.mockFileName).toEqual(testConf.httpmock.mockFileName)
     })
 
     test('with config in .httpmockrc, should return the result', () => {
         const config = getConfig(path.join(__dirname,'../'))
-        expect(config).toEqual({
-            'mockFileName':'mymocks'
-        })
+        expect(config.mockFileName).toEqual('mymocks')
     })
 
 });
