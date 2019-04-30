@@ -1,4 +1,9 @@
 
+export interface Options {
+    port:number
+}
+
 export interface outParams {
-    app:object
+    app:object,
+    options:Options
 }

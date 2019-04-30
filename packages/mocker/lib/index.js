@@ -4,9 +4,10 @@ const semver = require("semver");
 const color_1 = require("http-mockjs-util/color");
 const getConfig_1 = require("./getConfig");
 const proxy_1 = require("./proxy");
+const deepmerge = require('deepmerge');
 const pkg = require('../package.json');
 const requiredVersion = pkg.engines.node;
-const out = (app) => {
+const out = (app, options) => {
     // judge the node version first
     if (!semver.satisfies(process.version, requiredVersion)) {
         console.error(`${color_1.default('Error ').red} You are using Node ${process.version}, but http-mockjs ` +
@@ -14,6 +15,7 @@ const out = (app) => {
         process.exit(1);
     }
     const config = getConfig_1.default(process.cwd());
-    proxy_1.default(app, config);
+    const proxyOptions = deepmerge(config, options);
+    proxy_1.default(app, proxyOptions);
 };
 exports.default = out;

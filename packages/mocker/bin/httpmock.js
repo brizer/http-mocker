@@ -1,10 +1,19 @@
 #!/usr/bin/env node
 const express = require('express')
-const mocker = require('../lib/index')
+const portfinder = require('portfinder')
+const color = require('http-mockjs-util/color').default
+const mocker = require('../lib/index').default
 
-console.log('init proxy')
+
 const app = express();
 
-mocker.default(app)
+portfinder.getPortPromise().then(port=>{
+    mocker(app,{
+        port:port
+    })
+    app.listen(port)
+    console.log(color(`init proxy in port: ${port}`).green)
+}).catch(err=>{
+    console.log(`${color(err).red}`)
+})
 
-app.listen(8080);

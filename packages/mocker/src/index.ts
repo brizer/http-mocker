@@ -2,12 +2,13 @@ import * as semver from 'semver'
 import color from 'http-mockjs-util/color'
 import getConfig from './getConfig'
 import proxy from './proxy'
+import {Options} from '../declations/Index'
 
-
+const deepmerge = require('deepmerge')
 const pkg = require('../package.json')
 const requiredVersion = pkg.engines.node
 
-const out = (app) => {
+const out = (app,options:Options) => {
   // judge the node version first
   if (!semver.satisfies(process.version, requiredVersion)) {
     console.error(
@@ -18,8 +19,9 @@ const out = (app) => {
   }
 
   const config = getConfig(process.cwd())
+  const proxyOptions = deepmerge(config,options)
 
-  proxy(app,config)
+  proxy(app,proxyOptions)
 }
 
 export default out
