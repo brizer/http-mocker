@@ -1,6 +1,6 @@
 
 export interface Options {
-    port:number
+    port?:number
 }
 
 export interface outParams {

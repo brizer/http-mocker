@@ -8,8 +8,9 @@ const deepmerge = require('deepmerge')
 const pkg = require('../package.json')
 const requiredVersion = pkg.engines.node
 
-const out = (app,options:Options) => {
+const out = (app,options:Options|any) => {
   // judge the node version first
+  options = options||{}
   if (!semver.satisfies(process.version, requiredVersion)) {
     console.error(
       `${color('Error ').red} You are using Node ${process.version}, but http-mockjs ` +

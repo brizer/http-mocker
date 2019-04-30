@@ -9,6 +9,7 @@ const pkg = require('../package.json');
 const requiredVersion = pkg.engines.node;
 const out = (app, options) => {
     // judge the node version first
+    options = options || {};
     if (!semver.satisfies(process.version, requiredVersion)) {
         console.error(`${color_1.default('Error ').red} You are using Node ${process.version}, but http-mockjs ` +
             `requires Node ${requiredVersion}.\nPlease upgrade your Node version.`);

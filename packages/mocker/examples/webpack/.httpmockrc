@@ -1,0 +1,12 @@
+{
+    "routes":{
+        "GET /j/getSomeData.json":
+        {
+            "path": "/api/get.json"
+        },
+        "POST /p/postData.do":
+        {
+            "path": "/api/post.json"
+        }
+    }
+}
