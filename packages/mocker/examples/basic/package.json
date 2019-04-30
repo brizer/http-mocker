@@ -7,6 +7,9 @@
         "routes":{
             "GET /getsomething.do":{
                 "path":"/api/get.json"
+            },
+            "POST /postsomething.do":{
+                "path":"/api/post.json"
             }
         }
     }
