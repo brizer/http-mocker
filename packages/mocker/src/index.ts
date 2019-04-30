@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as  path from 'path'
 import * as http from 'http'
 import * as semver from 'semver'
+import * as express from 'express'
 import color from 'http-mockjs-util/color'
 import getConfig from './getConfig'
 import proxy from './proxy'
@@ -11,7 +12,7 @@ import * as httpProxy from 'http-proxy'
 const pkg = require('../package.json')
 const requiredVersion = pkg.engines.node
 
-const out = ()=>{
+const out = (app) => {
   // judge the node version first
   if (!semver.satisfies(process.version, requiredVersion)) {
     console.error(
@@ -21,29 +22,34 @@ const out = ()=>{
     process.exit(1)
   }
 
-  const config = getConfig(__dirname)
+  const config = getConfig(process.cwd())
 
   const serveProxy = httpProxy.createProxyServer({})
-
-  http.createServer((req,res)=>{
-    serveProxy.web(req,res,{
-      target:'http://localhost:9008'
+  http.createServer((req, res) => {
+    serveProxy.web(req, res, {
+      target: 'http://localhost:8080'
     })
-  }).listen(8008)
+  }).listen(8009)
 
-  http.createServer((req,res)=>{
-    const proxyURL = `${req.method} ${req.url}`
+
+  app.all('/*', (req, res, next) => {
+    const proxyURL = `${req.method} ${req.path}`;
     const proxyLists = config.routes;
-    const proxyMatch = proxyLists[proxyURL]
+    console.log(process.cwd())
+    console.log(proxyURL);
+    console.log(proxyLists)
+    const proxyMatch = proxyLists[proxyURL];
     //if there is a request config in the config file
-    if(proxyMatch){
-      console.log(proxyURL)
-      const curPath = path.join(process.cwd(),config.mockFileName, proxyMatch.path)
-      const responseBody = fs.readFileSync(curPath,'utf-8')
-      res.write(responseBody)
+    if (proxyMatch) {
+      const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
+      const responseBody = fs.readFileSync(curPath, 'utf-8');
+      res.send(responseBody);
+      res.end();
     }
-    res.end()
-  }).listen(9008)
+    else {
+      next();
+    }
+  });
 }
 
 export default out

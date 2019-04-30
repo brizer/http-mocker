@@ -1,9 +1,12 @@
 {
+    "scripts": {
+        "mock":"http-mockjs"
+    },
     "httpmock":{
         "mockFileName":"mymocks",
         "routes":{
-            "getsomething.do":{
-                "path":"getsomething/data"
+            "GET /getsomething.do":{
+                "path":"/api/get.json"
             }
         }
     }

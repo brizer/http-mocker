@@ -7,7 +7,7 @@
     "test": "npm run buildmocker && jest",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
-    "demo01":"npm run buildmocker && cd packages/mocker/examples/basic && node index.js"
+    "demo01":"npm run buildmocker && cd packages/mocker/examples/basic && httpmock"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
