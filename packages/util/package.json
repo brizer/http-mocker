@@ -1,17 +1,16 @@
 {
   "name": "http-mockjs-util",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "> TODO: description",
   "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker#readme",
   "license": "ISC",
-  "main": "lib/colo",
+  "main": "color",
   "directories": {
-    "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "color.js"
   ],
   "repository": {
     "type": "git",

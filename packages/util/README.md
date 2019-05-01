@@ -1,11 +1,5 @@
-# `util`
+# `http-mockjs-util`
 
-> TODO: description
 
-## Usage
+Util tools for http-mockjs
 
-```
-const util = require('util');
-
-// TODO: DEMONSTRATE API
-```

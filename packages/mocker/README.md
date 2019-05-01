@@ -1,11 +1,3 @@
-# `mocker`
+# http-mockjs
 
-> TODO: description
-
-## Usage
-
-```
-const mocker = require('mocker');
-
-// TODO: DEMONSTRATE API
-```
+The core feature package of http-mockjs
