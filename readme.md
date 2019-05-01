@@ -1,6 +1,6 @@
 # http-mockjs
 
-[中文文档](./README_ZH.md)
+[中文文档](./readme_zh.md)
 
 
 A tool for the local mock interface.
@@ -46,7 +46,7 @@ Mapping management of the corresponding interface
 
 Config in `devServer.before`
 
-``` json
+``` js
   devServer:{
     before:(app)=>{
       mocker(app)
