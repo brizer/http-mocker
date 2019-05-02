@@ -1,0 +1,14 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      axios.get("/getsomething.do").then(data => {
+        console.warn(data);
+      });
+    </script>
+  </body>
+</html>

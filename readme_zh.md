@@ -42,13 +42,15 @@ mock文件存放的根路径
 
 在devServer参数中设置：
 
-``` json
+``` js
   devServer:{
     before:(app)=>{
       mocker(app)
     }
   }
 ```
+
+[demo](https://github.com/brizer/http-mocker/blob/dev/packages/mocker/examples/webpack/package.json)
 
 
 ### 与express配合
@@ -63,3 +65,16 @@ mocker(app)
 app.listen(8002)
 
 ```
+
+
+### 与http-server等命令行工具使用：
+
+通过代理http-server，将请求代理到httpmock启动的代理服务器上。
+``` json
+  "scripts": {
+    "serve": "http-server -p 8008 -P http://localhost:8001/",
+    "mock": "httpmock 8001"
+  },
+```
+
+[demo](https://github.com/brizer/http-mocker/blob/dev/packages/mocker/examples/commander/package.json)

@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "mock":"http-mockjs"
+        "mock":"httpmock 8001"
     },
     "httpmock":{
         "mockFileName":"mymocks",

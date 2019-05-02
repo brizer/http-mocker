@@ -1,0 +1,29 @@
+{
+  "name": "commander",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "http-server -p 8008 -P http://localhost:8001/",
+    "mock": "httpmock 8001",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "http-mockjs": "^1.0.2",
+    "http-server": "^0.11.1"
+  },
+  "httpmock": {
+    "mockFileName": "mymocks",
+    "routes": {
+      "GET /getsomething.do": {
+        "path": "/api/get.json"
+      },
+      "POST /postsomething.do": {
+        "path": "/api/post.json"
+      }
+    }
+  }
+}
