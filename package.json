@@ -4,9 +4,11 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "npm run buildmocker && jest",
+    "test": "npm run build && jest",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
+    "buildutil": "cd packages/util && tsc",
+    "build": "npm run buildmocker && npm run buildutil",
     "demo01":"npm run buildmocker && cd packages/mocker/examples/basic && httpmock",
     "demo02":"npm run buildmocker && cd packages/mocker/examples/webpack && npm start"
   },

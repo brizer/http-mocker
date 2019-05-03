@@ -55,6 +55,9 @@ Config in `devServer.before`
 ```
 
 
+[demo](https://github.com/brizer/http-mocker/blob/dev/packages/mocker/examples/webpack/package.json)
+
+
 ### working with express
 
 set app into mocker:

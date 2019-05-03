@@ -1,17 +1,22 @@
 {
-  "name": "http-mockjs-util",
-  "version": "1.0.1",
-  "description": "> TODO: description",
-  "author": "brizer <brizer@163.com>",
+  "name": "http-mockjs-middleware",
+  "version": "1.0.0",
+  "description": "middleware for http-mockjs",
+  "keywords": [
+    "middleware",
+    "http",
+    "mock"
+  ],
+  "author": "刘放 <362512489@qq.com>",
   "homepage": "https://github.com/brizer/http-mocker#readme",
-  "license": "ISC",
-  "main": "color",
+  "license": "MIT",
+  "main": "lib/middleware.js",
   "directories": {
+    "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "color.js",
-    "version.js"
+    "lib"
   ],
   "repository": {
     "type": "git",
@@ -22,8 +27,5 @@
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"
-  },
-  "dependencies": {
-    "semver": "^6.0.0"
   }
 }
