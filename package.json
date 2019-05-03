@@ -35,7 +35,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "tsc ./scripts/verifyCommitMsg.ts &&  node ./scripts/verifyCommitMsg.js"
+      "commit-msg": "node ./scripts/verifyCommitMsg.js"
     }
   },
   "engines": {
