@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run build && jest",
     "lint": "tslint -p tsconfig.json -c tslint.json",
+    "buildmiddleware": "cd packages/middleware && rm -rf lib && tsc",
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
     "buildutil": "cd packages/util && tsc",
     "build": "npm run buildmocker && npm run buildutil",

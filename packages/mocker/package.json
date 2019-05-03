@@ -34,7 +34,6 @@
     "http-mockjs-util": "^1.0.0",
     "http-proxy": "^1.17.0",
     "portfinder": "^1.0.20",
-    "semver": "^6.0.0",
     "url": "^0.11.0"
   },
   "engines": {

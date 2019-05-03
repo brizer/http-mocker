@@ -1,6 +1,3 @@
-import * as semver from 'semver'
-import color from 'http-mockjs-util/color'
-import vertion from 'http-mockjs-util/version'
 import getConfig from './getConfig'
 import proxy from './proxy'
 import {Options} from '../declations/Index'
