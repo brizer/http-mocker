@@ -10,8 +10,9 @@
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
     "buildutil": "cd packages/util && tsc",
     "build": "npm run buildmocker && npm run buildutil",
-    "demo01":"npm run buildmocker && cd packages/mocker/examples/basic && httpmock",
-    "demo02":"npm run buildmocker && cd packages/mocker/examples/webpack && npm start"
+    "demo:basic":"npm run build && cd packages/mocker/examples/basic && httpmock",
+    "demo:webpack":"npm run build && cd packages/mocker/examples/webpack && npm start",
+    "demo:command":"npm run build && cd packages/mocker/examples/commander && (npm run serve | npm run mock)"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

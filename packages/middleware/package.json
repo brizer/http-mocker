@@ -27,5 +27,8 @@
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"
+  },
+  "dependencies": {
+    "http-mockjs": "^1.0.3"
   }
 }
