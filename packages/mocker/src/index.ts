@@ -1,8 +1,10 @@
 import * as semver from 'semver'
 import color from 'http-mockjs-util/color'
+import vertion from 'http-mockjs-util/version'
 import getConfig from './getConfig'
 import proxy from './proxy'
 import {Options} from '../declations/Index'
+import version from 'http-mockjs-util/version';
 
 const deepmerge = require('deepmerge')
 const pkg = require('../package.json')
@@ -11,11 +13,7 @@ const requiredVersion = pkg.engines.node
 const out = (app,options:Options|any) => {
   // judge the node version first
   options = options||{}
-  if (!semver.satisfies(process.version, requiredVersion)) {
-    console.error(
-      `${color('Error ').red} You are using Node ${process.version}, but http-mockjs ` +
-      `requires Node ${requiredVersion}.\nPlease upgrade your Node version.`
-    )
+  if(!version.isNodeVersionsupport(requiredVersion)){
     process.exit(1)
   }
 
