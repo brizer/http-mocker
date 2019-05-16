@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import * as httpProxy from 'http-proxy'
 import * as portfinder from 'portfinder'
+import * as mock from 'mockjs'
 import color from 'http-mockjs-util/color'
 import { Config } from '../declations/Config';
 /**
@@ -53,7 +54,8 @@ const proxy = async (app, config: Config) => {
         if (proxyMatch) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
-            res.send(responseBody);
+            const result = mock.mock(responseBody)
+            res.send(result);
             res.end();
         }
         else {

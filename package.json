@@ -10,9 +10,9 @@
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
     "buildutil": "cd packages/util && tsc",
     "build": "npm run buildmocker && npm run buildutil",
-    "demo:basic":"npm run build && cd packages/mocker/examples/basic && httpmock",
-    "demo:webpack":"npm run build && cd packages/mocker/examples/webpack && npm start",
-    "demo:command":"npm run build && cd packages/mocker/examples/commander && (npm run serve | npm run mock)"
+    "demo:basic": "npm run build && cd packages/mocker/examples/basic && httpmock",
+    "demo:webpack": "npm run build && cd packages/mocker/examples/webpack && npm start",
+    "demo:command": "npm run build && cd packages/mocker/examples/commander && (npm run serve | npm run mock)"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
     "@types/jest": "^24.0.11",
+    "@types/mockjs": "^1.0.2",
     "@types/node": "^11.13.8",
     "babel-jest": "^24.7.1",
     "husky": "^2.1.0",
@@ -30,9 +31,7 @@
     "typescript": "^3.4.5"
   },
   "lint-staged": {
-    "packages/**/*.ts": [
-      
-    ]
+    "packages/**/*.ts": []
   },
   "husky": {
     "hooks": {
@@ -42,5 +41,8 @@
   },
   "engines": {
     "node": ">= 8.9.1"
+  },
+  "dependencies": {
+    "mockjs": "^1.0.1-beta3"
   }
 }

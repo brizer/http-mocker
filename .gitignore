@@ -5,6 +5,7 @@ node_modules/
 /.idea
 /.awcache
 /.vscode
+/.history
 
 # misc
 .DS_Store

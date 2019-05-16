@@ -13,6 +13,7 @@ const path = require("path");
 const fs = require("fs");
 const httpProxy = require("http-proxy");
 const portfinder = require("portfinder");
+const mock = require("mockjs");
 const color_1 = require("http-mockjs-util/color");
 /**
  * Print proxy init info
@@ -62,7 +63,8 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
         if (proxyMatch) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
-            res.send(responseBody);
+            const result = mock.mock(responseBody);
+            res.send(result);
             res.end();
         }
         else {
