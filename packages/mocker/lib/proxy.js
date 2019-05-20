@@ -12,7 +12,6 @@ const http = require("http");
 const path = require("path");
 const fs = require("fs");
 const httpProxy = require("http-proxy");
-const portfinder = require("portfinder");
 const mock = require("mockjs");
 const color_1 = require("http-mockjs-util/color");
 /**
@@ -40,13 +39,12 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     const serveProxy = httpProxy.createProxyServer({});
     const proxyLists = config.routes;
     let port = 8009;
-    try {
-        //get an idle port
-        port = yield portfinder.getPortPromise();
-    }
-    catch (error) {
-        console.log(color_1.default(`${error}`).red);
-    }
+    // try {
+    //     //get an idle port
+    //     port = await portfinder.getPortPromise()
+    // } catch (error) {
+    //     console.log(color(`${error}`).red)
+    // }
     //print info
     printProxyInfo(config);
     //create a proxy server

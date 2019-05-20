@@ -31,12 +31,12 @@ const proxy = async (app, config: Config) => {
     const serveProxy = httpProxy.createProxyServer({})
     const proxyLists = config.routes;
     let port = 8009 ;
-    try {
-        //get an idle port
-        port = await portfinder.getPortPromise()
-    } catch (error) {
-        console.log(color(`${error}`).red)
-    }
+    // try {
+    //     //get an idle port
+    //     port = await portfinder.getPortPromise()
+    // } catch (error) {
+    //     console.log(color(`${error}`).red)
+    // }
     //print info
     printProxyInfo(config)
     //create a proxy server
