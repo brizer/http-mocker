@@ -39,7 +39,7 @@ const printProxyInfo = (config) => {
 const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     const serveProxy = httpProxy.createProxyServer({});
     const proxyLists = config.routes;
-    let port = 8009;
+    let port = config.port | 8009;
     // try {
     //     //get an idle port
     //     port = await portfinder.getPortPromise()

@@ -14,5 +14,6 @@
         "GET /users/:id+":{
             "path": "/api/info.json"
         }
-    }
+    },
+    "port":8002
 }
