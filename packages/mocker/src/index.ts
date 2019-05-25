@@ -20,4 +20,4 @@ const out = (app,options:Options|any) => {
   proxy(app,proxyOptions)
 }
 
-export default out
+export const mocker =  out

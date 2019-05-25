@@ -16,4 +16,4 @@ const out = (app, options) => {
     const proxyOptions = deepmerge(config, options);
     proxy_1.default(app, proxyOptions);
 };
-exports.default = out;
+exports.mocker = out;

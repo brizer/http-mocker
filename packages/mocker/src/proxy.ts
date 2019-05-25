@@ -3,9 +3,10 @@ import * as path from 'path'
 import * as fs from 'fs'
 import * as httpProxy from 'http-proxy'
 import * as portfinder from 'portfinder'
+import * as pathToRegexp from 'path-to-regexp'
 import * as mock from 'mockjs'
 import color from 'http-mockjs-util/color'
-import { Config } from '../declations/Config';
+import { Config, Routes } from '../declations/Config';
 /**
  * Print proxy init info
  * @param {object} config - config info
@@ -48,8 +49,18 @@ const proxy = async (app, config: Config) => {
     
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
-        const proxyURL = `${req.method} ${req.path}`;
-        const proxyMatch = proxyLists[proxyURL];
+        const proxyURL:string = `${req.method} ${req.path}`;
+        let proxyMatch:Routes = proxyLists[proxyURL];
+        
+        //to adapte express router url style such as user/:id and so on:
+        Object.keys(proxyLists).forEach((key,index)=>{
+            const re = pathToRegexp(key)
+            if(re.exec(proxyURL)){
+                proxyMatch = proxyLists[key]
+            }
+        })
+
+
         //if there is a request config in the config file
         if (proxyMatch) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);

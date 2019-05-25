@@ -7,6 +7,12 @@
         "POST /p/postData.do":
         {
             "path": "/api/post.json"
+        },
+        "GET /user/:id":{
+            "path": "/api/user.json"
+        },
+        "GET /users/:id+":{
+            "path": "/api/info.json"
         }
     }
 }

@@ -12,6 +12,7 @@ const http = require("http");
 const path = require("path");
 const fs = require("fs");
 const httpProxy = require("http-proxy");
+const pathToRegexp = require("path-to-regexp");
 const mock = require("mockjs");
 const color_1 = require("http-mockjs-util/color");
 /**
@@ -56,7 +57,14 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
         const proxyURL = `${req.method} ${req.path}`;
-        const proxyMatch = proxyLists[proxyURL];
+        let proxyMatch = proxyLists[proxyURL];
+        //to adapte express router url style such as user/:id and so on:
+        Object.keys(proxyLists).forEach((key, index) => {
+            const re = pathToRegexp(key);
+            if (re.exec(proxyURL)) {
+                proxyMatch = proxyLists[key];
+            }
+        });
         //if there is a request config in the config file
         if (proxyMatch) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);

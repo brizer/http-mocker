@@ -34,6 +34,7 @@
     "http-mockjs-util": "^1.1.0",
     "http-proxy": "^1.17.0",
     "mockjs": "^1.0.1-beta3",
+    "path-to-regexp": "^3.0.0",
     "portfinder": "^1.0.20",
     "url": "^0.11.0"
   },
