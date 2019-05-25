@@ -8,6 +8,8 @@ A tool for the local mock interface.
 It has the following features:
 
 1. Perform the mock mapping relationship through the httpmock field in the package.json , or configuration file .httpmockrc.
+2. Support [mockjs]((https://www.npmjs.com/package/mockjs)) syntax, flexible configuration of dynamic mock return value;
+3. Identify express-style urls based on [path-to-regexp](https://www.npmjs.com/package/path-to-regexp)
 
 
 ---
@@ -29,17 +31,44 @@ Take a configuration file `.httpmockrc` as an example:
         "POST /p/postData.do":
         {
             "path": "/api/post.json"
+        },
+        "GET /user/:id":{
+            "path": "/api/user.json"
+        },
+        "GET /users/:id+":{
+            "path": "/api/info.json"
         }
     }
 }
 ```
 
+Return the file content demo as follows, you can use the mockjs style:
+
+```
+{
+    "code":0,
+    "message":"success",
+    "result":{
+        "content":true,
+        "name":"brizer123",
+        "domain":"@domain()",
+        "otherUrl":"@url()",
+        "desciption":"@cparagraph(1, 3)",
+        "date":"@date('yyyy-MM-dd')"
+    }
+}
+```
+
 #### mockFileName
-The root path where the mock file is stored
+The root path where the mock file is stored, default is `mocks`
 
 #### routes
 
 Mapping management of the corresponding interface
+
+#### port
+
+Which port to start mock server, default is 8009
 
 
 ### working with webpack-dev-server
@@ -64,6 +93,7 @@ set app into mocker:
 
 ``` js
 const app = express();
+const {mocker} = require('http-mockjs')
 
 mocker(app)
 

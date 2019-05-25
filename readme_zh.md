@@ -5,6 +5,8 @@
 它拥有以下功能：
 
 1、通过配置文件.httpmockrc或者package.json文件中的httpmock字段来进行mock映射关系；
+2、支持[mockjs](https://www.npmjs.com/package/mockjs)语法,灵活配置动态化的mock返回值;
+3、基于[path-to-regexp](https://www.npmjs.com/package/path-to-regexp)识别express风格的url
 
 ---
 
@@ -25,18 +27,44 @@
         "POST /p/postData.do":
         {
             "path": "/api/post.json"
+        },
+        "GET /user/:id":{
+            "path": "/api/user.json"
+        },
+        "GET /users/:id+":{
+            "path": "/api/info.json"
         }
     }
 }
 ```
 
+返回文件内容demo如下，可以使用mockjs风格
+
+```
+{
+    "code":0,
+    "message":"success",
+    "result":{
+        "content":true,
+        "name":"brizer123",
+        "domain":"@domain()",
+        "otherUrl":"@url()",
+        "desciption":"@cparagraph(1, 3)",
+        "date":"@date('yyyy-MM-dd')"
+    }
+}
+```
+
 #### mockFileName
-mock文件存放的根路径
+mock文件存放的根路径，默认是`mocks`
 
 #### routes
 
 对应接口的映射管理
 
+#### port
+
+开启mockserver的端口，默认是8009
 
 ### 与webpack-dev-server配合
 
@@ -59,6 +87,7 @@ mock文件存放的根路径
 
 ``` js
 const app = express();
+const {mocker} = require('http-mockjs')
 
 mocker(app)
 
