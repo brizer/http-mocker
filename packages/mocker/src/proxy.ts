@@ -6,7 +6,9 @@ import * as portfinder from 'portfinder'
 import * as pathToRegexp from 'path-to-regexp'
 import * as mock from 'mockjs'
 import color from 'http-mockjs-util/color'
-import { Config, Routes } from '../declations/Config';
+import { watch } from 'chokidar'
+import { getConfigPath, default as getConfig } from './getConfig'
+import { Config, Routes } from '../declations/Config'
 /**
  * Print proxy init info
  * @param {object} config - config info
@@ -30,7 +32,7 @@ const printProxyInfo = (config:Config) =>{
  */
 const proxy = async (app, config: Config) => {
     const serveProxy = httpProxy.createProxyServer({})
-    const proxyLists = config.routes;
+    let proxyLists = config.routes;
     let port:number = config.port | 8009 ;
     // try {
     //     //get an idle port
@@ -40,6 +42,17 @@ const proxy = async (app, config: Config) => {
     // }
     //print info
     printProxyInfo(config)
+
+    //watch config file changes
+    const configPath:string = getConfigPath()
+    const watcher = watch(configPath)
+    watcher.on('all',path=>{
+        const config = getConfig(process.cwd())
+        proxyLists = config.routes
+        console.log(color('config file content has changed').green)
+    })
+
+
     //create a proxy server
     http.createServer((req, res) => {
         serveProxy.web(req, res, {

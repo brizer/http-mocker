@@ -15,6 +15,8 @@ const httpProxy = require("http-proxy");
 const pathToRegexp = require("path-to-regexp");
 const mock = require("mockjs");
 const color_1 = require("http-mockjs-util/color");
+const chokidar_1 = require("chokidar");
+const getConfig_1 = require("./getConfig");
 /**
  * Print proxy init info
  * @param {object} config - config info
@@ -38,7 +40,7 @@ const printProxyInfo = (config) => {
  */
 const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     const serveProxy = httpProxy.createProxyServer({});
-    const proxyLists = config.routes;
+    let proxyLists = config.routes;
     let port = config.port | 8009;
     // try {
     //     //get an idle port
@@ -48,6 +50,14 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     // }
     //print info
     printProxyInfo(config);
+    //watch config file changes
+    const configPath = getConfig_1.getConfigPath();
+    const watcher = chokidar_1.watch(configPath);
+    watcher.on('all', path => {
+        const config = getConfig_1.default(process.cwd());
+        proxyLists = config.routes;
+        console.log(color_1.default('config file content has changed').green);
+    });
     //create a proxy server
     http.createServer((req, res) => {
         serveProxy.web(req, res, {

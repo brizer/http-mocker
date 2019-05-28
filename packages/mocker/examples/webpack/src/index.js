@@ -34,6 +34,7 @@ Axios.get('/users/foo/info').then(data=>{
 })
 
 
-Axios.get('http://study.163.com/users/foo/info').then(data=>{
-    pathNode2.innerHTML = data.data.name
+Axios.get('/j/new').then(data=>{
+    pathNode3.innerHTML = data.data.name
 })
+
