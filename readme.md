@@ -8,7 +8,7 @@ A tool for the local mock interface.
 It has the following features:
 
 1. Perform the mock mapping relationship through the httpmock field in the package.json , or configuration file .httpmockrc.
-2. Support [mockjs]((https://www.npmjs.com/package/mockjs)) syntax, flexible configuration of dynamic mock return value;
+2. Support [mockjs](https://www.npmjs.com/package/mockjs) syntax, flexible configuration of dynamic mock return value;
 3. Identify express-style urls based on [path-to-regexp](https://www.npmjs.com/package/path-to-regexp)
 
 
