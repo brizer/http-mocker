@@ -3,6 +3,7 @@ import Axios from ".0.18.0@axios";
 const contentNode = document.querySelector('#j-content')
 const pathNode1 = document.querySelector('#j-path-1')
 const pathNode2 = document.querySelector('#j-path-2')
+const pathNode3 = document.querySelector('#j-path-3')
 const sendNode = document.querySelector('#j-send')
 contentNode.innerHTML = 'hello world,anyone'
 
@@ -29,5 +30,10 @@ Axios.get('/user/12121').then(data=>{
 })
 
 Axios.get('/users/foo/info').then(data=>{
+    pathNode2.innerHTML = data.data.name
+})
+
+
+Axios.get('http://study.163.com/users/foo/info').then(data=>{
     pathNode2.innerHTML = data.data.name
 })

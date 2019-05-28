@@ -13,6 +13,9 @@
         },
         "GET /users/:id+":{
             "path": "/api/info.json"
+        },
+        "GET http://study.163.com/users/foo/info": {
+            "path": "/api/info.json"
         }
     },
     "port":8002
