@@ -1,4 +1,4 @@
-# http-mockjs
+# http-mockjs[![npm](https://img.shields.io/npm/v/http-mockjs.svg?maxAge=2592000)](https://www.npmjs.com/package/http-mockjs)
 
 [中文文档](./readme_zh.md)
 
