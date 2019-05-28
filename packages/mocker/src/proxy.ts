@@ -75,7 +75,7 @@ const proxy = async (app, config: Config) => {
 
 
         //if there is a request config in the config file
-        if (proxyMatch) {
+        if (proxyMatch && proxyMatch.ignore!== true) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
             const result = mock.mock(responseBody)

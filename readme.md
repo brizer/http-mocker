@@ -36,7 +36,8 @@ Take a configuration file `.httpmockrc` as an example:
             "path": "/api/user.json"
         },
         "GET /users/:id+":{
-            "path": "/api/info.json"
+            "path": "/api/info.json",
+            "ignore": true
         }
     }
 }
@@ -65,6 +66,17 @@ The root path where the mock file is stored, default is `mocks`
 #### routes
 
 Mapping management of the corresponding interface
+
+##### path
+
+Path of the mapped local mock file 
+
+##### ignore
+
+If set to true, skip this matching rule.
+
+Sometimes you want to keep the configuration, but you don't want it to take effect, for example, when an interface needs to directly call the result of the remote rather than the local mock. It is useful.
+
 
 #### port
 

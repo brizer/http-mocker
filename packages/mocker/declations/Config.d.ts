@@ -1,5 +1,12 @@
 interface Routes {
-    path: string
+    /**
+     * 
+     */
+    path: string,
+    /**
+     * Whether to ignore the rule
+     */
+    ignore: boolean
 }
 
 

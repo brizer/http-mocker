@@ -32,7 +32,8 @@
             "path": "/api/user.json"
         },
         "GET /users/:id+":{
-            "path": "/api/info.json"
+            "path": "/api/info.json",
+            "ignore": true
         }
     }
 }
@@ -61,6 +62,19 @@ mock文件存放的根路径，默认是`mocks`
 #### routes
 
 对应接口的映射管理
+
+
+##### path
+
+映射对应的本地mock文件的路径 
+
+##### ignore
+
+如果设置为true，则跳过该匹配规则.
+
+有时候你想要保留该配置，但是又不希望其生效，比如说某个接口需要直接调用远端而不是本地mock的结果时。可以用上它。
+
+
 
 #### port
 
