@@ -6,10 +6,11 @@
   "scripts": {
     "test": "npm run build && jest",
     "lint": "tslint -p tsconfig.json -c tslint.json",
+    "dev:editor:server": "cd packages/editor && ts-node --project ./tsconfig.server.json ./server/index.ts",
     "buildmiddleware": "cd packages/middleware && rm -rf lib && tsc",
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
     "buildutil": "cd packages/util && tsc",
-    "build:editor:server": "cd packages/editor/server && tsc --project ./tsconfig.server.json",
+    "build:editor:server": "cd packages/editor/server && tsc --project ../tsconfig.server.json",
     "build": "npm run buildmocker && npm run buildutil",
     "demo:basic": "npm run build && cd packages/mocker/examples/basic && httpmock",
     "demo:webpack": "npm run build && cd packages/mocker/examples/webpack && npm start",
@@ -28,6 +29,7 @@
     "jest": "^24.7.1",
     "lerna": "^3.13.4",
     "lint-staged": "^8.1.5",
+    "ts-node": "^8.2.0",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
