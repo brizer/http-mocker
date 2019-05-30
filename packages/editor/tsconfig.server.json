@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "rootDir": "./server",
+        "outDir": "./dist/server",
+        "module": "commonjs",
+        "target": "es2016",
+        "sourceMap": true,
+        "allowJs": true
+    },
+    "include": [
+        "server"
+    ]
+}
