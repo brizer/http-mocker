@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "rootDir": "./ui",
+        "outDir": "./dist/ui",
+        "module": "es2015",
+        "lib":["dom"],
+        "jsx": "react",
+        "target": "es5",
+        "sourceMap": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "./ui/index.tsx"
+    ]
+}

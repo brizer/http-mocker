@@ -3,10 +3,10 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = env => ({
-  entry: "./index.tsx",
+  entry: "./ui/index.tsx",
   mode: process.env.NODE_ENV,
   output: {
-    path: path.resolve(__dirname, "../dist/ui"),
+    path: path.resolve(__dirname, "./dist/ui"),
     filename: "ui.bundle.js"
   },
   resolve: {
@@ -33,7 +33,7 @@ module.exports = env => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-        template: path.resolve('./index.html')
+        template: path.resolve('./ui/index.html')
     }),
     new webpack.HotModuleReplacementPlugin()
   ]
