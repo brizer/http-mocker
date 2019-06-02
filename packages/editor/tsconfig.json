@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
+        "paths": { "*": ["types/*"] },
         "rootDir": "./ui",
         "outDir": "./dist/ui",
         "module": "es2015",

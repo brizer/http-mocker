@@ -1,8 +1,7 @@
 import React from 'react';
 import { createGlobalStyle } from "styled-components";
-
-const { normalize } = require('styled-normalize')
-
+import { DatePicker } from 'antd';
+import { normalize } from 'styled-normalize';
 
 const GlobalStyle = createGlobalStyle`
     ${normalize}    
@@ -13,6 +12,7 @@ const App: React.FC = () => {
         <React.Fragment>
             <GlobalStyle />
             <div className="App">
+                <DatePicker />
                 <header className="App-header">
                     <p>
                     Edit <code>src/App.tsx</code> and save to reload.
