@@ -1,0 +1,1 @@
+export const GET_CONFIG_INFO = 'GET_CONFIG_INFO'

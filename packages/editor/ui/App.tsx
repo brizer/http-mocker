@@ -1,35 +1,43 @@
-import React from 'react';
+import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { DatePicker } from 'antd';
-import { normalize } from 'styled-normalize';
+import { normalize } from "styled-normalize";
+import { connect } from "react-redux";
+import { GET_CONFIG_INFO } from "./constants/actionTypes";
+
+interface AppProps extends React.Props<any> {
+  onLoad: any
+}
 
 const GlobalStyle = createGlobalStyle`
     ${normalize}    
 `;
 
-const App: React.FC = () => {
-  return (
-        <React.Fragment>
-            <GlobalStyle />
-            <div className="App">
-                <DatePicker />
-                <header className="App-header">
-                    <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                    </p>
-                    <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >
-                    Learn React
-                    </a>
-                </header>
-            </div>
-        </React.Fragment>
-        
-  );
-}
+const mapStateToProps = state => ({
+  ...state.config
+});
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  onLoad: () => dispatch({ type: GET_CONFIG_INFO })
+});
+
+class App extends React.Component <AppProps, any> {
+
+  componentDidMount() {
+      this.props.onLoad()
+  }
+  render() {
+    return (
+        <React.Fragment>
+          <GlobalStyle />
+          <div className="App">
+            <h1>GUI for http-mockjs</h1>
+          </div>
+        </React.Fragment>
+      );
+  }
+  
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
