@@ -10,7 +10,7 @@ module.exports = env => ({
     filename: "ui.bundle.js"
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [ ".tsx",".ts", ".js", ".jsx"]
   },
   devServer: {
     contentBase: path.resolve(__dirname, "../dist/ui"),

@@ -4,6 +4,7 @@ import { normalize } from "styled-normalize";
 import { connect } from "react-redux";
 import { Input, Row, Col } from "antd";
 import { fetchConfig } from "./redux/actions/configActions";
+import RouteTable from './components/RouteTable'
 
 interface AppProps extends React.Props<any> {
   onLoad?: any;
@@ -79,7 +80,7 @@ class App extends React.Component<AppProps, AppState> {
             </Col>
           </Row>
           <div className="table">
-            <Row>1</Row>
+            <RouteTable />
           </div>
         </div>
       </React.Fragment>
