@@ -7,7 +7,12 @@ export const fetchConfig = () => {
         dispatch({ type: GET_CONFIG_INFO })
         axios.get(GET_CONFIG)
             .then((response) => {
-                dispatch({ type: GET_CONFIG_INFO_FULFILLED, payload: response.data })
+                if(response.data.result == 1){
+                    dispatch({ type: GET_CONFIG_INFO_FULFILLED, payload: response.data.data })
+                }else{
+                dispatch({ type: GET_CONFIG_INFO_REJECTED, payload: `something is wrong ` })
+
+                }
             })
             .catch(err => {
                 dispatch({ type: GET_CONFIG_INFO_REJECTED, payload: err })
