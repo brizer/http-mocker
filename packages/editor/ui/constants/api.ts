@@ -1,1 +1,1 @@
-export const GET_CONFIG = '/api/getConfig'
+export const GET_CONFIG = '/api/config'

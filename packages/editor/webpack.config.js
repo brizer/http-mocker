@@ -15,7 +15,14 @@ module.exports = env => ({
   devServer: {
     contentBase: path.resolve(__dirname, "../dist/ui"),
     hot: true,
-    port: 9000
+    port: 9000,
+    proxy: {
+      '/api': {
+        target:'http://localhost:4000',
+        changeOrigin:true,
+        secure:false
+      }
+    }
   },
   devtool: "source-map",
   module: {
