@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Form, Input, InputNumber, Popconfirm, Select } from "antd";
+import { Table, Form, Input, InputNumber, Popconfirm, Select, Switch } from "antd";
 import { METHODS } from "../constants/httpMothods";
 
 const data = [];
@@ -7,6 +7,9 @@ for (let i = 0; i < 30; i++) {
   data.push({
     key: i.toString(),
     method: `GET`,
+    url:'/user/:id',
+    path: '/api/user.json',
+    ignore: true,
     age: 32,
     address: `London Park no. ${i}`
   });
@@ -74,11 +77,11 @@ class EditableTable extends React.Component<any, any> {
           dataIndex: "method",
           width: "25%",
           render: (text, record) => {
-            const { editingKey} = this.state;
+            const { editingKey, data} = this.state;
             const editable = this.isEditing(record)
             return (
               <div>
-                <Select defaultValue="GET" disabled={!editable} onChange={this.methodChange}>
+                <Select defaultValue={text} disabled={!editable} onChange={this.methodChange}>
                   {methods.map((v,i)=>{
                     return <Select.Option value={v} key={i}>{v}</Select.Option>
                   })}
@@ -88,16 +91,33 @@ class EditableTable extends React.Component<any, any> {
           }
         },
         {
-          title: "age",
-          dataIndex: "age",
+          title: 'Url',
+          dataIndex: 'url',
+          width:"20%",
+          editable:true
+        },
+        {
+          title: "Path",
+          dataIndex: "path",
           width: "15%",
           editable: true
         },
         {
-          title: "address",
-          dataIndex: "address",
-          width: "40%",
-          editable: true
+          title: "Ignore",
+          dataIndex: "ignore",
+          width: "15%",
+          render:(text,record)=>{
+            const {editingKey,data} = this.state;
+            const editable = this.isEditing(record)
+            const onChange=(checked)=>{
+              text = !text;
+            }
+            return (
+              <div>
+                <Switch checked={text} onChange={onChange}/>
+              </div>
+            )
+          }
         },
         {
           title: "operation",
@@ -120,7 +140,7 @@ class EditableTable extends React.Component<any, any> {
                 </EditableContext.Consumer>
                 <Popconfirm
                   title="Sure to cancel?"
-                  onConfirm={() => this.cancel()}
+                  onConfirm={() => this.cancel(record)}
                 >
                   <a>Cancel</a>
                 </Popconfirm>
@@ -141,8 +161,12 @@ class EditableTable extends React.Component<any, any> {
 
   isEditing = record => record.key === this.state.editingKey;
 
-  cancel = () => {
-    this.setState({ editingKey: "" });
+  cancel = (record) => {
+    console.log(record)
+    // reback data for select
+    // this.setState({ editingKey: "" });
+    const newData = [...this.state.data];
+    this.setState({ data: newData, editingKey: "" });
   };
 
   methodChange = (value) => {
