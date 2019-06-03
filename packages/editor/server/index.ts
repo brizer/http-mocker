@@ -4,6 +4,7 @@ import color from 'http-mockjs-util/color'
 import * as parseArgs from 'minimist'
 import * as portfinder from 'portfinder'
 import * as readPkg from 'read-pkg'
+import apiRouter from './routes'
 
 const checkVersion = async () => {
     const pkg = await readPkg()
@@ -36,8 +37,10 @@ const main = async () => {
 }
 
 const app = express()
+
 app.use(express.static('dist/ui'))
 
+app.use('/api',apiRouter)
 
 checkVersion()
 main()
