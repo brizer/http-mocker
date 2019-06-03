@@ -3,11 +3,14 @@ import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 import { connect } from "react-redux";
 import { GET_CONFIG_INFO } from "./constants/actionTypes";
+import { fetchConfig } from './redux/actions/configActions'
 
 interface AppProps extends React.Props<any> {
-  onLoad: any
+  onLoad?: any
 }
-
+interface AppState {
+  
+}
 const GlobalStyle = createGlobalStyle`
     ${normalize}    
 `;
@@ -17,12 +20,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => dispatch({ type: GET_CONFIG_INFO })
+  onLoad: () => dispatch(fetchConfig())
 });
 
-class App extends React.Component <AppProps, any> {
+class App extends React.Component <AppProps, AppState> {
 
   componentDidMount() {
+      this.fetchConfig()
+  }
+
+  fetchConfig() {
       this.props.onLoad()
   }
   render() {

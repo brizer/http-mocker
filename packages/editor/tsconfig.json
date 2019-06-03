@@ -11,8 +11,9 @@
         "sourceMap": true,
         "allowJs": true,
         "skipLibCheck": true,
-        "allowSyntheticDefaultImports": true
-    },
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true
+        },
     "include": [
         "./ui/index.tsx"
     ]
