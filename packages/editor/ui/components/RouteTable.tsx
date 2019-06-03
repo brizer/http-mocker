@@ -1,11 +1,12 @@
 import React from "react";
-import { Table, Form, Input, InputNumber, Popconfirm } from "antd";
+import { Table, Form, Input, InputNumber, Popconfirm, Select } from "antd";
+import { METHODS } from "../constants/httpMothods";
 
 const data = [];
 for (let i = 0; i < 30; i++) {
   data.push({
     key: i.toString(),
-    name: `Edrward ${i}`,
+    method: `GET`,
     age: 32,
     address: `London Park no. ${i}`
   });
@@ -59,6 +60,8 @@ class EditableCell extends React.Component<any, any> {
   }
 }
 
+const methods = METHODS
+
 class EditableTable extends React.Component<any, any> {
   constructor(props) {
     super(props);
@@ -67,10 +70,22 @@ class EditableTable extends React.Component<any, any> {
       editingKey: "",
       columns: [
         {
-          title: "name",
-          dataIndex: "name",
+          title: "Method",
+          dataIndex: "method",
           width: "25%",
-          editable: true
+          render: (text, record) => {
+            const { editingKey} = this.state;
+            const editable = this.isEditing(record)
+            return (
+              <div>
+                <Select defaultValue="GET" disabled={!editable} onChange={this.methodChange}>
+                  {methods.map((v,i)=>{
+                    return <Select.Option value={v} key={i}>{v}</Select.Option>
+                  })}
+                </Select>
+              </div>
+            )
+          }
         },
         {
           title: "age",
@@ -129,6 +144,10 @@ class EditableTable extends React.Component<any, any> {
   cancel = () => {
     this.setState({ editingKey: "" });
   };
+
+  methodChange = (value) => {
+    console.log(value)
+  }
 
   save(form, key) {
     form.validateFields((error, row) => {
