@@ -7,9 +7,11 @@ import {
   Popconfirm,
   Select,
   Switch,
-  Button
+  Button,
+  Modal
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
+import RouteModal from './RouteModal'
 
 const EditableContext = React.createContext({});
 
@@ -68,6 +70,8 @@ class EditableTable extends React.Component<any, any> {
     this.state = {
       data: [],
       editingKey: "",
+      showDetailModal:false,
+      detailRecord:{},
       columns: [
         {
           title: "Method",
@@ -175,8 +179,9 @@ class EditableTable extends React.Component<any, any> {
                   title="Sure to Delete?"
                   onConfirm={() => this.delete(record.key)}
                 >
-                  <a>Delete</a>
+                  <a style={{ marginRight:8}}>Delete</a>
                 </Popconfirm>
+                <a onClick={()=>this.showDetail(record)}>Detail</a>
               </div>
             );
           }
@@ -241,6 +246,10 @@ class EditableTable extends React.Component<any, any> {
     this.props.onSave(newData)
   }
 
+  showDetail(record) {
+    this.setState({showDetailModal:true,detailRecord:record})
+  }
+
   handleAdd(){
     const newData = [...this.state.data];
     newData.push({
@@ -248,6 +257,13 @@ class EditableTable extends React.Component<any, any> {
       'url':+new Date()
     })
     this.props.onSave(newData)
+  }
+
+  onCancel = ()=>{
+    this.setState({'showDetailModal':false})
+  }
+  onOk = ()=>{
+    this.setState({'showDetailModal':false})
   }
 
   render() {
@@ -290,6 +306,7 @@ class EditableTable extends React.Component<any, any> {
             pageSize: 10000
           }}
         />
+        <RouteModal visible={this.state.showDetailModal} record={this.state.detailRecord} onCancel={()=>this.onCancel()} onOk={()=>this.onOk()} />
       </EditableContext.Provider>
     );
   }
