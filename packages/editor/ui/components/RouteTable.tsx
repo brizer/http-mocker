@@ -68,9 +68,12 @@ class EditableTable extends React.Component<any, any> {
           render: (text, record) => {
             const { editingKey, data} = this.state;
             const editable = this.isEditing(record)
+            const changeMethods = (value)=>{
+              record.method = value
+            }
             return editable?(
               <div>
-                <Select defaultValue={text} disabled={!editable}>
+                <Select defaultValue={text} disabled={!editable} onChange={changeMethods} >
                   {methods.map((v,i)=>{
                     return <Select.Option value={v} key={i}>{v}</Select.Option>
                   })}
@@ -100,9 +103,13 @@ class EditableTable extends React.Component<any, any> {
           render:(text,record,index)=>{
             const {editingKey,data} = this.state;
             const editable = this.isEditing(record)
+
+            const changeIgnore = (checked)=>{
+              record.ignore = checked
+            }
             return editable?(
               <div>
-                <Switch defaultChecked={text} disabled={!editable}/>
+                <Switch defaultChecked={text} disabled={!editable} onChange={changeIgnore}/>
               </div>
             ):(
               <div>{text.toString()}</div>
@@ -150,8 +157,8 @@ class EditableTable extends React.Component<any, any> {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     //todo problem
+    if(this.props.routes == nextProps.routes){return;}
     this.setState(
       Object.assign({}, this.state, {
         data: nextProps.routes,

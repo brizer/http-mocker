@@ -51,6 +51,7 @@ class App extends React.Component<any, any> {
     );
   }
 
+
   fetchConfig =()=> {
     this.props.onLoad();
   }
