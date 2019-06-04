@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED } from '../../constants/actionTypes';
-import { GET_CONFIG, SET_CONFIG } from '../../constants/api';
+import { GET_CONFIG, SET_CONFIG, GET_ROUTE } from '../../constants/api';
 
 
 export const fetchConfig = () => {
@@ -66,6 +66,25 @@ export const setConfig = (data) => {
         })
         .catch(err => {
             dispatch({ type: GET_CONFIG_INFO_REJECTED, payload: err })
+        })
+    })
+}
+
+
+export const getRouteInfo = (data)=>{
+    return (dispath=>{
+        if(!data) return
+        let path = ''
+        path = data.path
+        axios.get(GET_ROUTE,{
+            params:{
+                path:path
+            }
+        })
+        .then((response)=>{
+            if(response.data.result == 1){
+                
+            }
         })
     })
 }
