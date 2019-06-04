@@ -54,6 +54,10 @@ class App extends React.Component<AppProps, AppState> {
     this.props.onLoad();
   }
 
+  saveConfigRoute(data) {
+    console.log('save',data)
+  }
+
   render() {
     const mockFileNameChange = e => {
       this.setState({
@@ -74,13 +78,14 @@ class App extends React.Component<AppProps, AppState> {
             </Col>
             <Col span={8}>
               <Input
+                disabled={true}
                 value={this.state.config.mockFileName}
                 onChange={mockFileNameChange}
               />
             </Col>
           </Row>
           <div className="table">
-            <RouteTable />
+            <RouteTable  onSave={this.saveConfigRoute}/>
           </div>
         </div>
       </React.Fragment>

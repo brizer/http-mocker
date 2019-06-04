@@ -9,9 +9,7 @@ for (let i = 0; i < 30; i++) {
     method: `GET`,
     url:'/user/:id',
     path: '/api/user.json',
-    ignore: true,
-    age: 32,
-    address: `London Park no. ${i}`
+    ignore: true
   });
 }
 const EditableContext = React.createContext({});
@@ -79,14 +77,16 @@ class EditableTable extends React.Component<any, any> {
           render: (text, record) => {
             const { editingKey, data} = this.state;
             const editable = this.isEditing(record)
-            return (
+            return editable?(
               <div>
-                <Select defaultValue={text} disabled={!editable} onChange={this.methodChange}>
+                <Select defaultValue={text} disabled={!editable}>
                   {methods.map((v,i)=>{
                     return <Select.Option value={v} key={i}>{v}</Select.Option>
                   })}
                 </Select>
               </div>
+            ):(
+              <div>{text}</div>
             )
           }
         },
@@ -106,16 +106,15 @@ class EditableTable extends React.Component<any, any> {
           title: "Ignore",
           dataIndex: "ignore",
           width: "15%",
-          render:(text,record)=>{
+          render:(text,record,index)=>{
             const {editingKey,data} = this.state;
             const editable = this.isEditing(record)
-            const onChange=(checked)=>{
-              text = !text;
-            }
-            return (
+            return editable?(
               <div>
-                <Switch checked={text} onChange={onChange}/>
+                <Switch defaultChecked={text} disabled={!editable}/>
               </div>
+            ):(
+              <div>{text.toString()}</div>
             )
           }
         },
@@ -162,16 +161,11 @@ class EditableTable extends React.Component<any, any> {
   isEditing = record => record.key === this.state.editingKey;
 
   cancel = (record) => {
-    console.log(record)
     // reback data for select
-    // this.setState({ editingKey: "" });
-    const newData = [...this.state.data];
-    this.setState({ data: newData, editingKey: "" });
+    this.setState({ editingKey: "" });
+    // const newData = [...this.state.data];
+    // this.setState({ data: newData, editingKey: "" });
   };
-
-  methodChange = (value) => {
-    console.log(value)
-  }
 
   save(form, key) {
     form.validateFields((error, row) => {
@@ -191,6 +185,8 @@ class EditableTable extends React.Component<any, any> {
         newData.push(row);
         this.setState({ data: newData, editingKey: "" });
       }
+
+      this.props.onSave(newData)
     });
   }
 
