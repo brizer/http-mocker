@@ -1,7 +1,7 @@
 import * as cosmiconfig from 'cosmiconfig';
+import * as jsonfile from 'jsonfile'
 import { Config } from '../declations/Config';
 import * as defaultConf from './defaultConfig'
-import { fileURLToPath } from 'url';
 
 const deepmerge = require('deepmerge')
 let configPath:string = '';
@@ -26,6 +26,14 @@ const getConfig = (dir: string): Config => {
 
 export const getConfigPath = ()=>{
     return configPath
+}
+/**
+ * set config info into config file
+ * @param {object} configInfo configInfo
+ */
+export const setConfig = (configInfo:any)=> {
+    const dir = getConfigPath()
+    return jsonfile.writeFile(dir,configInfo,{spaces:4})
 }
 
 export default getConfig

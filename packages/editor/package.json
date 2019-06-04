@@ -33,6 +33,7 @@
     "url": "https://github.com/brizer/http-mocker/issues"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "http-mockjs": "^2.2.0",
     "http-mockjs-util": "^2.0.0",

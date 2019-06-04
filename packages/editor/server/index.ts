@@ -1,4 +1,5 @@
 import * as express from 'express'
+import * as bodyParser from 'body-parser'
 import version from 'http-mockjs-util/version'
 import color from 'http-mockjs-util/color'
 import * as parseArgs from 'minimist'
@@ -37,6 +38,8 @@ const main = async () => {
 }
 
 const app = express()
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 
 app.use(express.static('dist/ui'))
 

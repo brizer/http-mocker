@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const cosmiconfig = require("cosmiconfig");
+const jsonfile = require("jsonfile");
 const defaultConf = require("./defaultConfig");
 const deepmerge = require('deepmerge');
 let configPath = '';
@@ -18,5 +19,13 @@ const getConfig = (dir) => {
 };
 exports.getConfigPath = () => {
     return configPath;
+};
+/**
+ * set config info into config file
+ * @param {object} configInfo configInfo
+ */
+exports.setConfig = (configInfo) => {
+    const dir = exports.getConfigPath();
+    return jsonfile.writeFile(dir, configInfo, { spaces: 4 });
 };
 exports.default = getConfig;
