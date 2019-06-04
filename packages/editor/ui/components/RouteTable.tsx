@@ -174,6 +174,7 @@ class EditableTable extends React.Component<any, any> {
     this.setState({ editingKey: "" });
     // const newData = [...this.state.data];
     // this.setState({ data: newData, editingKey: "" });
+    this.props.onGet()
   };
 
   save(form, key) {

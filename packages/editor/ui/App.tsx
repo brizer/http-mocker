@@ -87,7 +87,7 @@ class App extends React.Component<any, any> {
             </Col>
           </Row>
           <div className="table">
-            <RouteTable routes={this.state.config.routes}  onSave={this.saveConfigRoute.bind(this)}/>
+            <RouteTable onGet={this.fetchConfig.bind(this)} routes={this.state.config.routes}  onSave={this.saveConfigRoute.bind(this)}/>
           </div>
         </div>
       </React.Fragment>
