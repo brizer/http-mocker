@@ -158,6 +158,15 @@ class EditableTable extends React.Component<any, any> {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(
+      Object.assign({}, this.state, {
+        data: nextProps.routes,
+        editingKey: "" 
+      })
+    );
+  }
+
   isEditing = record => record.key === this.state.editingKey;
 
   cancel = (record) => {
