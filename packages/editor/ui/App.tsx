@@ -77,7 +77,7 @@ class App extends React.Component<any, any> {
           <h1>GUI for http-mockjs</h1>
           <Row>
             <Col span={8}>
-              <MiddleLabel>mock文件夹名称</MiddleLabel>
+              <MiddleLabel>Mock File Name</MiddleLabel>
             </Col>
             <Col span={8}>
               <Input

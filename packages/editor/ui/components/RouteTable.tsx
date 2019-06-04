@@ -171,9 +171,12 @@ class EditableTable extends React.Component<any, any> {
                 >
                   Edit
                 </a>
-                <a
-                  onClick={()=>this.delete(record.key)}
-                >Delete</a>
+                <Popconfirm
+                  title="Sure to Delete?"
+                  onConfirm={() => this.delete(record.key)}
+                >
+                  <a>Delete</a>
+                </Popconfirm>
               </div>
             );
           }
@@ -240,7 +243,10 @@ class EditableTable extends React.Component<any, any> {
 
   handleAdd(){
     const newData = [...this.state.data];
-    newData.push({})
+    newData.push({
+      'method':'GET',
+      'url':+new Date()
+    })
     this.props.onSave(newData)
   }
 
