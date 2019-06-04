@@ -58,6 +58,8 @@ export const setConfig = (data) => {
         })
         .then((response) => {
             if (response.data.result == 1) {
+
+                dispatch(fetchConfig())
                 dispatch({ type: SET_CONFIG_INFO_FULFILLED, payload: true })
             } else {
                 dispatch({ type: GET_CONFIG_INFO_REJECTED, payload: `something is wrong ` })

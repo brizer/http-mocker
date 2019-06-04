@@ -35,8 +35,7 @@ export default (state = initState, action) => {
             return {
                 ...state,
                 fetching: false,
-                fetched: true,
-                config: action.payload
+                fetched: true
             }
         case SET_CONFIG_INFO_REJECTED:
             return {
