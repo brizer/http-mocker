@@ -52,13 +52,12 @@ export const setConfig = (data) => {
                 'ignore':v.ignore
             }
         })
-        console.log(config)
         axios.post(SET_CONFIG,{
             config:config
         })
         .then((response) => {
             if (response.data.result == 1) {
-
+                //dispatch multi actions
                 dispatch(fetchConfig())
                 dispatch({ type: SET_CONFIG_INFO_FULFILLED, payload: true })
             } else {

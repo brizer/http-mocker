@@ -2,16 +2,7 @@ import React from "react";
 import { Table, Form, Input, InputNumber, Popconfirm, Select, Switch } from "antd";
 import { METHODS } from "../constants/httpMothods";
 
-const data = [];
-for (let i = 0; i < 30; i++) {
-  data.push({
-    key: i.toString(),
-    method: `GET`,
-    url:'/user/:id',
-    path: '/api/user.json',
-    ignore: true
-  });
-}
+
 const EditableContext = React.createContext({});
 
 class EditableCell extends React.Component<any, any> {
@@ -67,7 +58,7 @@ class EditableTable extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
-      data,
+      data:[],
       editingKey: "",
       columns: [
         {
@@ -159,6 +150,8 @@ class EditableTable extends React.Component<any, any> {
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger;
+    //todo problem
     this.setState(
       Object.assign({}, this.state, {
         data: nextProps.routes,
