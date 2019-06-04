@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED } from '../../constants/actionTypes';
+import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED, GET_ROUTE_INFO_FULFILLED } from '../../constants/actionTypes';
 import { GET_CONFIG, SET_CONFIG, GET_ROUTE } from '../../constants/api';
 
 
@@ -83,8 +83,13 @@ export const getRouteInfo = (data)=>{
         })
         .then((response)=>{
             if(response.data.result == 1){
-                
+                dispath({type: GET_ROUTE_INFO_FULFILLED,payload:response.data.content})
+            }else{
+                dispath({type: GET_ROUTE_INFO_FULFILLED,payload:undefined})
             }
+        })
+        .catch(err=>{
+            console.log(err)
         })
     })
 }
