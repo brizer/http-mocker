@@ -1,7 +1,15 @@
 import React from "react";
-import { Table, Form, Input, InputNumber, Popconfirm, Select, Switch } from "antd";
+import {
+  Table,
+  Form,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Select,
+  Switch,
+  Button
+} from "antd";
 import { METHODS } from "../constants/httpMothods";
-
 
 const EditableContext = React.createContext({});
 
@@ -52,13 +60,13 @@ class EditableCell extends React.Component<any, any> {
   }
 }
 
-const methods = METHODS
+const methods = METHODS;
 
 class EditableTable extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
-      data:[],
+      data: [],
       editingKey: "",
       columns: [
         {
@@ -66,29 +74,37 @@ class EditableTable extends React.Component<any, any> {
           dataIndex: "method",
           width: "25%",
           render: (text, record) => {
-            const { editingKey, data} = this.state;
-            const editable = this.isEditing(record)
-            const changeMethods = (value)=>{
-              record.method = value
-            }
-            return editable?(
+            const { editingKey, data } = this.state;
+            const editable = this.isEditing(record);
+            const changeMethods = value => {
+              record.method = value;
+            };
+            return editable ? (
               <div>
-                <Select defaultValue={text} disabled={!editable} onChange={changeMethods} >
-                  {methods.map((v,i)=>{
-                    return <Select.Option value={v} key={i}>{v}</Select.Option>
+                <Select
+                  defaultValue={text}
+                  disabled={!editable}
+                  onChange={changeMethods}
+                >
+                  {methods.map((v, i) => {
+                    return (
+                      <Select.Option value={v} key={i}>
+                        {v}
+                      </Select.Option>
+                    );
                   })}
                 </Select>
               </div>
-            ):(
+            ) : (
               <div>{text}</div>
-            )
+            );
           }
         },
         {
-          title: 'Url',
-          dataIndex: 'url',
-          width:"20%",
-          editable:true
+          title: "Url",
+          dataIndex: "url",
+          width: "20%",
+          editable: true
         },
         {
           title: "Path",
@@ -100,20 +116,24 @@ class EditableTable extends React.Component<any, any> {
           title: "Ignore",
           dataIndex: "ignore",
           width: "15%",
-          render:(text,record,index)=>{
-            const {editingKey,data} = this.state;
-            const editable = this.isEditing(record)
+          render: (text, record, index) => {
+            const { editingKey, data } = this.state;
+            const editable = this.isEditing(record);
 
-            const changeIgnore = (checked)=>{
-              record.ignore = checked
-            }
-            return editable?(
+            const changeIgnore = checked => {
+              record.ignore = checked;
+            };
+            return editable ? (
               <div>
-                <Switch defaultChecked={text} disabled={!editable} onChange={changeIgnore}/>
+                <Switch
+                  defaultChecked={text}
+                  disabled={!editable}
+                  onChange={changeIgnore}
+                />
               </div>
-            ):(
+            ) : (
               <div>{text.toString()}</div>
-            )
+            );
           }
         },
         {
@@ -143,12 +163,18 @@ class EditableTable extends React.Component<any, any> {
                 </Popconfirm>
               </span>
             ) : (
-              <a
-                disabled={editingKey !== ""}
-                onClick={() => this.edit(record.key)}
-              >
-                Edit
-              </a>
+              <div>
+                <a
+                  disabled={editingKey !== ""}
+                  onClick={() => this.edit(record.key)}
+                  style={{ marginRight: 8}}
+                >
+                  Edit
+                </a>
+                <a
+                  onClick={()=>this.delete(record.key)}
+                >Delete</a>
+              </div>
             );
           }
         }
@@ -158,23 +184,25 @@ class EditableTable extends React.Component<any, any> {
 
   componentWillReceiveProps(nextProps) {
     //todo problem
-    if(this.props.routes == nextProps.routes){return;}
+    if (this.props.routes == nextProps.routes) {
+      return;
+    }
     this.setState(
       Object.assign({}, this.state, {
         data: nextProps.routes,
-        editingKey: "" 
+        editingKey: ""
       })
     );
   }
 
   isEditing = record => record.key === this.state.editingKey;
 
-  cancel = (record) => {
+  cancel = record => {
     // reback data for select
     this.setState({ editingKey: "" });
     // const newData = [...this.state.data];
     // this.setState({ data: newData, editingKey: "" });
-    this.props.onGet()
+    this.props.onGet();
   };
 
   save(form, key) {
@@ -196,12 +224,24 @@ class EditableTable extends React.Component<any, any> {
         this.setState({ data: newData, editingKey: "" });
       }
 
-      this.props.onSave(newData)
+      this.props.onSave(newData);
     });
   }
 
   edit(key) {
     this.setState({ editingKey: key });
+  }
+
+  delete(key) {
+    const newData = [...this.state.data];
+    newData.splice(key,1)
+    this.props.onSave(newData)
+  }
+
+  handleAdd(){
+    const newData = [...this.state.data];
+    newData.push({})
+    this.props.onSave(newData)
   }
 
   render() {
@@ -229,6 +269,10 @@ class EditableTable extends React.Component<any, any> {
 
     return (
       <EditableContext.Provider value={this.props.form}>
+
+        <Button onClick={this.handleAdd.bind(this)} type="primary" style={{ marginBottom: 16 }}>
+          Add a row
+        </Button>
         <Table
           components={components}
           bordered
@@ -236,8 +280,8 @@ class EditableTable extends React.Component<any, any> {
           columns={columns}
           rowClassName="editable-row"
           pagination={{
-            hideOnSinglePage:true,
-            pageSize:10000
+            hideOnSinglePage: true,
+            pageSize: 10000
           }}
         />
       </EditableContext.Provider>
