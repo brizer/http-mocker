@@ -101,7 +101,7 @@ export const setRouteInfo = (data)=>{
         if(!data) return
         let body:any = {}
         body.path = data.record.path,
-        body.content = data.content
+        body.content = JSON.parse(data.content)
         axios.post(SET_ROUTE,{
             route:body
         }).
