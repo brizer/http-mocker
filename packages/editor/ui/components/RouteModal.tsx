@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from "react-redux";
-import {Modal} from 'antd'
+import {Modal, Input } from 'antd'
 import store from '../redux/store/store'
 import { getRouteInfo } from '../redux/actions/configActions';
 
+const { TextArea } = Input 
 
 class RouteModal extends React.Component<any, any>{
     constructor(props){
@@ -15,7 +15,11 @@ class RouteModal extends React.Component<any, any>{
     }
 
     componentDidMount() {
-        const record = this.props.record
+        store.subscribe(()=>{
+            const state = store.getState()
+            const content = state.config.content
+            this.setState({content:content})
+        })
     }
 
     componentWillReceiveProps(nextProps){
@@ -35,9 +39,7 @@ class RouteModal extends React.Component<any, any>{
           width={800}
           onCancel={this.props.onCancel}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <TextArea value={this.state.content} rows={20} />
         </Modal>
         )
     }

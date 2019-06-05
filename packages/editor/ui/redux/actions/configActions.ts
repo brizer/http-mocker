@@ -83,9 +83,10 @@ export const getRouteInfo = (data)=>{
         })
         .then((response)=>{
             if(response.data.result == 1){
-                dispath({type: GET_ROUTE_INFO_FULFILLED,payload:response.data.content})
+                const str = JSON.stringify(response.data.data,null,4)
+                dispath({type: GET_ROUTE_INFO_FULFILLED,payload:str})
             }else{
-                dispath({type: GET_ROUTE_INFO_FULFILLED,payload:undefined})
+                dispath({type: GET_ROUTE_INFO_FULFILLED,payload:''})
             }
         })
         .catch(err=>{

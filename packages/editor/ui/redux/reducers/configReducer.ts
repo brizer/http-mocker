@@ -1,6 +1,8 @@
-import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED, SET_CONFIG_INFO_REJECTED } from "../../constants/actionTypes";
+import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED, SET_CONFIG_INFO_REJECTED, GET_ROUTE_INFO_FULFILLED, GET_ROUTE_INFO } from "../../constants/actionTypes";
+import { GET_ROUTE } from "ui/constants/api";
 const initState = {
     config: {},
+    content:'',
     fetching: false,
     fetched: false,
     error: null
@@ -42,6 +44,18 @@ export default (state = initState, action) => {
                 ...state,
                 fetching: false,
                 error: action.payload
+            }
+        case GET_ROUTE_INFO:
+            return {
+                ...state,
+                fetching: true
+            }
+        case GET_ROUTE_INFO_FULFILLED:
+            return {
+                ...state,
+                fetching: false,
+                fetched: true,
+                content:action.payload
             }
         default:
             return state;
