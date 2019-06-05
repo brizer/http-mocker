@@ -10,11 +10,20 @@ It has the following features:
 1. Perform the mock mapping relationship through the httpmock field in the package.json , or configuration file .httpmockrc.
 2. Support [mockjs](https://www.npmjs.com/package/mockjs) syntax, flexible configuration of dynamic mock return value;
 3. Identify express-style urls based on [path-to-regexp](https://www.npmjs.com/package/path-to-regexp)
+4. Based on [http-mockjs-ui](https://www.npmjs.com/package/http-mockjs-ui), manage the configuration file and mock file content in a visual way to improve efficiency.[More detail](./packages/editor/readme.md)
 
 
 ---
 
 ## Usage
+
+### GUI
+
+GUI for configuration and mock content.[More detail](./packages/editor/readme.md)
+
+![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190605142856.png)
+
+
 
 ### Configuration
 

@@ -5,12 +5,22 @@
 它拥有以下功能：
 
 1、通过配置文件.httpmockrc或者package.json文件中的httpmock字段来进行mock映射关系；
+
 2、支持[mockjs](https://www.npmjs.com/package/mockjs)语法,灵活配置动态化的mock返回值;
+
 3、基于[path-to-regexp](https://www.npmjs.com/package/path-to-regexp)识别express风格的url
+
+4、基于[http-mockjs-ui](https://www.npmjs.com/package/http-mockjs-ui)，通过可视化的方式管理配置文件和mock文件内容，提高效率。[详细可见](./packages/editor/readme_zh.md)
 
 ---
 
 ## 使用方式
+
+### 可视化界面
+
+可视化管理配置文件和mock内容.[更多详情](./packages/editor/readme.md)
+
+![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190605142856.png)
 
 ### 配置文件含义
 
