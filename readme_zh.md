@@ -18,7 +18,7 @@
 
 ### 可视化界面
 
-可视化管理配置文件和mock内容.[更多详情](./packages/editor/readme.md)
+可视化管理配置文件和mock内容.[更多详情](./packages/editor/readme_zh.md)
 
 ![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190605142856.png)
 
