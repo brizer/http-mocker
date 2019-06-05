@@ -12,6 +12,8 @@ import {
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
 import RouteModal from './RouteModal'
+import store from "../redux/store/store"
+import { getRouteInfo } from "../redux/actions/configActions";
 
 const EditableContext = React.createContext({});
 
@@ -248,6 +250,8 @@ class EditableTable extends React.Component<any, any> {
 
   showDetail(record) {
     this.setState({showDetailModal:true,detailRecord:record})
+    store.dispatch(getRouteInfo(record))
+
   }
 
   handleAdd(){

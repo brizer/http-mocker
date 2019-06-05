@@ -26,8 +26,12 @@ class RouteModal extends React.Component<any, any>{
         if(this.props.record == nextProps.record){
             return
         }
-        store.dispatch(getRouteInfo(nextProps.record))
+        // store.dispatch(getRouteInfo(nextProps.record))
         
+    }
+
+    changeContent (e){
+        this.setState({content:e.target.value})
     }
     
     render(){
@@ -39,7 +43,7 @@ class RouteModal extends React.Component<any, any>{
           width={800}
           onCancel={this.props.onCancel}
         >
-          <TextArea value={this.state.content} rows={20} />
+          <TextArea value={this.state.content} onChange={this.changeContent.bind(this)} rows={20} />
         </Modal>
         )
     }
