@@ -33,13 +33,18 @@ class RouteModal extends React.Component<any, any>{
     changeContent (e){
         this.setState({content:e.target.value})
     }
+
+
+    save() {
+        this.props.onOk(this.state.content)
+    }
     
     render(){
         return (
         <Modal
           title="Basic Modal"
           visible={this.props.visible}
-          onOk={this.props.onOk}
+          onOk={()=>this.save()}
           width={800}
           onCancel={this.props.onCancel}
         >

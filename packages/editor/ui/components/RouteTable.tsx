@@ -13,7 +13,7 @@ import {
 import { METHODS } from "../constants/httpMothods";
 import RouteModal from './RouteModal'
 import store from "../redux/store/store"
-import { getRouteInfo } from "../redux/actions/configActions";
+import { getRouteInfo, setRouteInfo } from "../redux/actions/configActions";
 
 const EditableContext = React.createContext({});
 
@@ -266,8 +266,14 @@ class EditableTable extends React.Component<any, any> {
   onCancel = ()=>{
     this.setState({'showDetailModal':false})
   }
-  onOk = ()=>{
+  onOk = (value)=>{
+    //todo: save value to file
     this.setState({'showDetailModal':false})
+    store.dispatch(setRouteInfo({
+      record:this.state.detailRecord,
+      content:value
+    }).bind(this))
+
   }
 
   render() {
@@ -310,7 +316,7 @@ class EditableTable extends React.Component<any, any> {
             pageSize: 10000
           }}
         />
-        <RouteModal visible={this.state.showDetailModal} record={this.state.detailRecord} onCancel={()=>this.onCancel()} onOk={()=>this.onOk()} />
+        <RouteModal visible={this.state.showDetailModal} record={this.state.detailRecord} onCancel={()=>this.onCancel()} onOk={(v)=>this.onOk(v)} />
       </EditableContext.Provider>
     );
   }

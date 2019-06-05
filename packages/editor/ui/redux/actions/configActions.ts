@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED, GET_ROUTE_INFO_FULFILLED } from '../../constants/actionTypes';
-import { GET_CONFIG, SET_CONFIG, GET_ROUTE } from '../../constants/api';
+import { GET_CONFIG_INFO, GET_CONFIG_INFO_FULFILLED, GET_CONFIG_INFO_REJECTED, SET_CONFIG_INFO, SET_CONFIG_INFO_FULFILLED, GET_ROUTE_INFO_FULFILLED, SET_ROUTE_INFO_FULFILLED } from '../../constants/actionTypes';
+import { GET_CONFIG, SET_CONFIG, GET_ROUTE, SET_ROUTE } from '../../constants/api';
 
 
 export const fetchConfig = () => {
@@ -91,6 +91,24 @@ export const getRouteInfo = (data)=>{
         })
         .catch(err=>{
             console.log(err)
+        })
+    })
+}
+
+
+export const setRouteInfo = (data)=>{
+    return (dispatch=>{
+        if(!data) return
+        let body:any = {}
+        body.path = data.record.path,
+        body.content = data.content
+        axios.post(SET_ROUTE,{
+            route:body
+        }).
+        then((response)=>{
+            if(response.data.result == 1){
+                dispatch({ type: SET_ROUTE_INFO_FULFILLED, payload: true })
+            }
         })
     })
 }
