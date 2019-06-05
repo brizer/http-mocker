@@ -22,11 +22,21 @@ function checkRequiredFiles(files) {
     }
 }
 
+function mkdirsSync(dirname) {  
+    if (fs.existsSync(dirname)) {  
+        return true;  
+    } else {  
+        if (mkdirsSync(path.dirname(dirname))) {  
+            fs.mkdirSync(dirname);  
+            return true;  
+        }  
+    }  
+} 
+
 const getRoutePath = (lnk:string):string=>{
     let pathL = lnk
     configContent = getConfig(undefined)
     const mockFileName = configContent.mockFileName || 'mocks'
-    console.log(process.cwd())
     const pathR = path.resolve(process.cwd(), `./${mockFileName}${pathL}`)
     return pathR
 }
@@ -57,21 +67,19 @@ export const RouteService = {
         const pathR = getRoutePath(req.body.route.path)
         const content = req.body.route.content
         if (!checkRequiredFiles([pathR])) {
+            const dir = path.dirname(pathR)
+            mkdirsSync(dir)
+        } 
+        jsonfile.writeFile(pathR,content,{spaces:4}).then(() => {
+            res.json({
+                result: 1
+            })
+        }).catch(err => {
             res.json({
                 result: 0,
-                message: 'is no path'
+                message: 'some thing is wrong'
             })
-        } else {
-            jsonfile.writeFile(pathR,content,{spaces:4}).then(() => {
-                res.json({
-                    result: 1
-                })
-            }).catch(err => {
-                res.json({
-                    result: 0,
-                    message: 'some thing is wrong'
-                })
-            })
-        }
+        })
+        
     }
 }

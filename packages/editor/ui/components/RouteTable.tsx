@@ -271,7 +271,7 @@ class EditableTable extends React.Component<any, any> {
     this.setState({'showDetailModal':false})
     store.dispatch(setRouteInfo({
       record:this.state.detailRecord,
-      content:value
+      content:value||'{}'
     }).bind(this))
 
   }
