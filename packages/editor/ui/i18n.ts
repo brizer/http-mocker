@@ -5,7 +5,7 @@ import Backend from 'i18next-xhr-backend'
 
 i18n
     .use(Backend)
-    .use(LanguageDetector)
+    // .use(LanguageDetector)
     .use(reactI18nextModule)
     .init({
         fallbackLng:'en'

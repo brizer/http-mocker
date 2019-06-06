@@ -16,6 +16,9 @@
         "ignore":"是否忽略",
         "operation":"操作",
         "sure":"确定",
-        "to":"要"
+        "to":"要",
+        "language":"语言",
+        "chinese":"中文",
+        "english":"英文"
     }
 }

@@ -16,6 +16,9 @@
         "ignore":"Ignore",
         "operation":"Operation",
         "sure":"sure",
-        "to":"to"
+        "to":"to",
+        "language":"Language",
+        "chinese":"Chinese",
+        "english":"English"
     }
 }

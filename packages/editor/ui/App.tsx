@@ -2,7 +2,7 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 import { connect } from "react-redux";
-import { Input, Row, Col } from "antd";
+import { Input, Row, Col, Select } from "antd";
 import { withNamespaces } from 'react-i18next';
 import { fetchConfig, setConfig } from "./redux/actions/configActions";
 import RouteTable from './components/RouteTable'
@@ -74,12 +74,28 @@ class App extends React.Component<any, any> {
     const changeLanguage = lng =>{
       i18n.changeLanguage(lng)
     }
+
     
     return (
       <React.Fragment>
         <GlobalStyle />
         <div className="App">
-          <h1>{t('title')}</h1>
+          <Row>
+            <Col span={20}>
+              <h1>{t('title')}</h1>
+
+            </Col>
+            <Col span={4} style={{lineHeight:'80px'}}>
+              <span style={{marginRight:8}}>{t('txt.language')}:</span>
+              <Select
+                  defaultValue='en'
+                  onChange={changeLanguage}
+                >
+                  <Select.Option value="en">{t('txt.english')}</Select.Option>
+                  <Select.Option value="zh-CN">{t('txt.chinese')}</Select.Option>
+                </Select>
+            </Col>
+          </Row>
           <Row>
             <Col span={8}>
               <MiddleLabel>{t('mockFileName')}</MiddleLabel>
