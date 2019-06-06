@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 import { connect } from "react-redux";
 import { Input, Row, Col } from "antd";
+import { withNamespaces } from 'react-i18next';
 import { fetchConfig, setConfig } from "./redux/actions/configActions";
 import RouteTable from './components/RouteTable'
 
@@ -69,15 +70,19 @@ class App extends React.Component<any, any> {
         })
       });
     };
-
+    const {t,i18n} = this.props;
+    const changeLanguage = lng =>{
+      i18n.changeLanguage(lng)
+    }
+    
     return (
       <React.Fragment>
         <GlobalStyle />
         <div className="App">
-          <h1>GUI for http-mockjs</h1>
+          <h1>{t('title')}</h1>
           <Row>
             <Col span={8}>
-              <MiddleLabel>Mock File Name</MiddleLabel>
+              <MiddleLabel>{t('mockFileName')}</MiddleLabel>
             </Col>
             <Col span={8}>
               <Input
@@ -95,7 +100,7 @@ class App extends React.Component<any, any> {
     );
   }
 }
-export default connect(
+export default withNamespaces('translation')(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(App));

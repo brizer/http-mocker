@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require("webpack");
 const path = require("path");
 
@@ -42,6 +43,9 @@ module.exports = env => ({
     new HtmlWebpackPlugin({
         template: path.resolve('./ui/index.html')
     }),
+    new CopyPlugin([
+      {from:'ui/locales',to:'locales'}
+    ]),
     new webpack.HotModuleReplacementPlugin()
   ]
 });

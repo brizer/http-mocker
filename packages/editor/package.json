@@ -37,9 +37,13 @@
     "express": "^4.17.1",
     "http-mockjs": "^3.0.0",
     "http-mockjs-util": "^3.0.0",
+    "i18next": "^13.1.5",
+    "i18next-browser-languagedetector": "^2.2.3",
+    "i18next-xhr-backend": "^1.5.1",
     "jsonfile": "^5.0.0",
     "minimist": "^1.2.0",
     "portfinder": "^1.0.20",
+    "react-i18next": "^9.0.6",
     "read-pkg": "^5.1.1"
   },
   "devDependencies": {
