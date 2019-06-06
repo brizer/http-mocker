@@ -13,3 +13,4 @@ export const useSSR: any;
 export const useTranslation: any;
 export const withSSR: any;
 export const withTranslation: any;
+export const withNamespaces: any;

@@ -1,4 +1,21 @@
 {
     "title":"GUI for http-mockjs",
-    "mockFileName":"Mock File Name"
+    "mockFileName":"Mock File Name",
+    "action":{
+        "add":"Add a row",       
+        "edit":"Edit",
+        "delete":"Delete",
+        "detail":"Detail",
+        "cancel":"Cancel",
+        "save":"Save"
+    },    
+    "txt":{
+        "method":"Method",
+        "url":"Url",
+        "path":"Path",
+        "ignore":"Ignore",
+        "operation":"Operation",
+        "sure":"sure",
+        "to":"to"
+    }
 }

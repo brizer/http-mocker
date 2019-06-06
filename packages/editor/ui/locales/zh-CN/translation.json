@@ -1,5 +1,21 @@
 {
     "title":"http-mockjs可视化操作界面",
-    "mockFileName":"Mock文件夹名称"
-
+    "mockFileName":"Mock文件夹名称",
+    "action":{
+        "add":"增加一个规则",
+        "edit":"编辑",
+        "delete":"删除",
+        "detail":"详情",
+        "cancel":"取消",
+        "save":"保存"
+    },
+    "txt":{
+        "method":"请求方式",
+        "url":"Url",
+        "path":"文件路径",
+        "ignore":"是否忽略",
+        "operation":"操作",
+        "sure":"确定",
+        "to":"要"
+    }
 }

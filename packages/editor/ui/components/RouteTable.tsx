@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
 import RouteModal from './RouteModal'
+import { withNamespaces } from 'react-i18next';
 import store from "../redux/store/store"
 import { getRouteInfo, setRouteInfo } from "../redux/actions/configActions";
 
@@ -73,122 +74,7 @@ class EditableTable extends React.Component<any, any> {
       data: [],
       editingKey: "",
       showDetailModal:false,
-      detailRecord:{},
-      columns: [
-        {
-          title: "Method",
-          dataIndex: "method",
-          width: "25%",
-          render: (text, record) => {
-            const { editingKey, data } = this.state;
-            const editable = this.isEditing(record);
-            const changeMethods = value => {
-              record.method = value;
-            };
-            return editable ? (
-              <div>
-                <Select
-                  defaultValue={text}
-                  disabled={!editable}
-                  onChange={changeMethods}
-                >
-                  {methods.map((v, i) => {
-                    return (
-                      <Select.Option value={v} key={i}>
-                        {v}
-                      </Select.Option>
-                    );
-                  })}
-                </Select>
-              </div>
-            ) : (
-              <div>{text}</div>
-            );
-          }
-        },
-        {
-          title: "Url",
-          dataIndex: "url",
-          width: "20%",
-          editable: true
-        },
-        {
-          title: "Path",
-          dataIndex: "path",
-          width: "15%",
-          editable: true
-        },
-        {
-          title: "Ignore",
-          dataIndex: "ignore",
-          width: "15%",
-          render: (text, record, index) => {
-            const { editingKey, data } = this.state;
-            const editable = this.isEditing(record);
-
-            const changeIgnore = checked => {
-              record.ignore = checked;
-            };
-            return editable ? (
-              <div>
-                <Switch
-                  defaultChecked={text}
-                  disabled={!editable}
-                  onChange={changeIgnore}
-                />
-              </div>
-            ) : (
-              <div>{text.toString()}</div>
-            );
-          }
-        },
-        {
-          title: "operation",
-          dataIndex: "operation",
-          render: (text, record) => {
-            const { editingKey } = this.state;
-            const editable = this.isEditing(record);
-            return editable ? (
-              <span>
-                <EditableContext.Consumer>
-                  {form => (
-                    <a
-                      href="javascript:;"
-                      onClick={() => this.save(form, record.key)}
-                      style={{ marginRight: 8 }}
-                    >
-                      Save
-                    </a>
-                  )}
-                </EditableContext.Consumer>
-                <Popconfirm
-                  title="Sure to cancel?"
-                  onConfirm={() => this.cancel(record)}
-                >
-                  <a>Cancel</a>
-                </Popconfirm>
-              </span>
-            ) : (
-              <div>
-                <a
-                  disabled={editingKey !== ""}
-                  onClick={() => this.edit(record.key)}
-                  style={{ marginRight: 8}}
-                >
-                  Edit
-                </a>
-                <Popconfirm
-                  title="Sure to Delete?"
-                  onConfirm={() => this.delete(record.key)}
-                >
-                  <a style={{ marginRight:8}}>Delete</a>
-                </Popconfirm>
-                <a onClick={()=>this.showDetail(record)}>Detail</a>
-              </div>
-            );
-          }
-        }
-      ]
+      detailRecord:{}
     };
   }
 
@@ -277,13 +163,129 @@ class EditableTable extends React.Component<any, any> {
   }
 
   render() {
+    const { t,i18n} = this.props
     const components = {
       body: {
         cell: EditableCell
       }
     };
 
-    const columns = this.state.columns.map(col => {
+    const staticColumns = [
+      {
+        title: t('txt.method'),
+        dataIndex: "method",
+        width: "25%",
+        render: (text, record) => {
+          const { editingKey, data } = this.state;
+          const editable = this.isEditing(record);
+          const changeMethods = value => {
+            record.method = value;
+          };
+          return editable ? (
+            <div>
+              <Select
+                defaultValue={text}
+                disabled={!editable}
+                onChange={changeMethods}
+              >
+                {methods.map((v, i) => {
+                  return (
+                    <Select.Option value={v} key={i}>
+                      {v}
+                    </Select.Option>
+                  );
+                })}
+              </Select>
+            </div>
+          ) : (
+            <div>{text}</div>
+          );
+        }
+      },
+      {
+        title: t('txt.url'),
+        dataIndex: "url",
+        width: "20%",
+        editable: true
+      },
+      {
+        title: t('txt.path'),
+        dataIndex: "path",
+        width: "15%",
+        editable: true
+      },
+      {
+        title: t('txt.ignore'),
+        dataIndex: "ignore",
+        width: "15%",
+        render: (text, record, index) => {
+          const { editingKey, data } = this.state;
+          const editable = this.isEditing(record);
+
+          const changeIgnore = checked => {
+            record.ignore = checked;
+          };
+          return editable ? (
+            <div>
+              <Switch
+                defaultChecked={text}
+                disabled={!editable}
+                onChange={changeIgnore}
+              />
+            </div>
+          ) : (
+            <div>{text.toString()}</div>
+          );
+        }
+      },
+      {
+        title: t('txt.operation'),
+        dataIndex: "operation",
+        render: (text, record) => {
+          const { editingKey } = this.state;
+          const editable = this.isEditing(record);
+          return editable ? (
+            <span>
+              <EditableContext.Consumer>
+                {form => (
+                  <a
+                    href="javascript:;"
+                    onClick={() => this.save(form, record.key)}
+                    style={{ marginRight: 8 }}
+                  >
+                    {t('action.save')}
+                  </a>
+                )}
+              </EditableContext.Consumer>
+              <Popconfirm
+                title="Sure to cancel?"
+                onConfirm={() => this.cancel(record)}
+              >
+                <a>{t('action.cancel')}</a>
+              </Popconfirm>
+            </span>
+          ) : (
+            <div>
+              <a
+                disabled={editingKey !== ""}
+                onClick={() => this.edit(record.key)}
+                style={{ marginRight: 8}}
+              >
+                {t('action.edit')}
+              </a>
+              <Popconfirm
+                title="Sure to Delete?"
+                onConfirm={() => this.delete(record.key)}
+              >
+                <a style={{ marginRight:8}}>{t('action.delete')}</a>
+              </Popconfirm>
+              <a onClick={()=>this.showDetail(record)}>{t('action.detail')}</a>
+            </div>
+          );
+        }
+      }
+    ]
+    const columns = staticColumns.map(col => {
       if (!col.editable) {
         return col;
       }
@@ -303,7 +305,7 @@ class EditableTable extends React.Component<any, any> {
       <EditableContext.Provider value={this.props.form}>
 
         <Button onClick={this.handleAdd.bind(this)} type="primary" style={{ marginBottom: 16 }}>
-          Add a row
+          {t('action.add')}
         </Button>
         <Table
           components={components}
@@ -324,4 +326,4 @@ class EditableTable extends React.Component<any, any> {
 
 const RouteTable = Form.create()(EditableTable);
 
-export default RouteTable;
+export default withNamespaces('translation')(RouteTable);
