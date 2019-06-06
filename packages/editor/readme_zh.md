@@ -20,3 +20,7 @@ http-mockjs-ui
 进行可视化的编辑即可：
 
 ![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190605142856.png)
+
+支持国际化功能：
+
+![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190606135409.png)

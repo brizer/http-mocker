@@ -19,3 +19,7 @@ http-mockjs-ui
 Then perform the visual editing operation:
 
 ![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190605142856.png)
+
+Support internationalization:
+
+![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190606135409.png)
