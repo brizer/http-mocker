@@ -2,6 +2,8 @@
 
 A GUI tool for managing the contents of configuration files and mock files in [http-mockjs](https://github.com/brizer/http-mocker)
 
+1. Establish two-way communication through sockets to ensure consistency of configuration files and GUI
+
 # Install
 
 ```

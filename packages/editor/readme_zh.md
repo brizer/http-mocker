@@ -3,6 +3,8 @@
 一个管理[http-mockjs](https://github.com/brizer/http-mocker)配置文件和mock文件内容的可视化工具
 
 
+1. 通过socket建立双向通信，确保配置文件和可视化界面数据的一致性
+
 # 安装
 
 ```
