@@ -6,6 +6,9 @@ import color from 'http-mockjs-util/color'
 import * as parseArgs from 'minimist'
 import * as portfinder from 'portfinder'
 import apiRouter from './routes'
+import * as io from 'socket.io'
+import { socket } from './socket/connection'
+import { Watcher } from './service/watchService';
 
 
 const args = parseArgs(process.argv)
@@ -19,9 +22,12 @@ const main = async () => {
             port: defaultPort
         })
         
-        app.listen(port,()=>{
+        const server  = app.listen(port,()=>{
             console.log(color(`server is launch in port: ${port}`).green)
         })
+        socket(io(server))
+
+        
     } catch (error) {
         console.error(error)
     }
@@ -36,6 +42,8 @@ const staticPath = path.resolve(__dirname,'../ui')
 app.use(express.static(staticPath))
 
 app.use('/api',apiRouter)
+new Watcher()
+
 
 main()
 

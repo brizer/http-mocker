@@ -6,6 +6,7 @@ import { Input, Row, Col, Select } from "antd";
 import { withNamespaces } from 'react-i18next';
 import { fetchConfig, setConfig } from "./redux/actions/configActions";
 import RouteTable from './components/RouteTable'
+import { socketClient, SOCKET_EVENTS } from "./socket/connection";
 
 interface AppProps extends React.Props<any> {
   onLoad?: any;
@@ -42,6 +43,8 @@ class App extends React.Component<any, any> {
   }
   componentDidMount() {
     this.fetchConfig();
+    // use socket to refresh
+    socketClient().on(SOCKET_EVENTS.CHANGE_CONFIG,this.fetchConfig)
   }
 
   componentWillReceiveProps(nextProps) {

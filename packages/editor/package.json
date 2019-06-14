@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chokidar": "^3.0.1",
     "express": "^4.17.1",
     "http-mockjs": "^3.1.0",
     "http-mockjs-util": "^3.0.0",
@@ -44,7 +45,9 @@
     "minimist": "^1.2.0",
     "portfinder": "^1.0.20",
     "react-i18next": "^9.0.6",
-    "read-pkg": "^5.1.1"
+    "read-pkg": "^5.1.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -54,6 +57,8 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-redux": "^7.0.9",
+    "@types/socket.io": "^2.1.2",
+    "@types/socket.io-client": "^1.4.32",
     "@types/styled-components": "^4.1.15",
     "antd": "^3.19.2",
     "babel-plugin-import": "^1.12.0",

@@ -58,7 +58,9 @@ export const setConfig = (data) => {
         .then((response) => {
             if (response.data.result == 1) {
                 //dispatch multi actions
-                dispatch(fetchConfig())
+                // replace it with socket,
+                // to fix: https://github.com/brizer/http-mocker/issues/2
+                // dispatch(fetchConfig())
                 dispatch({ type: SET_CONFIG_INFO_FULFILLED, payload: true })
             } else {
                 dispatch({ type: GET_CONFIG_INFO_REJECTED, payload: `something is wrong ` })
