@@ -8,12 +8,13 @@ import {
   Select,
   Switch,
   Button,
+  Affix,
   Modal
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
-import RouteModal from './RouteModal'
-import { withNamespaces } from 'react-i18next';
-import store from "../redux/store/store"
+import RouteModal from "./RouteModal";
+import { withNamespaces } from "react-i18next";
+import store from "../redux/store/store";
 import { getRouteInfo, setRouteInfo } from "../redux/actions/configActions";
 
 const EditableContext = React.createContext({});
@@ -73,8 +74,8 @@ class EditableTable extends React.Component<any, any> {
     this.state = {
       data: [],
       editingKey: "",
-      showDetailModal:false,
-      detailRecord:{}
+      showDetailModal: false,
+      detailRecord: {}
     };
   }
 
@@ -130,40 +131,40 @@ class EditableTable extends React.Component<any, any> {
 
   delete(key) {
     const newData = [...this.state.data];
-    newData.splice(key,1)
-    this.props.onSave(newData)
+    newData.splice(key, 1);
+    this.props.onSave(newData);
   }
 
   showDetail(record) {
-    this.setState({showDetailModal:true,detailRecord:record})
-    store.dispatch(getRouteInfo(record))
-
+    this.setState({ showDetailModal: true, detailRecord: record });
+    store.dispatch(getRouteInfo(record));
   }
 
-  handleAdd(){
+  handleAdd() {
     const newData = [...this.state.data];
     newData.push({
-      'method':'GET',
-      'url':+new Date()
-    })
-    this.props.onSave(newData)
+      method: "GET",
+      url: +new Date()
+    });
+    this.props.onSave(newData);
   }
 
-  onCancel = ()=>{
-    this.setState({'showDetailModal':false})
-  }
-  onOk = (value)=>{
+  onCancel = () => {
+    this.setState({ showDetailModal: false });
+  };
+  onOk = value => {
     //todo: save value to file
-    this.setState({'showDetailModal':false})
-    store.dispatch(setRouteInfo({
-      record:this.state.detailRecord,
-      content:value||'{}'
-    }).bind(this))
-
-  }
+    this.setState({ showDetailModal: false });
+    store.dispatch(
+      setRouteInfo({
+        record: this.state.detailRecord,
+        content: value || "{}"
+      }).bind(this)
+    );
+  };
 
   render() {
-    const { t,i18n} = this.props
+    const { t, i18n } = this.props;
     const components = {
       body: {
         cell: EditableCell
@@ -172,7 +173,7 @@ class EditableTable extends React.Component<any, any> {
 
     const staticColumns = [
       {
-        title: t('txt.method'),
+        title: t("txt.method"),
         dataIndex: "method",
         width: "25%",
         render: (text, record) => {
@@ -203,19 +204,19 @@ class EditableTable extends React.Component<any, any> {
         }
       },
       {
-        title: t('txt.url'),
+        title: t("txt.url"),
         dataIndex: "url",
         width: "20%",
         editable: true
       },
       {
-        title: t('txt.path'),
+        title: t("txt.path"),
         dataIndex: "path",
         width: "15%",
         editable: true
       },
       {
-        title: t('txt.ignore'),
+        title: t("txt.ignore"),
         dataIndex: "ignore",
         width: "15%",
         render: (text, record, index) => {
@@ -239,7 +240,7 @@ class EditableTable extends React.Component<any, any> {
         }
       },
       {
-        title: t('txt.operation'),
+        title: t("txt.operation"),
         dataIndex: "operation",
         render: (text, record) => {
           const { editingKey } = this.state;
@@ -253,7 +254,7 @@ class EditableTable extends React.Component<any, any> {
                     onClick={() => this.save(form, record.key)}
                     style={{ marginRight: 8 }}
                   >
-                    {t('action.save')}
+                    {t("action.save")}
                   </a>
                 )}
               </EditableContext.Consumer>
@@ -261,7 +262,7 @@ class EditableTable extends React.Component<any, any> {
                 title="Sure to cancel?"
                 onConfirm={() => this.cancel(record)}
               >
-                <a>{t('action.cancel')}</a>
+                <a>{t("action.cancel")}</a>
               </Popconfirm>
             </span>
           ) : (
@@ -269,22 +270,24 @@ class EditableTable extends React.Component<any, any> {
               <a
                 disabled={editingKey !== ""}
                 onClick={() => this.edit(record.key)}
-                style={{ marginRight: 8}}
+                style={{ marginRight: 8 }}
               >
-                {t('action.edit')}
+                {t("action.edit")}
               </a>
               <Popconfirm
                 title="Sure to Delete?"
                 onConfirm={() => this.delete(record.key)}
               >
-                <a style={{ marginRight:8}}>{t('action.delete')}</a>
+                <a style={{ marginRight: 8 }}>{t("action.delete")}</a>
               </Popconfirm>
-              <a onClick={()=>this.showDetail(record)}>{t('action.detail')}</a>
+              <a onClick={() => this.showDetail(record)}>
+                {t("action.detail")}
+              </a>
             </div>
           );
         }
       }
-    ]
+    ];
     const columns = staticColumns.map(col => {
       if (!col.editable) {
         return col;
@@ -303,10 +306,15 @@ class EditableTable extends React.Component<any, any> {
 
     return (
       <EditableContext.Provider value={this.props.form}>
-
-        <Button onClick={this.handleAdd.bind(this)} type="primary" style={{ marginBottom: 16 }}>
-          {t('action.add')}
-        </Button>
+        <Affix offsetTop={10}>
+          <Button
+            onClick={this.handleAdd.bind(this)}
+            type="primary"
+            style={{ marginBottom: 16 }}
+          >
+            {t("action.add")}
+          </Button>
+        </Affix>
         <Table
           components={components}
           bordered
@@ -318,7 +326,12 @@ class EditableTable extends React.Component<any, any> {
             pageSize: 10000
           }}
         />
-        <RouteModal visible={this.state.showDetailModal} record={this.state.detailRecord} onCancel={()=>this.onCancel()} onOk={(v)=>this.onOk(v)} />
+        <RouteModal
+          visible={this.state.showDetailModal}
+          record={this.state.detailRecord}
+          onCancel={() => this.onCancel()}
+          onOk={v => this.onOk(v)}
+        />
       </EditableContext.Provider>
     );
   }
@@ -326,4 +339,4 @@ class EditableTable extends React.Component<any, any> {
 
 const RouteTable = Form.create()(EditableTable);
 
-export default withNamespaces('translation')(RouteTable);
+export default withNamespaces("translation")(RouteTable);

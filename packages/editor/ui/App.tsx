@@ -111,7 +111,7 @@ class App extends React.Component<any, any> {
               />
             </Col>
           </Row>
-          <div className="table">
+          <div className="table" style={{margin:'20px'}}>
             <RouteTable onGet={this.fetchConfig.bind(this)} routes={this.state.config.routes}  onSave={this.saveConfigRoute.bind(this)}/>
           </div>
         </div>
