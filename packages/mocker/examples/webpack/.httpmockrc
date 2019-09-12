@@ -16,6 +16,9 @@
         },
         "GET /j/new": {
             "path": "/api/info.json"
+        },
+        "GET /j/new?id=123": {
+            "path": "/api/123.json"
         }
     },
     "port":8002

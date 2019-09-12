@@ -1,9 +1,10 @@
-import Axios from ".0.18.0@axios";
+import Axios from "axios";
 
 const contentNode = document.querySelector('#j-content')
 const pathNode1 = document.querySelector('#j-path-1')
 const pathNode2 = document.querySelector('#j-path-2')
 const pathNode3 = document.querySelector('#j-path-3')
+const pathNode4 = document.querySelector('#j-path-4')
 const sendNode = document.querySelector('#j-send')
 contentNode.innerHTML = 'hello world,anyone'
 
@@ -36,5 +37,9 @@ Axios.get('/users/foo/info').then(data=>{
 
 Axios.get('/j/new').then(data=>{
     pathNode3.innerHTML = data.data.name
+})
+
+Axios.get('/j/new?id=123').then(data=>{
+    pathNode4.innerHTML = data.data.name
 })
 

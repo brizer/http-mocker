@@ -62,7 +62,7 @@ const proxy = async (app, config: Config) => {
     
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
-        const proxyURL:string = `${req.method} ${req.path}`;
+        const proxyURL:string = `${req.method} ${req.originalUrl}`;
         let proxyMatch:Routes = proxyLists[proxyURL];
         
         //to adapte express router url style such as user/:id and so on:

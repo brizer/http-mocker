@@ -8,7 +8,6 @@
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "dev:editor:ui": "cd packages/editor && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
     "dev:editor:server": "cd packages/editor && cross-env NODE_ENV=development nodemon",
-    "buildmiddleware": "cd packages/middleware && rm -rf lib && tsc",
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
     "buildutil": "cd packages/util && tsc",
     "build:editor:ui": "cd packages/editor && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
