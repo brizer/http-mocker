@@ -47,6 +47,10 @@ Take a configuration file `.httpmockrc` as an example:
         "GET /users/:id+":{
             "path": "/api/info.json",
             "ignore": true
+        },
+        "GET /users/user?id=123":{
+            "path": "/api/user/123.json",
+            "ignore": true
         }
     }
 }
