@@ -10,7 +10,7 @@
   ],
   "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/editor.js",
   "directories": {
     "lib": "lib",
