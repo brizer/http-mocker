@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
+    "mock": "httpmock",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,7 +17,7 @@
     "http-mockjs-ui": "^2.0.0",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "axios": "^0.18.0"

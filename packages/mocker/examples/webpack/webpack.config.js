@@ -23,5 +23,8 @@ module.exports = {
     before:(app)=>{
       mocker(app)
     }
+    // proxy: {
+    //   '*': 'http://localhost:8000'
+    // }
   }
 };

@@ -51,15 +51,10 @@ const proxy = async (app, config: Config) => {
         proxyLists = config.routes
         console.log(color('config file content has changed').green)
     })
-
-
-    //create a proxy server
-    http.createServer((req, res) => {
-        serveProxy.web(req, res, {
-            target: `http://localhost:${config.port}`
-        })
-    }).listen(port)
-    
+    // app.use(function (req, res, next) {
+    //     res.set('Content-type','application/json');
+    //     next();
+    //   });
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
         const proxyURL:string = `${req.method} ${req.originalUrl}`;
@@ -79,6 +74,7 @@ const proxy = async (app, config: Config) => {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
             const result = mock.mock(responseBody)
+            res.set('Content-Type', 'application/json')
             res.send(result);
             res.end();
         }

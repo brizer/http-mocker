@@ -2,7 +2,7 @@
 const express = require("express");
 const portfinder = require("portfinder");
 const color = require("http-mockjs-util/color").default;
-const mocker = require("../lib/index").default;
+const mocker = require("../lib/index").mocker;
 
 const port = process.argv[2];
 

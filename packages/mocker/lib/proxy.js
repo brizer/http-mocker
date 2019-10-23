@@ -1,15 +1,13 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const http = require("http");
 const path = require("path");
 const fs = require("fs");
 const httpProxy = require("http-proxy");
@@ -39,7 +37,7 @@ const printProxyInfo = (config) => {
  * @param {object} app - app object
  * @param {object} config - user config info
  */
-const proxy = (app, config) => __awaiter(void 0, void 0, void 0, function* () {
+const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     const serveProxy = httpProxy.createProxyServer({});
     let proxyLists = config.routes;
     let port = config.port | 8009;
@@ -59,12 +57,10 @@ const proxy = (app, config) => __awaiter(void 0, void 0, void 0, function* () {
         proxyLists = config.routes;
         console.log(color_1.default('config file content has changed').green);
     });
-    //create a proxy server
-    http.createServer((req, res) => {
-        serveProxy.web(req, res, {
-            target: `http://localhost:${config.port}`
-        });
-    }).listen(port);
+    // app.use(function (req, res, next) {
+    //     res.set('Content-type','application/json');
+    //     next();
+    //   });
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
         const proxyURL = `${req.method} ${req.originalUrl}`;
@@ -81,6 +77,7 @@ const proxy = (app, config) => __awaiter(void 0, void 0, void 0, function* () {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
             const result = mock.mock(responseBody);
+            res.set('Content-Type', 'application/json');
             res.send(result);
             res.end();
         }
