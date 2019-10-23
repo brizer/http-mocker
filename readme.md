@@ -56,6 +56,19 @@ Take a configuration file `.httpmockrc` as an example:
 }
 ```
 
+
+Use `responseHeaders` to custom response header, the default `Content-Type` is `application/json`:
+
+``` json
+{
+    "mockFileName":"mymocks",
+    "responseHeaders":{
+      "Content-Type":"application/json",
+      "xixi":"hah"
+    }
+}
+```
+
 Return the file content demo as follows, you can use the mockjs style:
 
 ```

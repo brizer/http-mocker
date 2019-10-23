@@ -53,9 +53,22 @@
 }
 ```
 
+支持自定义响应头responseHeaders，默认的Content-Type为application/json：
+
+``` json
+{
+    "mockFileName":"mymocks",
+    "responseHeaders":{
+      "Content-Type":"application/json",
+      "xixi":"hah"
+    }
+}
+```
+
+
 返回文件内容demo如下，可以使用mockjs风格
 
-```
+``` json
 {
     "code":0,
     "message":"success",
