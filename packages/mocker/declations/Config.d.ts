@@ -17,5 +17,6 @@ export interface Config {
     mockFileName?: string;
     routes?: Routes;
     port?:number;
+    responseHeaders?:object;
 }
 

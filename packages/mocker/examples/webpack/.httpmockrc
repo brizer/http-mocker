@@ -1,4 +1,7 @@
 {
+    "responseHeaders":{
+       "xixi":"haha"
+    },
     "routes":{
         "GET /j/getSomeData.json":
         {

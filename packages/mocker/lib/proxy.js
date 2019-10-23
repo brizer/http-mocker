@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fs = require("fs");
-const httpProxy = require("http-proxy");
 const pathToRegexp = require("path-to-regexp");
 const mock = require("mockjs");
 const color_1 = require("http-mockjs-util/color");
@@ -38,15 +37,7 @@ const printProxyInfo = (config) => {
  * @param {object} config - user config info
  */
 const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
-    const serveProxy = httpProxy.createProxyServer({});
     let proxyLists = config.routes;
-    let port = config.port | 8009;
-    // try {
-    //     //get an idle port
-    //     port = await portfinder.getPortPromise()
-    // } catch (error) {
-    //     console.log(color(`${error}`).red)
-    // }
     //print info
     printProxyInfo(config);
     //watch config file changes
@@ -77,7 +68,7 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
             const result = mock.mock(responseBody);
-            res.set('Content-Type', 'application/json');
+            res.set(config.responseHeaders);
             res.send(result);
             res.end();
         }

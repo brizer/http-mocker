@@ -31,15 +31,8 @@ const printProxyInfo = (config:Config) =>{
  * @param {object} config - user config info
  */
 const proxy = async (app, config: Config) => {
-    const serveProxy = httpProxy.createProxyServer({})
     let proxyLists = config.routes;
-    let port:number = config.port | 8009 ;
-    // try {
-    //     //get an idle port
-    //     port = await portfinder.getPortPromise()
-    // } catch (error) {
-    //     console.log(color(`${error}`).red)
-    // }
+
     //print info
     printProxyInfo(config)
 
@@ -74,7 +67,7 @@ const proxy = async (app, config: Config) => {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             const responseBody = fs.readFileSync(curPath, 'utf-8');
             const result = mock.mock(responseBody)
-            res.set('Content-Type', 'application/json')
+            res.set(config.responseHeaders);
             res.send(result);
             res.end();
         }
