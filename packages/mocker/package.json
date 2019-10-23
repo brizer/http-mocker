@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs",
-  "version": "3.3.0",
+  "version": "3.3.1-alpha.0",
   "description": "Simple, independent tools for request mock and proxy",
   "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker/tree/master/packages/mocker#readme",
