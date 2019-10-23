@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run build && jest",
     "lint": "tslint -p tsconfig.json -c tslint.json",
+    "start": "lerna bootstrap",
     "dev:editor:ui": "cd packages/editor && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
     "dev:editor:server": "cd packages/editor && cross-env NODE_ENV=development nodemon",
     "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
