@@ -39,6 +39,8 @@ Axios.get('/j/new').then(data=>{
     pathNode3.innerHTML = data.data.name
 })
 
+Axios.get('/j/new?otherParam=true').then(data=>console.log(data.data));
+
 Axios.get('/j/new?id=123').then(data=>{
     pathNode4.innerHTML = data.data.name
 })

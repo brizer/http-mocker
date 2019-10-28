@@ -52,15 +52,21 @@ const proxy = async (app, config: Config) => {
     app.all('/*', (req, res, next) => {
         const proxyURL:string = `${req.method} ${req.originalUrl}`;
         let proxyMatch:Routes = proxyLists[proxyURL];
-        
         //to adapte express router url style such as user/:id and so on:
-        Object.keys(proxyLists).forEach((key,index)=>{
+        Object.keys(proxyLists).forEach((key)=>{
             const re = pathToRegexp(key)
             if(re.exec(proxyURL)){
                 proxyMatch = proxyLists[key]
+            } else if(proxyURL.includes('?')) {
+                // if some url with params have not be defined in routers
+                // handle /api/user?otherParam=true to /api/user.
+                const key = proxyURL.substr(0,proxyURL.indexOf('?'));
+                if(key in proxyLists){
+                    proxyMatch = proxyLists[key];
+                }
             }
+            
         })
-
 
         //if there is a request config in the config file
         if (proxyMatch && proxyMatch.ignore!== true) {
