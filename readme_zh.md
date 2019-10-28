@@ -107,6 +107,11 @@ mock文件存放的根路径，默认是`mocks`
 
 开启mockserver的端口，默认是8009
 
+#### responseHeaders
+
+自定义响应头.
+
+
 ### 与webpack-dev-server配合
 
 在devServer参数中设置：

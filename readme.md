@@ -71,7 +71,7 @@ Use `responseHeaders` to custom response header, the default `Content-Type` is `
 
 Return the file content demo as follows, you can use the mockjs style:
 
-```
+``` json
 {
     "code":0,
     "message":"success",
@@ -107,6 +107,10 @@ Sometimes you want to keep the configuration, but you don't want it to take effe
 #### port
 
 Which port to start mock server, default is 8009
+
+#### responseHeaders
+
+Custom response headers.
 
 
 ### working with webpack-dev-server
