@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Simple, independent tools for request mock and proxy",
   "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker/tree/master/packages/mocker#readme",
@@ -31,7 +31,7 @@
     "cosmiconfig": "^5.2.0",
     "deepmerge": "^3.2.0",
     "express": "^4.16.4",
-    "http-mockjs-util": "^3.0.0",
+    "http-mockjs-util": "^3.0.1",
     "jsonfile": "^5.0.0",
     "mockjs": "^1.0.1-beta3",
     "path-to-regexp": "^3.0.0",
