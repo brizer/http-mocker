@@ -1,6 +1,6 @@
 import getConfig from './getConfig'
 import proxy from './proxy'
-import {Options} from '../declations/Index'
+import {Options} from 'http-mockjs-util/declations'
 import version from 'http-mockjs-util/version';
 
 const deepmerge = require('deepmerge')

@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fs = require("fs");
-const pathToRegexp = require("path-to-regexp");
 const mock = require("mockjs");
 const color_1 = require("http-mockjs-util/color");
+const matchRoute_1 = require("http-mockjs-util/matchRoute");
 const chokidar_1 = require("chokidar");
 const getConfig_1 = require("./getConfig");
 /**
@@ -55,22 +55,22 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
         const proxyURL = `${req.method} ${req.originalUrl}`;
-        let proxyMatch = proxyLists[proxyURL];
-        //to adapte express router url style such as user/:id and so on:
-        Object.keys(proxyLists).forEach((key) => {
-            const re = pathToRegexp(key);
-            if (re.exec(proxyURL)) {
-                proxyMatch = proxyLists[key];
-            }
-            else if (proxyURL.includes('?')) {
-                // if some url with params have not be defined in routers
-                // handle /api/user?otherParam=true to /api/user.
-                const key = proxyURL.substr(0, proxyURL.indexOf('?'));
-                if (key in proxyLists) {
-                    proxyMatch = proxyLists[key];
-                }
-            }
-        });
+        const proxyMatch = matchRoute_1.getMatechedRoute(proxyLists, proxyURL);
+        // let proxyMatch:Routes = proxyLists[proxyURL];
+        // //to adapte express router url style such as user/:id and so on:
+        // Object.keys(proxyLists).forEach((key)=>{
+        //     const re = pathToRegexp(key)
+        //     if(re.exec(proxyURL)){
+        //         proxyMatch = proxyLists[key]
+        //     } else if(proxyURL.includes('?')) {
+        //         // if some url with params have not be defined in routers
+        //         // handle /api/user?otherParam=true to /api/user.
+        //         const key = proxyURL.substr(0,proxyURL.indexOf('?'));
+        //         if(key in proxyLists){
+        //             proxyMatch = proxyLists[key];
+        //         }
+        //     }
+        // })
         //if there is a request config in the config file
         if (proxyMatch && proxyMatch.ignore !== true) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);

@@ -1,6 +1,6 @@
 import * as cosmiconfig from 'cosmiconfig';
 import * as jsonfile from 'jsonfile'
-import { Config } from '../declations/Config';
+import { Config } from 'http-mockjs-util/declations';
 import * as defaultConf from './defaultConfig'
 
 const deepmerge = require('deepmerge')

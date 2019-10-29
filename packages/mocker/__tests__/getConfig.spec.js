@@ -13,7 +13,10 @@ describe('getConfig', () => {
     test('with no config, should return default', () => {
         const config = getConfig(path.join(__dirname,'../../'))
         expect(config).toEqual({
-            'mockFileName':'mocks'
+            'mockFileName':'mocks',
+            'responseHeaders':{
+                'Content-Type':'application/json'
+            }
         })
     })
 

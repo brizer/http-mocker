@@ -1,14 +1,12 @@
-import * as http from 'http'
 import * as path from 'path'
 import * as fs from 'fs'
-import * as httpProxy from 'http-proxy'
-import * as portfinder from 'portfinder'
 import * as pathToRegexp from 'path-to-regexp'
 import * as mock from 'mockjs'
 import color from 'http-mockjs-util/color'
+import { getMatechedRoute } from 'http-mockjs-util/matchRoute';
 import { watch } from 'chokidar'
 import { getConfigPath, default as getConfig } from './getConfig'
-import { Config, Routes } from '../declations/Config'
+import { Config, Routes } from 'http-mockjs-util/declations'
 /**
  * Print proxy init info
  * @param {object} config - config info
@@ -51,22 +49,23 @@ const proxy = async (app, config: Config) => {
     //filter configed api and map local
     app.all('/*', (req, res, next) => {
         const proxyURL:string = `${req.method} ${req.originalUrl}`;
-        let proxyMatch:Routes = proxyLists[proxyURL];
-        //to adapte express router url style such as user/:id and so on:
-        Object.keys(proxyLists).forEach((key)=>{
-            const re = pathToRegexp(key)
-            if(re.exec(proxyURL)){
-                proxyMatch = proxyLists[key]
-            } else if(proxyURL.includes('?')) {
-                // if some url with params have not be defined in routers
-                // handle /api/user?otherParam=true to /api/user.
-                const key = proxyURL.substr(0,proxyURL.indexOf('?'));
-                if(key in proxyLists){
-                    proxyMatch = proxyLists[key];
-                }
-            }
+        const proxyMatch = getMatechedRoute(proxyLists,proxyURL);
+        // let proxyMatch:Routes = proxyLists[proxyURL];
+        // //to adapte express router url style such as user/:id and so on:
+        // Object.keys(proxyLists).forEach((key)=>{
+        //     const re = pathToRegexp(key)
+        //     if(re.exec(proxyURL)){
+        //         proxyMatch = proxyLists[key]
+        //     } else if(proxyURL.includes('?')) {
+        //         // if some url with params have not be defined in routers
+        //         // handle /api/user?otherParam=true to /api/user.
+        //         const key = proxyURL.substr(0,proxyURL.indexOf('?'));
+        //         if(key in proxyLists){
+        //             proxyMatch = proxyLists[key];
+        //         }
+        //     }
             
-        })
+        // })
 
         //if there is a request config in the config file
         if (proxyMatch && proxyMatch.ignore!== true) {

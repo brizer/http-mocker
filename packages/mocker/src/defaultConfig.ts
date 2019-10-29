@@ -1,4 +1,4 @@
-import { Config } from '../declations/Config'
+import { Config } from "http-mockjs-util/declations";
 
 /**
  * Default config object

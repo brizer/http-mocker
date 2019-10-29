@@ -1,4 +1,14 @@
-interface Routes {
+
+export interface Options {
+    port?:number
+}
+
+export interface outParams {
+    app:object,
+    options:Options
+}
+
+export interface Routes {
     /**
      * 
      */
@@ -19,4 +29,3 @@ export interface Config {
     port?:number;
     responseHeaders?:object;
 }
-
