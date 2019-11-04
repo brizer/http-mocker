@@ -9,10 +9,6 @@
   "directories": {
     "test": "__tests__"
   },
-  "files": [
-    "color.js",
-    "version.js"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brizer/http-mocker.git"
