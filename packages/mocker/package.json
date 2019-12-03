@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs",
-  "version": "3.3.5-alpha.0",
+  "version": "3.3.5-alpha.2",
   "description": "Simple, independent tools for request mock and proxy",
   "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker/tree/master/packages/mocker#readme",
@@ -10,12 +10,8 @@
     "http-mockjs": "bin/http-mockjs.js"
   },
   "directories": {
-    "lib": "lib",
     "test": "__tests__"
   },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brizer/http-mocker.git"

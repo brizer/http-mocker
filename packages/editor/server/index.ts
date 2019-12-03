@@ -3,7 +3,6 @@ import * as express from 'express'
 import * as path from 'path'
 import * as bodyParser from 'body-parser'
 import color from 'http-mockjs-util/color'
-import * as parseArgs from 'minimist'
 import * as portfinder from 'portfinder'
 import apiRouter from './routes'
 import * as io from 'socket.io'
@@ -11,11 +10,9 @@ import { socket } from './socket/connection'
 import { Watcher } from './service/watchService';
 
 
-const args = parseArgs(process.argv)
-const defaultPort = args.port || 4000
-process.env.DEBUG_LOG = args.debug ? "log": ""
+const defaultPort = 4000
 
-const main = async () => {
+export const main = async () => {
 
     try {
         const port = await portfinder.getPortPromise({

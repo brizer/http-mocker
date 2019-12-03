@@ -21,5 +21,6 @@ export class UIAction extends AbstractAction {
     uiProcess.on("close", code => {
       console.log(`child process exited with code ${code}`);
     });
+    
   }
 }
