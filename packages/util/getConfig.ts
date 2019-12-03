@@ -25,6 +25,10 @@ const getConfig = (dir: string): Config => {
 }
 
 export const getConfigPath = ()=>{
+    // fix different level of dependence
+    if(!configPath){
+        getConfig(process.cwd())
+    }
     return configPath
 }
 /**

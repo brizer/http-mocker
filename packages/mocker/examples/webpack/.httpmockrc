@@ -1,6 +1,29 @@
 {
     "mockFileName": "mocks",
-    "responseHeaders": {
-        "Content-Type": "application/json"
+    "routes": {
+        "GET /j/getSomeData.json": {
+            "path": "/api/get.json",
+            "ignore": false
+        },
+        "POST /p/postData.do": {
+            "path": "/api/post.json",
+            "ignore": false
+        },
+        "GET /user/:id": {
+            "path": "/api/user.json",
+            "ignore": false
+        },
+        "GET /users/:id+": {
+            "path": "/api/info.json",
+            "ignore": false
+        },
+        "GET /j/new": {
+            "path": "/api/info.json",
+            "ignore": false
+        },
+        "GET /j/new?id=123": {
+            "path": "/api/123.json",
+            "ignore": false
+        }
     }
 }

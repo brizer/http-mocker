@@ -21,6 +21,10 @@ const getConfig = (dir) => {
     return finalConfig;
 };
 exports.getConfigPath = () => {
+    // fix different level of dependence
+    if (!configPath) {
+        getConfig(process.cwd());
+    }
     return configPath;
 };
 /**
