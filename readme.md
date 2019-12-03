@@ -1,15 +1,16 @@
 # http-mockjs
 
+[中文文档](./readme_zh.md)
+
 A tool for mock local requests or proxy remote requests.
 
 It has the following functions:
-
 
 1. Mock the mapping relationship through the httpmock field in the configuration file `.httpmockrc` or `package.json` file;
 
 2. Support [mockjs](https://www.npmjs.com/package/mockjs) syntax, flexible configuration of dynamic mocker.
 
-3.  Identify express-style URLs based on [path-to-regexp](https://www.npmjs.com/package/path-to-regexp).
+3. Identify express-style URLs based on [path-to-regexp](https://www.npmjs.com/package/path-to-regexp).
 
 4. Based on [http-mockjs-ui](https://www.npmjs.com/package/http-mockjs-ui), manage configuration file by GUI to improve efficiency.
 
@@ -21,13 +22,13 @@ It has the following functions:
 
 Under the project directory
 
-``` sh
+```sh
 npm install --save-dev http-mockjs
 ```
 
 Or global installation
 
-``` sh
+```sh
 npm install -g http-mockjs
 ```
 
@@ -35,24 +36,22 @@ npm install -g http-mockjs
 
 The mock process is according to the `.httpmockrc` file in the current directory, so the newer needs to generate the default configuration file:
 
-```  sh
+```sh
 http-mockjs init
 ```
 
 A configuration file `.httpmockrc` will be generated in the current folder with the following contents:
 
-``` json
+```json
 {
-    "mockFileName": "mocks",
-    "responseHeaders": {
-        "Content-Type": "application / json"
-    }
+  "mockFileName": "mocks",
+  "responseHeaders": {
+    "Content-Type": "application / json"
+  }
 }
-
 ```
 
 If you want to know how to write the configuration file. Please see at the bottom of the document.
-
 
 ## Visual GUI
 
@@ -60,16 +59,13 @@ Manage configuration files and mock content in GUI visualy [More details](./pack
 
 ![](https://raw.githubusercontent.com/brizer/graph-bed/master/img/20190605142856.png)
 
-
 How to launch GUI:
 
-``` sh
+```sh
 http-mockjs ui
 ```
 
-
 ## Usage
-
 
 It has been updated to version 4. If you are using 3.x, the documentation is [see here](https://github.com/brizer/http-mocker/tree/v3.x).
 
@@ -77,7 +73,7 @@ The new version requires only one package to implement visual management and ini
 
 ### Act as a proxy server directly from the command line
 
-``` sh
+```sh
 http-mockjs server -p 8008
 ```
 
@@ -85,7 +81,7 @@ http-mockjs server -p 8008
 
 ### Work with wepback by passing app object
 
-``` js
+```js
 const {mocker} = require ('http-mockjs')
 
 devServer: {
@@ -98,55 +94,51 @@ devServer: {
 
 [Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/webpack)
 
-
 ### Work with express
 
 Just pass in the app object
 
-``` js
-const app = express ();
-const {mocker} = require ('http-mockjs')
+```js
+const app = express();
+const { mocker } = require("http-mockjs");
 
-mocker (app)
+mocker(app);
 
-app.listen (8002)
-
+app.listen(8002);
 ```
-
 
 ### Work with http-server and other command line tools:
 
 By proxying the http-server, the request is proxyed to the proxy server started by `http-mockjs server`.
 
-``` json
-  "scripts": {
-    "serve": "http-server -p 8008 -P http: // localhost: 8001 /",
-    "mock": "http-mockjs server -p 8001"
-  }
+```json
+  "scripts": {
+    "serve": "http-server -p 8008 -P http: // localhost: 8001 /",
+    "mock": "http-mockjs server -p 8001"
+  }
 ```
 
 [Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/commander)
 
-
 ## Configuration file field description
 
-### mockFileName 
+### mockFileName
 
-Where  to load mock result
+Where to load mock result
 
-### responseHeaders 
+### responseHeaders
 
 custom response headers
 
-### routes 
+### routes
 
 Specific mapping
 
-#### routes.path 
+#### routes.path
 
 file path
 
-#### routes.ignore 
+#### routes.ignore
 
 whether to skip matches.
 
@@ -154,54 +146,49 @@ Sometimes you want to keep the configuration, but you don't want it to take effe
 
 Here is an example of a complete configuration file:
 
-``` json
+```json
 {
-    "mockFileName": "mocks",
-    "responseHeaders": {
-        "Content-Type": "application / json"
-    },
-    "routes": {
-        "GET /j/getSomeData.json":
-        {
-            "path": "/api/get.json"
-        },
-        "POST /p/postData.do":
-        {
-            "path": "/api/post.json"
-        },
-        "GET / user /: id": {
-            "path": "/api/user.json"
-        },
-        "GET / users /: id +": {
-            "path": "/api/info.json",
-            "ignore": true
-        },
-        "GET / users / user? Id = 123": {
-            "path": "/api/user/123.json",
-            "ignore": true
-        }
-    }
+  "mockFileName": "mocks",
+  "responseHeaders": {
+    "Content-Type": "application / json"
+  },
+  "routes": {
+    "GET /j/getSomeData.json": {
+      "path": "/api/get.json"
+    },
+    "POST /p/postData.do": {
+      "path": "/api/post.json"
+    },
+    "GET / user /: id": {
+      "path": "/api/user.json"
+    },
+    "GET / users /: id +": {
+      "path": "/api/info.json",
+      "ignore": true
+    },
+    "GET / users / user? Id = 123": {
+      "path": "/api/user/123.json",
+      "ignore": true
+    }
+  }
 }
-
 ```
 
 The file pointed to is created in the folder specified by `mockFileName`.
 
 The demo of the returned file is as follows, you can use mockjs style
 
-
-``` json
+```json
 {
-    "code": 0,
-    "message": "success",
-    "result": {
-        "content": true,
-        "name": "brizer123",
-        "domain": "@ domain ()",
-        "otherUrl": "@ url ()",
-        "desciption": "@ cparagraph (1, 3)",
-        "date": "@ date ('yyyy-MM-dd')"
-    }
+  "code": 0,
+  "message": "success",
+  "result": {
+    "content": true,
+    "name": "brizer123",
+    "domain": "@ domain ()",
+    "otherUrl": "@ url ()",
+    "desciption": "@ cparagraph (1, 3)",
+    "date": "@ date ('yyyy-MM-dd')"
+  }
 }
 ```
-
