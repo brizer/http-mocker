@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs-proxy",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "The core proxy for http-mockjs",
   "keywords": [
     "proxy",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "chokidar": "^3.3.0",
-    "http-mockjs-util": "^3.0.2",
+    "http-mockjs-util": "^3.0.3-alpha.0",
     "mockjs": "^1.1.0"
   }
 }
