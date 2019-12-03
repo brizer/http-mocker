@@ -1,0 +1,38 @@
+{
+  "name": "http-mockjs-proxy",
+  "version": "1.0.0",
+  "description": "The core proxy for http-mockjs",
+  "keywords": [
+    "proxy",
+    "http",
+    "mock",
+    "mockjs"
+  ],
+  "author": "brizer <brizer@163.com>",
+  "homepage": "https://github.com/brizer/http-mocker#readme",
+  "license": "MIT",
+  "main": "lib/proxy.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brizer/http-mocker.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/brizer/http-mocker/issues"
+  },
+  "dependencies": {
+    "chokidar": "^3.3.0",
+    "http-mockjs-util": "^3.0.2",
+    "mockjs": "^1.1.0"
+  }
+}

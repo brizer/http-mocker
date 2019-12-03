@@ -1,0 +1,13 @@
+{
+    "mockFileName":"mymocks",
+    "routes":{
+        "GET /j/getScoreComponentsAndSetting.json":
+        {
+            "path": "/api/get.json"
+        },
+        "POST /p/postScoreComponentsAndSetting.do":
+        {
+            "path": "/api/post.json"
+        }
+    }
+}

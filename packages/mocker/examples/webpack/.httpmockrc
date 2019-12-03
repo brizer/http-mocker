@@ -1,28 +1,29 @@
 {
-    "responseHeaders":{
-       "xixi":"hahahaha"
-    },
-    "routes":{
-        "GET /j/getSomeData.json":
-        {
-            "path": "/api/get.json"
+    "mockFileName": "mocks",
+    "routes": {
+        "GET /j/getSomeData.json": {
+            "path": "/api/get.json",
+            "ignore": false
         },
-        "POST /p/postData.do":
-        {
-            "path": "/api/post.json"
+        "POST /p/postData.do": {
+            "path": "/api/post.json",
+            "ignore": false
         },
-        "GET /user/:id":{
-            "path": "/api/user.json"
+        "GET /user/:id": {
+            "path": "/api/user.json",
+            "ignore": false
         },
-        "GET /users/:id+":{
-            "path": "/api/info.json"
+        "GET /users/:id+": {
+            "path": "/api/info.json",
+            "ignore": false
         },
         "GET /j/new": {
-            "path": "/api/info.json"
+            "path": "/api/info.json",
+            "ignore": false
         },
         "GET /j/new?id=123": {
-            "path": "/api/123.json"
+            "path": "/api/123.json",
+            "ignore": false
         }
-    },
-    "port":8002
+    }
 }

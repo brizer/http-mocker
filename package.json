@@ -4,19 +4,12 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "npm run build && jest",
+    "test": "lerna run test",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "start": "lerna bootstrap",
-    "dev:editor:ui": "cd packages/editor && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
-    "dev:editor:server": "cd packages/editor && cross-env NODE_ENV=development nodemon",
-    "buildmocker": "cd packages/mocker && rm -rf lib && tsc",
-    "buildutil": "cd packages/util && tsc",
-    "build:editor:ui": "cd packages/editor && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
-    "build:editor:server": "cd packages/editor/server && cross-env NODE_ENV=production tsc --project ../tsconfig.server.json",
-    "build": "npm run buildmocker && npm run buildutil",
-    "demo:basic": "npm run build && cd packages/mocker/examples/basic && httpmock",
-    "demo:webpack": "npm run build && cd packages/mocker/examples/webpack && npm start",
-    "demo:command": "npm run build && cd packages/mocker/examples/commander && (npm run serve | npm run mock)"
+    "dev:ui": "lerna run dev:ui",
+    "dev:server": "lerna run dev:server",
+    "build": "lerna run build"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

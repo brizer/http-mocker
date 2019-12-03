@@ -1,5 +1,5 @@
 import { Routes } from "./declations";
-import * as pathToRegexp from 'path-to-regexp';
+import pathToRegexp from 'path-to-regexp';
 
 export function getMatechedRoute(proxyLists:Routes,proxyURL:string):Routes {
     let proxyMatch:Routes = proxyLists[proxyURL];

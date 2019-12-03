@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "mock": "httpmock",
+    "mock": "http-mockjs server -p 8080",
+    "mock:ui": "http-mockjs ui",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

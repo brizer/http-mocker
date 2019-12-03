@@ -9,4 +9,5 @@ const config = {
         'Content-Type': 'application/json'
     }
 };
+exports.fileName = '.httpmockrc';
 exports.default = config;

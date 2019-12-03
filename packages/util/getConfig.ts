@@ -1,7 +1,7 @@
-import * as cosmiconfig from 'cosmiconfig';
-import * as jsonfile from 'jsonfile'
-import { Config } from 'http-mockjs-util/declations';
-import * as defaultConf from './defaultConfig'
+import cosmiconfig from 'cosmiconfig';
+import jsonfile from 'jsonfile'
+import { Config } from './declations';
+import defaultConf from './defaultConfig'
 
 const deepmerge = require('deepmerge')
 let configPath:string = '';
@@ -20,7 +20,7 @@ const getConfig = (dir: string): Config => {
 
     configPath = filepath
 
-    const finalConfig = deepmerge(defaultConf.default, config)
+    const finalConfig = deepmerge(defaultConf, config)
     return finalConfig
 }
 

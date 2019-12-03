@@ -27,7 +27,11 @@
     "url": "git+https://github.com/brizer/http-mocker.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "dev:ui": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
+    "dev:server": "cross-env NODE_ENV=development nodemon",
+    "build": "rm -rf dist && npm run build:editor:ui && npm run build:editor:server",
+    "build:editor:ui": "cd ../editor && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
+    "build:editor:server": "cd server && cross-env NODE_ENV=production tsc --project ../tsconfig.server.json"
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"
@@ -36,7 +40,6 @@
     "body-parser": "^1.19.0",
     "chokidar": "^3.0.1",
     "express": "^4.17.1",
-    "http-mockjs": "^3.3.4",
     "http-mockjs-util": "^3.0.2",
     "i18next": "^13.1.5",
     "i18next-browser-languagedetector": "^2.2.3",
@@ -62,11 +65,17 @@
     "@types/styled-components": "^4.1.15",
     "antd": "^3.19.2",
     "babel-plugin-import": "^1.12.0",
+    "cross-env": "^5.2.0",
     "lodash": "^4.17.15",
+    "nodemon": "^2.0.1",
     "react-redux": "^7.0.3",
     "redux": "^4.0.1",
     "styled-components": "^4.2.1",
-    "styled-normalize": "^8.0.6"
+    "styled-normalize": "^8.0.6",
+    "ts-node": "^8.5.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "engines": {
     "node": ">=8.9.1"

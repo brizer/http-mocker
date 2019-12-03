@@ -1,15 +1,13 @@
 {
-    "compilerOptions": {
-        "rootDir": "./server",
-        "outDir": "./dist/server",
-        "module": "commonjs",
-        "target": "es2016",
-        "lib": ["es2016"],
-        "sourceMap": true,
-        "allowJs": true,
-        "jsx": "react"
-    },
-    "include": [
-        "server"
-    ]
+  "compilerOptions": {
+    "rootDir": "./server",
+    "outDir": "./dist/server",
+    "module": "commonjs",
+    "target": "es2016",
+    "lib": ["es2016"],
+    "sourceMap": false,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["server"]
 }

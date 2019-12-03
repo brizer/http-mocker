@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const cosmiconfig = require("cosmiconfig");
-const jsonfile = require("jsonfile");
-const defaultConf = require("./defaultConfig");
+const cosmiconfig_1 = __importDefault(require("cosmiconfig"));
+const jsonfile_1 = __importDefault(require("jsonfile"));
+const defaultConfig_1 = __importDefault(require("./defaultConfig"));
 const deepmerge = require('deepmerge');
 let configPath = '';
 /**
@@ -11,10 +14,10 @@ let configPath = '';
  * @return {object} finalConfig - config content
  */
 const getConfig = (dir) => {
-    const explorer = cosmiconfig('httpmock');
+    const explorer = cosmiconfig_1.default('httpmock');
     const { config = {}, filepath = '' } = explorer.searchSync(dir) || {};
     configPath = filepath;
-    const finalConfig = deepmerge(defaultConf.default, config);
+    const finalConfig = deepmerge(defaultConfig_1.default, config);
     return finalConfig;
 };
 exports.getConfigPath = () => {
@@ -26,6 +29,6 @@ exports.getConfigPath = () => {
  */
 exports.setConfig = (configInfo) => {
     const dir = exports.getConfigPath();
-    return jsonfile.writeFile(dir, configInfo, { spaces: 4 });
+    return jsonfile_1.default.writeFile(dir, configInfo, { spaces: 4 });
 };
 exports.default = getConfig;

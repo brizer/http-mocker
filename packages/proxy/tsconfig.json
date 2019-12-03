@@ -5,8 +5,8 @@
     "target": "es6",
     "skipLibCheck": true,
     "sourceMap": false,
-    "esModuleInterop": true
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["bin", "commands"],
+  "include": ["lib"],
   "exclude": ["node_modules"]
 }

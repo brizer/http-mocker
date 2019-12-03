@@ -1,13 +1,28 @@
 {
-    "mockFileName":"mymocks",
+    "mockFileName": "mocks",
+    "responseHeaders": {
+        "Content-Type": "application/json"
+    },
     "routes":{
-        "GET /j/getScoreComponentsAndSetting.json":
+        "GET /j/getSomeData.json":
         {
             "path": "/api/get.json"
         },
-        "POST /p/postScoreComponentsAndSetting.do":
+        "POST /p/postData.do":
         {
             "path": "/api/post.json"
+        },
+        "GET /user/:id":{
+            "path": "/api/user.json"
+        },
+        "GET /users/:id+":{
+            "path": "/api/info.json"
+        },
+        "GET /j/new": {
+            "path": "/api/info.json"
+        },
+        "GET /j/new?id=123": {
+            "path": "/api/123.json"
         }
     }
 }

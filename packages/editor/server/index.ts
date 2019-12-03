@@ -23,7 +23,7 @@ const main = async () => {
         })
         
         const server  = app.listen(port,()=>{
-            console.log(color(`server is launch in port: ${port}`).green)
+            console.log(color(`server is launch in url: http://localhost:${port}`).green)
         })
         socket(io(server))
 

@@ -1,4 +1,4 @@
-import { Config } from "http-mockjs-util/declations";
+import { Config } from "./declations";
 
 /**
  * Default config object
@@ -9,4 +9,6 @@ const config: Config = {
         'Content-Type':'application/json'
     }
 }
+
+export const fileName = '.httpmockrc';
 export default config

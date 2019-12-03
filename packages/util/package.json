@@ -14,13 +14,20 @@
     "url": "git+https://github.com/brizer/http-mocker.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "npm run build && jest",
+    "build": "tsc"
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"
   },
   "dependencies": {
+    "cosmiconfig": "^5.2.0",
+    "deepmerge": "^4.2.2",
+    "jsonfile": "^5.0.0",
     "path-to-regexp": "^3.1.0",
     "semver": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/jsonfile": "^5.0.0"
   }
 }

@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as util from 'util'
-import getConfig ,{ getConfigPath, setConfig } from 'http-mockjs/lib/getConfig'
+import getConfig, { getConfigPath, setConfig } from 'http-mockjs-util/getConfig'
 let configFilePath:string = ''
 let configContent = {}
 

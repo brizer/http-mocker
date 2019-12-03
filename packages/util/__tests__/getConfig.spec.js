@@ -8,7 +8,7 @@ let testConf = {
         mockFileName : 'customFile'
     }
 }
-const getConfig = require('../lib/getConfig').default;
+const getConfig = require('../getConfig').default;
 describe('getConfig', () => {
     test('with no config, should return default', () => {
         const config = getConfig(path.join(__dirname,'../../'))

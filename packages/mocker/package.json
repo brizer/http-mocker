@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "bin": {
-    "httpmock": "bin/httpmock.js"
+    "http-mockjs": "bin/http-mockjs.js"
   },
   "directories": {
     "lib": "lib",
@@ -21,16 +21,19 @@
     "url": "git+https://github.com/brizer/http-mocker.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "tsc"
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"
   },
   "dependencies": {
     "chokidar": "^3.0.0",
+    "commander": "^3.0.2",
     "cosmiconfig": "^5.2.0",
     "deepmerge": "^3.2.0",
     "express": "^4.16.4",
+    "http-mockjs-proxy": "^1.0.0",
+    "http-mockjs-ui": "^3.4.4",
     "http-mockjs-util": "^3.0.2",
     "jsonfile": "^5.0.0",
     "mockjs": "^1.0.1-beta3",
