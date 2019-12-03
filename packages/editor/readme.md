@@ -7,14 +7,14 @@ A GUI tool for managing the contents of configuration files and mock files in [h
 # Install
 
 ```
-npm install http-mockjs-ui
+npm install http-mockjs  -g
 ```
 
 # Usage
 Switch to the project directory with the `.httpmockrc` configuration file
 
 ```
-http-mockjs-ui
+http-mockjs ui
 
 ```
 

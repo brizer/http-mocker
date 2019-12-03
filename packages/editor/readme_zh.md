@@ -8,14 +8,14 @@
 # 安装
 
 ```
-npm install http-mockjs-ui
+npm install http-mockjs -g
 ```
 
 # 使用
 切换到有`.httpmockrc`配置文件的工程目录下
 
 ```
-http-mockjs-ui
+http-mockjs ui
 
 ```
 

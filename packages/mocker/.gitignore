@@ -37,7 +37,6 @@ build/config\.gypi
 lib/**/*.js
 commands/**/*.js
 actions/**/*.js
-bin/**/*.js
 lib/**/*.d.ts
 commands/**/*.d.ts
 actions/**/*.d.ts
