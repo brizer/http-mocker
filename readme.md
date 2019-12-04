@@ -46,7 +46,7 @@ A configuration file `.httpmockrc` will be generated in the current folder with 
 {
   "mockFileName": "mocks",
   "responseHeaders": {
-    "Content-Type": "application / json"
+    "Content-Type": "application/json"
   }
 }
 ```
@@ -82,12 +82,12 @@ http-mockjs server -p 8008
 ### Work with wepback by passing app object
 
 ```js
-const {mocker} = require ('http-mockjs')
+const {mocker} = require('http-mockjs')
 
 devServer: {
   port: '8002',
-  before: (app) => {
-    mocker (app)
+  before:(app)=>{
+    mocker(app)
   }
 }
 ```
@@ -113,7 +113,7 @@ By proxying the http-server, the request is proxyed to the proxy server started 
 
 ```json
   "scripts": {
-    "serve": "http-server -p 8008 -P http: // localhost: 8001 /",
+    "serve": "http-server -p 8008 -P http://localhost:8001/",
     "mock": "http-mockjs server -p 8001"
   }
 ```
@@ -150,7 +150,7 @@ Here is an example of a complete configuration file:
 {
   "mockFileName": "mocks",
   "responseHeaders": {
-    "Content-Type": "application / json"
+    "Content-Type": "application/json"
   },
   "routes": {
     "GET /j/getSomeData.json": {
@@ -159,14 +159,14 @@ Here is an example of a complete configuration file:
     "POST /p/postData.do": {
       "path": "/api/post.json"
     },
-    "GET / user /: id": {
+    "GET /user/:id": {
       "path": "/api/user.json"
     },
-    "GET / users /: id +": {
+    "GET /users /:id+": {
       "path": "/api/info.json",
       "ignore": true
     },
-    "GET / users / user? Id = 123": {
+    "GET /users/user?Id=123": {
       "path": "/api/user/123.json",
       "ignore": true
     }
@@ -185,10 +185,10 @@ The demo of the returned file is as follows, you can use mockjs style
   "result": {
     "content": true,
     "name": "brizer123",
-    "domain": "@ domain ()",
-    "otherUrl": "@ url ()",
-    "desciption": "@ cparagraph (1, 3)",
-    "date": "@ date ('yyyy-MM-dd')"
+    "domain": "@domain()",
+    "otherUrl": "@url()",
+    "desciption": "@cparagraph(1,3)",
+    "date": "@date('yyyy-MM-dd')"
   }
 }
 ```
