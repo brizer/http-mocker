@@ -157,7 +157,6 @@ class EditableTable extends React.Component<any, any> {
     const { t, i18n } = this.props;
     // do not close the dialog
     // this.setState({ showDetailModal: false });
-    let realValue;
     try {
       JSON.parse(value)
     } catch (error) {

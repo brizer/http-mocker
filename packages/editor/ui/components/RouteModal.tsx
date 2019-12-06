@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Input } from "antd";
 import store from "../redux/store/store";
 import ReactJson from "react-json-view";
+import { getRouteInfo } from "../../ui/redux/actions/configActions";
 
 const { TextArea } = Input;
 
@@ -50,6 +51,7 @@ class RouteModal extends React.Component<any, any> {
 
   save() {
     this.props.onOk(this.state.content);
+    store.dispatch(getRouteInfo(this.props.record));
   }
 
   render() {
