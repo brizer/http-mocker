@@ -9,6 +9,7 @@ import {
   Switch,
   Button,
   Affix,
+  message,
   Modal
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
@@ -153,14 +154,23 @@ class EditableTable extends React.Component<any, any> {
     this.setState({ showDetailModal: false });
   };
   onOk = value => {
-    //todo: save value to file
-    this.setState({ showDetailModal: false });
+    const { t, i18n } = this.props;
+    // do not close the dialog
+    // this.setState({ showDetailModal: false });
+    let realValue;
+    try {
+      JSON.parse(value)
+    } catch (error) {
+      message.error(`${t("action.save")} ${t("txt.fail")}, ${t("action.please")} ${t("action.check")} ${t("txt.format")}`);
+      return;
+    }
     store.dispatch(
       setRouteInfo({
         record: this.state.detailRecord,
         content: value || "{}"
       }).bind(this)
     );
+    message.success(`${t("action.save")} ${t("txt.success")}`);
   };
 
   render() {

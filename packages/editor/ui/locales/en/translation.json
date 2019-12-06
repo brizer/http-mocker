@@ -7,7 +7,9 @@
         "delete":"Delete",
         "detail":"Detail",
         "cancel":"Cancel",
-        "save":"Save"
+        "save":"Save",
+        "check":"Check",
+        "please":"Please"
     },    
     "txt":{
         "method":"Method",
@@ -19,6 +21,9 @@
         "to":"to",
         "language":"Language",
         "chinese":"Chinese",
-        "english":"English"
+        "english":"English",
+        "success":"Success",
+        "fail":"Fail",
+        "format":"Format"
     }
 }

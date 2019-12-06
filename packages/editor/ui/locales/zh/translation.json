@@ -7,7 +7,9 @@
         "delete":"删除",
         "detail":"详情",
         "cancel":"取消",
-        "save":"保存"
+        "save":"保存",
+        "check":"检查",
+        "please":"请"
     },
     "txt":{
         "method":"请求方式",
@@ -19,6 +21,9 @@
         "to":"要",
         "language":"语言",
         "chinese":"中文",
-        "english":"英文"
+        "english":"英文",
+        "success":"成功",
+        "fail":"失败",
+        "format":"格式"
     }
 }

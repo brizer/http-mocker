@@ -1,58 +1,88 @@
-import React from 'react'
-import {Modal, Input } from 'antd'
-import store from '../redux/store/store'
-import { getRouteInfo } from '../redux/actions/configActions';
+import React from "react";
+import { Modal, Input } from "antd";
+import store from "../redux/store/store";
+import ReactJson from "react-json-view";
 
-const { TextArea } = Input 
+const { TextArea } = Input;
 
-class RouteModal extends React.Component<any, any>{
-    constructor(props){
-        super(props)
+class RouteModal extends React.Component<any, any> {
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            content:''
-        }
+    this.state = {
+      content: "",
+      JsonContent: {}
+    };
+  }
+
+  componentDidMount() {
+    store.subscribe(() => {
+      const state = store.getState();
+      const content = state.config.content;
+      const JsonContent = content ? JSON.parse(content) : {};
+      this.setState({ content: content });
+      this.setState({ JsonContent });
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.record == nextProps.record) {
+      return;
     }
+    // store.dispatch(getRouteInfo(nextProps.record))
+  }
 
-    componentDidMount() {
-        store.subscribe(()=>{
-            const state = store.getState()
-            const content = state.config.content
-            this.setState({content:content})
-        })
+  changeContent(e) {
+    this.setState({ content: e.target.value });
+    let jsonContent
+    try {
+        jsonContent = JSON.parse(e.target.value)
+    } catch (error) {
+        jsonContent = '';
     }
+    this.setState({ JsonContent:jsonContent})
+  }
 
-    componentWillReceiveProps(nextProps){
-        if(this.props.record == nextProps.record){
-            return
-        }
-        // store.dispatch(getRouteInfo(nextProps.record))
-        
-    }
+  onChangeEdiror(e) {
+    const { updated_src } = e;
+    this.setState({ content: JSON.stringify(updated_src, null, 4) });
+  }
 
-    changeContent (e){
-        this.setState({content:e.target.value})
-    }
+  save() {
+    this.props.onOk(this.state.content);
+  }
 
-
-    save() {
-        this.props.onOk(this.state.content)
-    }
-    
-    render(){
-        return (
-        <Modal
-          title="Basic Modal"
-          visible={this.props.visible}
-          onOk={()=>this.save()}
-          width={800}
-          onCancel={this.props.onCancel}
-        >
-          <TextArea value={this.state.content} onChange={this.changeContent.bind(this)} rows={20} />
-        </Modal>
-        )
-    }
+  render() {
+    return (
+      <Modal
+        title="Basic Modal"
+        visible={this.props.visible}
+        onOk={() => this.save()}
+        width={1200}
+        onCancel={this.props.onCancel}
+      >
+        <div style={{ float: "left", width: "50%" }}>
+          <ReactJson
+            src={this.state.JsonContent}
+            onEdit={this.onChangeEdiror.bind(this)}
+            onAdd={this.onChangeEdiror.bind(this)}
+            onDelete={this.onChangeEdiror.bind(this)}
+            displayObjectSize={false}
+            displayDataTypes={false}
+            enableClipboard={false}
+          ></ReactJson>
+        </div>
+        <div style={{ float: "right", width: "50%" }}>
+          <TextArea
+            value={this.state.content}
+            onChange={this.changeContent.bind(this)}
+            // rows={20}
+            autosize={true}
+          />
+        </div>
+      </Modal>
+    );
+  }
 }
 
-
-export default RouteModal
+export default RouteModal;

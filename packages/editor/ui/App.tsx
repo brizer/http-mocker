@@ -16,7 +16,8 @@ interface AppState {
   config: any;
 }
 const GlobalStyle = createGlobalStyle`
-    ${normalize}    
+    ${normalize}
+    .ant-modal-body {overflow:hidden}    
 `;
 
 const MiddleLabel = styled.span<any>`
