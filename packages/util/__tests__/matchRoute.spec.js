@@ -61,7 +61,7 @@ describe('matchRoute util',()=>{
     })
     test('special params in path with some special query',()=>{
         const { path } = getMatechedRoute(proxyList,'GET /user/345?id=123');
-        expect(path).toBe('/api/user/345.json')
+        expect(path).toBe('/api/user/123.json')
     })
     test('special params in path with some special query but not in list',()=>{
         const { path } = getMatechedRoute(proxyList,'GET /user/345?id=1234');
