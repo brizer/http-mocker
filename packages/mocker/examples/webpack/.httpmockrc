@@ -19,7 +19,7 @@
         },
         "GET /users/:id+": {
             "path": "/api/info.json",
-            "ignore": false
+            "ignore": true
         },
         "GET /j/new": {
             "path": "/api/info.json",

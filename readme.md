@@ -131,6 +131,12 @@ Where to load mock result
 
 custom response headers
 
+### requestHeaders 
+
+custom request headers
+
+When you do n’t use mocks and go to remote services, It's useful to customize cookies and tokens to simulate login.
+
 ### routes
 
 Specific mapping
@@ -151,7 +157,11 @@ Here is an example of a complete configuration file:
 {
   "mockFileName": "mocks",
   "responseHeaders": {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "X-Proxy-By": "http-mockjs"
+  },
+  "requestHeaders": {
+    "cookie":"Token=123ssfsfesfe"
   },
   "routes": {
     "GET /j/getSomeData.json": {

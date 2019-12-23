@@ -132,6 +132,10 @@ app.listen(8002)
 
 ### responseHeaders 自定义的响应头
 
+### requestHeaders 自定义的请求头
+
+在不使用mock，走代码到远程服务的时候可以启用，自定义cookie和token来模拟登录相关
+
 ### routes 具体的映射关系
 
 #### routes.path 文件路径
@@ -148,6 +152,9 @@ app.listen(8002)
     "responseHeaders": {
         "Content-Type": "application/json",
         "X-Proxy-By": "http-mockjs"
+    },
+    "requestHeaders": {
+        "cookie":"Token=123ssfsfesfe"
     },
     "routes":{
         "GET /j/getSomeData.json":

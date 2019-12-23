@@ -28,4 +28,5 @@ export interface Config {
     routes?: Routes;
     port?:number;
     responseHeaders?:object;
+    requestHeaders?:object;
 }

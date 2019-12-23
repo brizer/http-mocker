@@ -40,6 +40,7 @@ const printProxyInfo = (config) => {
 const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     let proxyLists = config.routes;
     let responseHeaders = config.responseHeaders;
+    let requestHeaders = config.requestHeaders;
     //print info
     printProxyInfo(config);
     //watch config file changes
@@ -49,6 +50,7 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
         const config = getConfig_1.default(process.cwd());
         proxyLists = config.routes;
         responseHeaders = config.responseHeaders;
+        requestHeaders = config.requestHeaders;
         console.log(color_1.default(" The content of http-mockjs'config file has changed").green);
     });
     //filter configed api and map local
@@ -66,6 +68,9 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             res.end();
         }
         else {
+            // add custom requestHeaders to others
+            const proxyHeaders = Object.assign({}, req.headers, requestHeaders);
+            req.headers = proxyHeaders;
             next();
         }
     });

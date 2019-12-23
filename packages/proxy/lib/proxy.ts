@@ -42,6 +42,7 @@ const printProxyInfo = (config: Config) => {
 const proxy = async (app, config: Config) => {
   let proxyLists = config.routes;
   let responseHeaders = config.responseHeaders;
+  let requestHeaders = config.requestHeaders;
 
   //print info
   printProxyInfo(config);
@@ -53,6 +54,7 @@ const proxy = async (app, config: Config) => {
     const config = getConfig(process.cwd());
     proxyLists = config.routes;
     responseHeaders = config.responseHeaders;
+    requestHeaders = config.requestHeaders;
     console.log(color(" The content of http-mockjs'config file has changed").green);
   });
   //filter configed api and map local
@@ -74,6 +76,9 @@ const proxy = async (app, config: Config) => {
       res.send(result);
       res.end();
     } else {
+      // add custom requestHeaders to matched items.
+      const proxyHeaders = Object.assign({},req.headers,requestHeaders);
+      req.headers = proxyHeaders;
       next();
     }
   });
