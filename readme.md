@@ -46,7 +46,8 @@ A configuration file `.httpmockrc` will be generated in the current folder with 
 {
   "mockFileName": "mocks",
   "responseHeaders": {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "X-Proxy-By": "http-mockjs"
   }
 }
 ```

@@ -29,7 +29,7 @@ const printProxyInfo = (config) => {
     Object.keys(proxyLists).forEach(key => {
         const proxyMatch = proxyLists[key];
         const mapLocalPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
-        console.log(`${color_1.default(key).green} ${color_1.default("has been map local to").black} ${color_1.default(mapLocalPath).yellow}`);
+        console.log(`${color_1.default(key).green} ${color_1.default("has been map local to").red} ${color_1.default(mapLocalPath).yellow}`);
     });
 };
 /**
@@ -39,6 +39,7 @@ const printProxyInfo = (config) => {
  */
 const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     let proxyLists = config.routes;
+    let responseHeaders = config.responseHeaders;
     //print info
     printProxyInfo(config);
     //watch config file changes
@@ -47,6 +48,7 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     watcher.on("all", path => {
         const config = getConfig_1.default(process.cwd());
         proxyLists = config.routes;
+        responseHeaders = config.responseHeaders;
         console.log(color_1.default(" The content of http-mockjs'config file has changed").green);
     });
     //filter configed api and map local
@@ -59,7 +61,7 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             const responseBody = fs.readFileSync(curPath, "utf-8");
             const result = mock.mock(responseBody);
             // set custom response headers
-            res.set(config.responseHeaders);
+            res.set(responseHeaders);
             res.send(result);
             res.end();
         }

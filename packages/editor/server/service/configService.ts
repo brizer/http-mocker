@@ -1,8 +1,9 @@
 import * as fs from 'fs'
 import * as util from 'util'
 import getConfig, { getConfigPath, setConfig } from 'http-mockjs-util/getConfig'
+import { Config } from 'http-mockjs-util/declations'
 let configFilePath:string = ''
-let configContent = {}
+let configContent: Config = {}
 
 const writeFilePromisify = util.promisify(fs.writeFile)
 
@@ -22,7 +23,11 @@ export const ConfigService = {
     ['setConfig'](req,res,next){
         const configInfo = req.body.config;
         if(configFilePath && configInfo){
-            setConfig(configInfo).then(data=>{
+            // only set routes filed in GUI
+            configContent = getConfig(undefined);
+            console.log(configContent);
+            configContent.routes = configInfo.routes;
+            setConfig(configContent).then(data=>{
                 res.json({
                     result:1
                 })

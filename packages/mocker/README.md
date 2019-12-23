@@ -23,6 +23,10 @@ Take a configuration file `.httpmockrc` as an example:
 ``` json
 {
     "mockFileName":"mymocks",
+    "responseHeaders": {
+        "Content-Type": "application/json",
+        "X-Proxy-By": "http-mockjs"
+    },
     "routes":{
         "GET /j/getSomeData.json":
         {
@@ -44,7 +48,7 @@ Take a configuration file `.httpmockrc` as an example:
 
 Return the file content demo as follows, you can use the mockjs style:
 
-```
+``` json
 {
     "code":0,
     "message":"success",

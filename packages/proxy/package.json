@@ -23,8 +23,7 @@
     "url": "git+https://github.com/brizer/http-mocker.git"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "tsc"
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"

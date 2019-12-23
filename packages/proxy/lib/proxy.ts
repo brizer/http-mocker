@@ -28,7 +28,7 @@ const printProxyInfo = (config: Config) => {
       proxyMatch.path
     );
     console.log(
-      `${color(key).green} ${color("has been map local to").black} ${
+      `${color(key).green} ${color("has been map local to").red} ${
         color(mapLocalPath).yellow
       }`
     );
@@ -41,6 +41,7 @@ const printProxyInfo = (config: Config) => {
  */
 const proxy = async (app, config: Config) => {
   let proxyLists = config.routes;
+  let responseHeaders = config.responseHeaders;
 
   //print info
   printProxyInfo(config);
@@ -51,6 +52,7 @@ const proxy = async (app, config: Config) => {
   watcher.on("all", path => {
     const config = getConfig(process.cwd());
     proxyLists = config.routes;
+    responseHeaders = config.responseHeaders;
     console.log(color(" The content of http-mockjs'config file has changed").green);
   });
   //filter configed api and map local
@@ -68,7 +70,7 @@ const proxy = async (app, config: Config) => {
       const responseBody = fs.readFileSync(curPath, "utf-8");
       const result = mock.mock(responseBody);
       // set custom response headers
-      res.set(config.responseHeaders);
+      res.set(responseHeaders);
       res.send(result);
       res.end();
     } else {

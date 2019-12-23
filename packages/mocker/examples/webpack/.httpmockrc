@@ -1,5 +1,9 @@
 {
     "mockFileName": "mocks",
+    "responseHeaders": {
+        "Content-Type": "application/json",
+        "X-Proxy-By": "http-mockjs"
+    },
     "routes": {
         "GET /j/getSomeData.json": {
             "path": "/api/get.json",

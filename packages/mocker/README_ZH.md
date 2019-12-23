@@ -44,7 +44,8 @@ http-mockjs init
 {
     "mockFileName": "mocks",
     "responseHeaders": {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Proxy-By": "http-mockjs"
     }
 }
 
@@ -146,7 +147,8 @@ app.listen(8002)
 {
     "mockFileName": "mocks",
     "responseHeaders": {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Proxy-By": "http-mockjs"
     },
     "routes":{
         "GET /j/getSomeData.json":
