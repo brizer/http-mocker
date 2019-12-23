@@ -68,7 +68,7 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             res.end();
         }
         else {
-            // add custom requestHeaders to others
+            // add custom requestHeaders to matched items.
             const proxyHeaders = Object.assign({}, req.headers, requestHeaders);
             req.headers = proxyHeaders;
             next();
