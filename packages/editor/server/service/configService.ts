@@ -25,7 +25,6 @@ export const ConfigService = {
         if(configFilePath && configInfo){
             // only set routes filed in GUI
             configContent = getConfig(undefined);
-            console.log(configContent);
             configContent.routes = configInfo.routes;
             setConfig(configContent).then(data=>{
                 res.json({
