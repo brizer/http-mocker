@@ -4,6 +4,7 @@
         "Content-Type": "application/json",
         "X-Proxy-By": "http-mockjs"
     },
+    "$schema": "http://json.schemastore.org/httpmockrc",
     "routes": {
         "GET /j/getSomeData.json": {
             "path": "/api/get.json",
@@ -27,6 +28,10 @@
         },
         "GET /j/new?id=123": {
             "path": "/api/123.json",
+            "ignore": false
+        },
+        "GET 1577943669014": {
+            "path": "/api/test.json",
             "ignore": false
         }
     }

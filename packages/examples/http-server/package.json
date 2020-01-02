@@ -1,0 +1,26 @@
+{
+  "name": "http-server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run mock | npm run serve",
+    "serve": "http-server -p 8008 -P http://localhost:8001/",
+    "mock": "node ../../mocker/bin/http-mockjs server -p 8001"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "httpmock": {
+    "mockFileName": "mymocks",
+    "routes": {
+      "GET /getsomething.do": {
+        "path": "/get.json"
+      },
+      "POST /postsomething.do": {
+        "path": "/post.json"
+      }
+    }
+  }
+}

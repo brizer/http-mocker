@@ -9,7 +9,9 @@
     "start": "lerna bootstrap",
     "dev:ui": "lerna run dev:ui",
     "dev:server": "lerna run dev:server",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "demo:http-server": "cd packages/examples/http-server && npm start",
+    "demo:webpack-dev-server": "cd packages/examples/webpack-dev-server && npm start"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

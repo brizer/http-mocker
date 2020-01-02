@@ -1,0 +1,27 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Examples for http-mocker",
+  "keywords": [
+    "examples",
+    "http-mocker",
+    "http-mockjs"
+  ],
+  "author": "brizer <brizer@163.com>",
+  "homepage": "https://github.com/brizer/http-mocker#readme",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brizer/http-mocker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brizer/http-mocker/issues"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.0"
+  }
+}

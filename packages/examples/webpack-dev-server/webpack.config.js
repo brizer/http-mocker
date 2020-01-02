@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { mocker } = require('http-mockjs')
+const { mocker } = require('../../mocker/lib/index')
 
 module.exports = {
   mode: 'development',
