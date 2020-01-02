@@ -72,14 +72,6 @@ It has been updated to version 4. If you are using 3.x, the documentation is [se
 
 The new version requires only one package to implement visual management and initialization functions.
 
-### Act as a proxy server directly from the command line
-
-```sh
-http-mockjs server -p 8008
-```
-
-[Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/basic)
-
 ### Work with wepback by passing app object
 
 ```js
@@ -112,7 +104,7 @@ app.listen(8002);
 
 By proxying the http-server, the request is proxyed to the proxy server started by `http-mockjs server`.
 
-```json
+``` json
   "scripts": {
     "serve": "http-server -p 8008 -P http://localhost:8001/",
     "mock": "http-mockjs server -p 8001"

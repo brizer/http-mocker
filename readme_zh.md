@@ -73,15 +73,6 @@ http-mockjs ui
 
 新版本只需要一个包，就可以实现可视化管理和初始化功能。
 
-
-### 直接作为代理服务器，从命令行中运行
-
-``` sh
-http-mockjs server -p 8008
-```
-
-[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/basic)
-
 ### 和webpack一起，将app对象传入
 
 ``` js
@@ -95,7 +86,7 @@ devServer:{
 }
 ```
 
-[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/webpack-dev-server/README_ZH.md)
+[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/webpack-dev-server)
 
 
 ### 与express配合
@@ -123,7 +114,7 @@ app.listen(8002)
   }
 ```
 
-[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/http-server/README_ZH.md)
+[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/http-server)
 
 
 ## 配置文件字段说明
