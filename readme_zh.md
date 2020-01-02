@@ -116,6 +116,10 @@ app.listen(8002)
 
 [参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/http-server)
 
+### 更多例子
+
+所有例子可以[参考](https://github.com/brizer/http-mocker/tree/dev/packages/examples)
+
 
 ## 配置文件字段说明
 

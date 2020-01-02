@@ -113,6 +113,10 @@ By proxying the http-server, the request is proxyed to the proxy server started 
 
 [Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/examples/http-server)
 
+### More examples
+
+[Here is more examples](https://github.com/brizer/http-mocker/tree/dev/packages/examples)
+
 ## Configuration file field description
 
 ### mockFileName
