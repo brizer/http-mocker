@@ -4,7 +4,7 @@
 
 它拥有以下功能：
 
-1、通过配置文件.httpmockrc或者package.json文件中的httpmock字段来进行mock映射关系；
+1、通过配置文件.httpmockrc.json或者package.json文件中的httpmock字段来进行mock映射关系；
 
 2、支持[mockjs](https://www.npmjs.com/package/mockjs)语法,灵活配置动态化的mock返回值;
 
@@ -32,13 +32,13 @@ npm install -g http-mockjs
 
 ## 初始化配置文件
 
-根据当前目录下的`.httpmockrc`文件来完成路由映射，所以第一次下载需要生成默认配置文件：
+根据当前目录下的`.httpmockrc.json`文件来完成路由映射，所以第一次下载需要生成默认配置文件：
 
 ``` sh
 http-mockjs init
 ```
 
-会在当前文件夹下产生配置文件`.httpmockrc`，文件内容如下：
+会在当前文件夹下产生配置文件`.httpmockrc.json`，文件内容如下：
 
 ``` json
 {

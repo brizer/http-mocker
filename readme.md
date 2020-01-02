@@ -6,7 +6,7 @@ A tool for mock local requests or proxy remote requests.
 
 It has the following functions:
 
-1. Mock the mapping relationship through the httpmock field in the configuration file `.httpmockrc` or `package.json` file;
+1. Mock the mapping relationship through the httpmock field in the configuration file `.httpmockrc.json` or `package.json` file;
 
 2. Support [mockjs](https://www.npmjs.com/package/mockjs) syntax, flexible configuration of dynamic mocker.
 
@@ -34,13 +34,13 @@ npm install -g http-mockjs
 
 ## Initialize the configuration file
 
-The mock process is according to the `.httpmockrc` file in the current directory, so the newer needs to generate the default configuration file:
+The mock process is according to the `.httpmockrc.json` file in the current directory, so the newer needs to generate the default configuration file:
 
 ```sh
 http-mockjs init
 ```
 
-A configuration file `.httpmockrc` will be generated in the current folder with the following contents:
+A configuration file `.httpmockrc.json` will be generated in the current folder with the following contents:
 
 ```json
 {

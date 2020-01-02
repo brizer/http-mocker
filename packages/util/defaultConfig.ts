@@ -4,6 +4,7 @@ import { Config } from "./declations";
  * Default config object
  */
 const config: Config = {
+  $schema: "http://json.schemastore.org/httpmockrc",
   mockFileName: "mocks",
   responseHeaders: {
     "Content-Type": "application/json",
@@ -11,5 +12,5 @@ const config: Config = {
   }
 };
 
-export const fileName = ".httpmockrc";
+export const fileName = ".httpmockrc.json";
 export default config;

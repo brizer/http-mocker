@@ -22,6 +22,10 @@ export interface Routes {
 
 export interface Config {
     /**
+     * json schema validator
+     */
+    $schema?:string;
+    /**
      * Mock path name
      */
     mockFileName?: string;
