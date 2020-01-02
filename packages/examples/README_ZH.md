@@ -38,7 +38,7 @@
 }
 ```
 
-其中get.json内容为：
+其中mockjs风格的get.json内容为：
 
 ``` json
 {

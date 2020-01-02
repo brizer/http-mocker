@@ -93,7 +93,7 @@ devServer: {
 }
 ```
 
-[Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/webpack)
+[Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/examples/webpack-dev-server)
 
 ### Work with express
 
@@ -119,7 +119,7 @@ By proxying the http-server, the request is proxyed to the proxy server started 
   }
 ```
 
-[Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/commander)
+[Reference example](https://github.com/brizer/http-mocker/tree/dev/packages/examples/http-server)
 
 ## Configuration file field description
 

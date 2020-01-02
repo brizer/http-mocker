@@ -95,7 +95,7 @@ devServer:{
 }
 ```
 
-[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/webpack)
+[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/webpack-dev-server/README_ZH.md)
 
 
 ### 与express配合
@@ -123,7 +123,7 @@ app.listen(8002)
   }
 ```
 
-[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/mocker/examples/commander)
+[参考例子](https://github.com/brizer/http-mocker/tree/dev/packages/examples/http-server/README_ZH.md)
 
 
 ## 配置文件字段说明
