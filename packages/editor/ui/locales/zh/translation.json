@@ -24,6 +24,7 @@
         "english":"英文",
         "success":"成功",
         "fail":"失败",
-        "format":"格式"
+        "format":"格式",
+        "delay":"延迟"
     }
 }

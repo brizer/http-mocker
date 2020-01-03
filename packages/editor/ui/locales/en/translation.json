@@ -24,6 +24,7 @@
         "english":"English",
         "success":"Success",
         "fail":"Fail",
-        "format":"Format"
+        "format":"Format",
+        "delay":"Delay"
     }
 }

@@ -23,7 +23,7 @@ const EditableContext = React.createContext({});
 class EditableCell extends React.Component<any, any> {
   getInput = () => {
     if (this.props.inputType === "number") {
-      return <InputNumber />;
+      return <InputNumber step={100} />;
     }
     return <Input />;
   };
@@ -37,6 +37,7 @@ class EditableCell extends React.Component<any, any> {
       record,
       index,
       children,
+      required,
       ...restProps
     } = this.props;
     return (
@@ -46,7 +47,7 @@ class EditableCell extends React.Component<any, any> {
             {getFieldDecorator(dataIndex, {
               rules: [
                 {
-                  required: true,
+                  required: required,
                   message: `Please Input ${title}!`
                 }
               ],
@@ -225,6 +226,12 @@ class EditableTable extends React.Component<any, any> {
         editable: true
       },
       {
+        title: t("txt.delay"),
+        dataIndex: "delay",
+        width: "10%",
+        editable: true
+      },
+      {
         title: t("txt.ignore"),
         dataIndex: "ignore",
         width: "15%",
@@ -305,8 +312,9 @@ class EditableTable extends React.Component<any, any> {
         ...col,
         onCell: record => ({
           record,
-          inputType: col.dataIndex === "age" ? "number" : "text",
+          inputType: col.dataIndex === "delay" ? "number" : "text",
           dataIndex: col.dataIndex,
+          required: col.dataIndex === "delay" ? false : true,
           title: col.title,
           editing: this.isEditing(record)
         })

@@ -23,6 +23,7 @@ export const fetchConfig = () => {
                             routeObj.key = index
                             routeObj.path = result.routes[key].path
                             routeObj.ignore = result.routes[key].ignore||false
+                            routeObj.delay = result.routes[key].delay
                             routeObj.method = route.replace(methodReg, '$1')  
                             routeObj.url = route.replace(methodReg, '$2')  
                             payload['routes'].push(routeObj)
@@ -50,7 +51,8 @@ export const setConfig = (data) => {
             config.routes[`${v.method} ${v.url}`]={
                 'path':v.path,
                 'ignore':v.ignore
-            }
+            };
+            if(v.delay)config.routes[`${v.method} ${v.url}`]['delay'] = Number(v.delay)
         })
         axios.post(SET_CONFIG,{
             config:config
