@@ -8,7 +8,9 @@ import {
   getConfigPath,
   default as getConfig
 } from "http-mockjs-util/getConfig";
+import { sleep } from "http-mockjs-util/delay";
 import { Config, Routes } from "http-mockjs-util/declations";
+import { Application } from 'express';
 /**
  * Print proxy init info
  * @param {object} config - config info
@@ -39,7 +41,7 @@ const printProxyInfo = (config: Config) => {
  * @param {object} app - app object
  * @param {object} config - user config info
  */
-const proxy = async (app, config: Config) => {
+const proxy = async (app:Application, config: Config) => {
   let proxyLists = config.routes;
   let responseHeaders = config.responseHeaders;
   let requestHeaders = config.requestHeaders;
@@ -58,7 +60,7 @@ const proxy = async (app, config: Config) => {
     console.log(color(" The content of http-mockjs'config file has changed").green);
   });
   //filter configed api and map local
-  app.all("/*", (req, res, next) => {
+  app.all("/*",async (req, res, next) => {
     const proxyURL: string = `${req.method} ${req.originalUrl}`;
     const proxyMatch = getMatechedRoute(proxyLists, proxyURL);
 
@@ -69,6 +71,9 @@ const proxy = async (app, config: Config) => {
         config.mockFileName,
         proxyMatch.path
       );
+      if(proxyMatch.delay && typeof proxyMatch.delay === 'number'){
+        await sleep(proxyMatch.delay)
+      }
       const responseBody = fs.readFileSync(curPath, "utf-8");
       const result = mock.mock(responseBody);
       // set custom response headers

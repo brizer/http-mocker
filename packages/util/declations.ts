@@ -16,7 +16,11 @@ export interface Routes {
     /**
      * Whether to ignore the rule
      */
-    ignore: boolean
+    ignore: boolean,
+    /**
+     * Delay to response
+     */
+    delay?: number
 }
 
 

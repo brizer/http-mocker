@@ -16,7 +16,8 @@
         },
         "GET /user/:id": {
             "path": "/api/user.json",
-            "ignore": false
+            "ignore": false,
+            "delay": 300
         },
         "GET /users/:id+": {
             "path": "/api/info.json",
@@ -24,7 +25,8 @@
         },
         "GET /j/new": {
             "path": "/api/info.json",
-            "ignore": false
+            "ignore": false,
+            "delay": 1000
         },
         "GET /j/new?id=123": {
             "path": "/api/123.json",

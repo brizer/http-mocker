@@ -15,6 +15,7 @@ const color_1 = require("http-mockjs-util/color");
 const matchRoute_1 = require("http-mockjs-util/matchRoute");
 const chokidar_1 = require("chokidar");
 const getConfig_1 = require("http-mockjs-util/getConfig");
+const delay_1 = require("http-mockjs-util/delay");
 /**
  * Print proxy init info
  * @param {object} config - config info
@@ -54,12 +55,15 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
         console.log(color_1.default(" The content of http-mockjs'config file has changed").green);
     });
     //filter configed api and map local
-    app.all("/*", (req, res, next) => {
+    app.all("/*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         const proxyURL = `${req.method} ${req.originalUrl}`;
         const proxyMatch = matchRoute_1.getMatechedRoute(proxyLists, proxyURL);
         //if there is a request config in the config file
         if (proxyMatch && proxyMatch.ignore !== true) {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
+            if (proxyMatch.delay && typeof proxyMatch.delay === 'number') {
+                yield delay_1.sleep(proxyMatch.delay);
+            }
             const responseBody = fs.readFileSync(curPath, "utf-8");
             const result = mock.mock(responseBody);
             // set custom response headers
@@ -73,6 +77,6 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             req.headers = proxyHeaders;
             next();
         }
-    });
+    }));
 });
 exports.default = proxy;
