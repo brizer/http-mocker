@@ -6,6 +6,10 @@ import { getRouteInfo } from "../../ui/redux/actions/configActions";
 
 const { TextArea } = Input;
 
+const ModalTitle = function(){
+  return <div><span>Mock Result based on </span> <a target='_blank' href="http://mockjs.com/examples.html">MockJs</a></div>
+}
+
 class RouteModal extends React.Component<any, any> {
   constructor(props) {
     super(props);
@@ -57,7 +61,7 @@ class RouteModal extends React.Component<any, any> {
   render() {
     return (
       <Modal
-        title="Basic Modal"
+        title={ModalTitle()}
         visible={this.props.visible}
         onOk={() => this.save()}
         width={1200}
