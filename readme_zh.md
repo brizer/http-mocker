@@ -135,6 +135,10 @@ app.listen(8002)
 
 #### routes.path 文件路径
 
+#### routes.delay 延迟返回
+
+某些特定场景，需要模拟异步顺序时，可以用到。
+
 #### routes.ignore 是否跳过匹配.
 
 有时候你想要保留该配置，但是又不希望其生效，比如说某个接口需要直接调用远端而不是本地mock的结果时，可以用上它。
@@ -169,7 +173,8 @@ app.listen(8002)
         },
         "GET /users/user?id=123":{
             "path": "/api/user/123.json",
-            "ignore": true
+            "ignore": true,
+            "delay": 1000
         }
     }
 }

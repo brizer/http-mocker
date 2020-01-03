@@ -141,6 +141,12 @@ Specific mapping
 
 file path
 
+#### routes.delay 
+
+Delayed fetch resule.
+
+It can be used in some specific scenarios when you need to simulate an asynchronous sequence of fetches.
+
 #### routes.ignore
 
 whether to skip matches.
