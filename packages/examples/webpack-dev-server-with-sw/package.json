@@ -1,0 +1,17 @@
+{
+  "name": "webpack",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "npm run server & npm run mock:ui",
+    "server": "webpack-dev-server",
+    "mock:ui": "node ../../mocker/bin/http-mockjs-ui"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "http-mockjs-sw": "0.0.4"
+  }
+}

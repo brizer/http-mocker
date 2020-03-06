@@ -1,0 +1,12 @@
+{
+    "code":0,
+    "message":"success",
+    "result":{
+        "content":true,
+        "name":"brizer123",
+        "domain":"@domain()",
+        "otherUrl":"@url()",
+        "desciption":"@cparagraph(1, 3)",
+        "date":"@date('yyyy-MM-dd')"
+    }
+}
