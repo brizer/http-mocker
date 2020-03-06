@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs-sw",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The service worker for http-mockjs",
   "keywords": [
     "proxy",
@@ -8,8 +8,8 @@
     "mock",
     "mockjs"
   ],
-  "main": "dist/lib/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/lib/init.js",
+  "module": "dist/esm/init.js",
   "author": "brizer <brizer@163.com>",
   "homepage": "https://github.com/brizer/http-mocker#readme",
   "license": "MIT",

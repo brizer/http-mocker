@@ -11,8 +11,11 @@
     "dev:server": "lerna run dev:server",
     "build": "lerna run build",
     "demo:http-server": "cd packages/examples/http-server && npm start",
+    "demo:http-server-with-sw": "cd packages/examples/http-server-with-sw && npm start",
     "demo:webpack-dev-server": "cd packages/examples/webpack-dev-server && npm start",
-    "demo:webpack-dev-server:ui": "cd packages/examples/webpack-dev-server && npm run mock:ui"
+    "demo:webpack-dev-server:ui": "cd packages/examples/webpack-dev-server && npm run mock:ui",
+    "demo:webpack-dev-server-with-sw": "cd packages/examples/webpack-dev-server-with-sw && npm start",
+    "demo:webpack-dev-server-with-sw:ui": "cd packages/examples/webpack-dev-server-with-sw && npm run mock:ui"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
