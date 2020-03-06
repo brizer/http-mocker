@@ -1,0 +1,41 @@
+{
+  "name": "http-mockjs-sw",
+  "version": "0.0.3",
+  "description": "The service worker for http-mockjs",
+  "keywords": [
+    "proxy",
+    "http",
+    "mock",
+    "mockjs"
+  ],
+  "main": "dist/lib/index.js",
+  "module": "dist/esm/index.js",
+  "author": "brizer <brizer@163.com>",
+  "homepage": "https://github.com/brizer/http-mocker#readme",
+  "license": "MIT",
+  "directories": {
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "dist",
+    "sw"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brizer/http-mocker.git"
+  },
+  "scripts": {
+    "build": "npm run clean && run-p build:*",
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
+    "build:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir dist/lib",
+    "build:umd": "rollup -c",
+    "clean": "rm -rf dist"
+  },
+  "bugs": {
+    "url": "https://github.com/brizer/http-mocker/issues"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
