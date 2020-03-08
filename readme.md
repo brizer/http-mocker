@@ -16,6 +16,8 @@ It has the following functions:
 
 5. Convenient initialization and GUI editing experience.
 
+6. Support for cross domain mock and proxy by [service worker](./packages/worker/README.md)
+
 ---
 
 ## Installation
@@ -65,6 +67,13 @@ How to launch GUI:
 ```sh
 http-mockjs ui
 ```
+
+
+## Support cross domain interfaces
+
+By introducing serviceworker to intercept clients, cross-domain mocking is supported.
+
+For specific usage, please see [http-mockjs-sw](./packages/worker/README_ZH.md)
 
 ## Usage
 

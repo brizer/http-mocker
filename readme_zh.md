@@ -14,6 +14,8 @@
 
 5、方便的初始化和GUI编辑体验。
 
+6、支持mock和proxy跨域的接口，通过[service worker](./packages/worker/README_ZH.md)
+
 ---
 
 ## 安装
@@ -65,6 +67,10 @@ http-mockjs init
 http-mockjs ui
 ```
 
+## 支持跨域接口
+
+通过引入serviceworker对客户端进行拦截，支持跨域mock。
+具体使用方式请查看[http-mockjs-sw](./packages/worker/README_ZH.md)
 
 ## 使用方式
 

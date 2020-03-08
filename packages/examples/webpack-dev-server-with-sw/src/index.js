@@ -49,6 +49,10 @@ Axios.get('/j/new?id=123').then(data=>{
     pathNode4.innerHTML = data.data.name
 })
 
-Axios.get('https://other.domain/somexhr.json').then(data=>{
-    pathNode5.innerHTML = data.data.name
-})
+setTimeout(()=>{
+
+    Axios.get('https://other.domain/somexhr.json').then(data=>{
+        pathNode5.innerHTML = data.data.name
+    })
+},2000)
+

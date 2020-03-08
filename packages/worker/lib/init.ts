@@ -28,6 +28,7 @@ function registerServiceWorker(
 
       workerInstance.postMessage({ type: "MOCK_ACTIVATE", regexp });
       worker = workerInstance;
+      listenToDeactivateWorker(worker);
       return reg;
     })
     .catch(error => {
@@ -37,7 +38,6 @@ function registerServiceWorker(
         error
       );
     });
-  return worker;
 }
 export default function init(
   options: InitOptions = {
@@ -46,6 +46,5 @@ export default function init(
 ) {
   const { reg, serviceWorkerUrl="./mockServiceWorker.js", serviceOptions } = options;
   let worker: ServiceWorker;
-  worker = registerServiceWorker(worker, serviceWorkerUrl, serviceOptions, reg);
-  listenToDeactivateWorker(worker);
+  registerServiceWorker(worker, serviceWorkerUrl, serviceOptions, reg);
 }

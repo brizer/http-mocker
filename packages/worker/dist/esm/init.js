@@ -16,12 +16,12 @@ function registerServiceWorker(worker, serviceWorkerUrl, options, regexp) {
         var workerInstance = reg.active || reg.installing || reg.waiting;
         workerInstance.postMessage({ type: "MOCK_ACTIVATE", regexp: regexp });
         worker = workerInstance;
+        listenToDeactivateWorker(worker);
         return reg;
     })
         .catch(function (error) {
         console.error("[http-mockjs-sw] Failed to register MockServiceWorker (%s). %o", serviceWorkerUrl, error);
     });
-    return worker;
 }
 export default function init(options) {
     if (options === void 0) { options = {
@@ -29,6 +29,5 @@ export default function init(options) {
     }; }
     var reg = options.reg, _a = options.serviceWorkerUrl, serviceWorkerUrl = _a === void 0 ? "./mockServiceWorker.js" : _a, serviceOptions = options.serviceOptions;
     var worker;
-    worker = registerServiceWorker(worker, serviceWorkerUrl, serviceOptions, reg);
-    listenToDeactivateWorker(worker);
+    registerServiceWorker(worker, serviceWorkerUrl, serviceOptions, reg);
 }
