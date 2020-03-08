@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs-sw",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "The service worker for http-mockjs",
   "keywords": [
     "proxy",
