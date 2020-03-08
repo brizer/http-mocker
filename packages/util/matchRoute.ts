@@ -1,7 +1,7 @@
 import { Routes } from "./declations";
 import pathToRegexp from 'path-to-regexp';
 
-export function getMatechedRoute(proxyLists:Routes,proxyURL:string):Routes {
+export function getMatechedRoute(proxyLists:Routes|{},proxyURL:string):Routes {
     let proxyMatch:Routes = proxyLists[proxyURL];
         //to adapte express router url style such as user/:id and so on:
         Object.keys(proxyLists).forEach((key)=>{

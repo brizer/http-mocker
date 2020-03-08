@@ -33,7 +33,7 @@ export interface Config {
      * Mock path name
      */
     mockFileName?: string;
-    routes?: Routes;
+    routes?: Routes|{};
     port?:number;
     responseHeaders?:object;
     requestHeaders?:object;

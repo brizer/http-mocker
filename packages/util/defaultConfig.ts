@@ -9,7 +9,8 @@ const config: Config = {
   responseHeaders: {
     "Content-Type": "application/json",
     "X-Proxy-By": "http-mockjs"
-  }
+  },
+  routes: {}
 };
 
 export const fileName = ".httpmockrc.json";
