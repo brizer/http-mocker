@@ -261,6 +261,7 @@ class EditableTable extends React.Component<any, any> {
         render: (text, record) => {
           const { editingKey } = this.state;
           const editable = this.isEditing(record);
+          const disableDetail = /js$/ig.test((record||{}).path);
           return editable ? (
             <span>
               <EditableContext.Consumer>
@@ -296,9 +297,9 @@ class EditableTable extends React.Component<any, any> {
               >
                 <a style={{ marginRight: 8 }}>{t("action.delete")}</a>
               </Popconfirm>
-              <a onClick={() => this.showDetail(record)}>
+              {disableDetail || <a onClick={() => this.showDetail(record)}>
                 {t("action.detail")}
-              </a>
+              </a>}
             </div>
           );
         }

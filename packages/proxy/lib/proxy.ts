@@ -2,6 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as mock from "mockjs";
 import color from "http-mockjs-util/color";
+import { substringFromChar } from "@tomato-js/string";
 import { getMatechedRoute } from "http-mockjs-util/matchRoute";
 import { watch } from "chokidar";
 import {
@@ -74,7 +75,15 @@ const proxy = async (app:Application, config: Config) => {
       if(proxyMatch.delay && typeof proxyMatch.delay === 'number'){
         await sleep(proxyMatch.delay)
       }
-      const responseBody = fs.readFileSync(curPath, "utf-8");
+      let responseBody;
+      // handle js
+      if(/js$/ig.test(curPath) ){
+        const jsRule = require(curPath);
+        responseBody = jsRule(req);
+      }else{
+        // handle json
+        responseBody = fs.readFileSync(curPath, "utf-8");
+      }
       const result = mock.mock(responseBody);
       // set custom response headers
       res.set(responseHeaders);

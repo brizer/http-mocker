@@ -32,6 +32,11 @@
             "path": "/api/123.json",
             "ignore": false,
             "delay": 900
+        },
+        "GET /j/fromjs": {
+            "path": "/api/from.js",
+            "ignore": false,
+            "delay": 900
         }
     }
 }

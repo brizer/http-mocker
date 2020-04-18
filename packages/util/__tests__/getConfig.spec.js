@@ -19,7 +19,8 @@ describe("getConfig", () => {
       responseHeaders: {
         "Content-Type": "application/json",
         "X-Proxy-By": "http-mockjs"
-      }
+      },
+      routes: {}
     });
   });
 

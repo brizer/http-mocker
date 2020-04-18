@@ -64,7 +64,16 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             if (proxyMatch.delay && typeof proxyMatch.delay === 'number') {
                 yield delay_1.sleep(proxyMatch.delay);
             }
-            const responseBody = fs.readFileSync(curPath, "utf-8");
+            let responseBody;
+            // handle js
+            if (/js$/ig.test(curPath)) {
+                const jsRule = require(curPath);
+                responseBody = jsRule(req);
+            }
+            else {
+                // handle json
+                responseBody = fs.readFileSync(curPath, "utf-8");
+            }
             const result = mock.mock(responseBody);
             // set custom response headers
             res.set(responseHeaders);

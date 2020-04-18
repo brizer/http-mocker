@@ -141,6 +141,32 @@ app.listen(8002)
 
 #### routes.path 文件路径
 
+一般情况下使用*.json文件作为返回值的mock，也可以通过javascript文件来满足复杂情况下的定制化数据mock。比如：
+
+``` json
+  "GET /info":{
+            "path": "/api/info.js"
+        },
+```
+
+js文件书写格式如下，其中req对象和[express的req](https://expressjs.com/en/4x/api.html#req)保持一致：
+
+``` js
+module.exports = function (req) {
+    const { query,params } = req;
+    const { type } = query;
+    if(type == 1){
+        return {
+            name:'This is from js and type 1'
+        }
+    }else{
+        return {
+            name:'This is from js and type 2'
+        }
+    }
+}
+```
+
 #### routes.delay 延迟返回
 
 某些特定场景，需要模拟异步顺序时，可以用到。
