@@ -150,6 +150,32 @@ Specific mapping
 
 file path
 
+we use `*.json` file for mock result in general，but we can also support js file for complex mock rules:
+
+``` json
+  "GET /info":{
+            "path": "/api/info.js"
+        },
+```
+
+The req is same as [req in express](https://expressjs.com/en/4x/api.html#req):
+
+``` js
+module.exports = function (req) {
+    const { query,params } = req;
+    const { type } = query;
+    if(type == 1){
+        return {
+            name:'This is from js and type 1'
+        }
+    }else{
+        return {
+            name:'This is from js and type 2'
+        }
+    }
+}
+```
+
 #### routes.delay 
 
 Delayed fetch resule.
