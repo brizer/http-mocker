@@ -29,6 +29,7 @@
     "url": "https://github.com/brizer/http-mocker/issues"
   },
   "dependencies": {
+    "@tomato-js/string": "^0.0.16",
     "chokidar": "^3.3.0",
     "http-mockjs-util": "^4.2.1",
     "mockjs": "^1.1.0"
