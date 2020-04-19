@@ -18,6 +18,11 @@ It has the following functions:
 
 6. Support for cross domain mock and proxy by [service worker](./packages/worker/README.md)
 
+
+7. Support js config for complex rules.
+
+8. Support for validating body by key and typeof value.
+
 ---
 
 ## Installation
@@ -188,38 +193,74 @@ whether to skip matches.
 
 Sometimes you want to keep the configuration, but you don't want it to take effect. For example, if a request needs to directly call the result of the remote instead of the local mock, you can use it.
 
+
+#### routes.validate 
+
+validate params in body by key and typeof value:
+
+``` json
+"POST /j/validate.json": {
+    "path": "/api/validate.json",
+    "ignore": false,
+    "validate": {
+        "param1": "string",
+        "param2": "number",
+        "param3": "object"
+    }
+}
+```
+
 Here is an example of a complete configuration file:
 
-```json
+``` json
 {
-  "mockFileName": "mocks",
-  "responseHeaders": {
-    "Content-Type": "application/json",
-    "X-Proxy-By": "http-mockjs"
-  },
-  "requestHeaders": {
-    "cookie":"Token=123ssfsfesfe"
-  },
-  "routes": {
-    "GET /j/getSomeData.json": {
-      "path": "/api/get.json"
+    "mockFileName": "mocks",
+    "responseHeaders": {
+        "Content-Type": "application/json",
+        "X-Proxy-By": "http-mockjs"
     },
-    "POST /p/postData.do": {
-      "path": "/api/post.json"
+    "requestHeaders": {
+        "cookie":"Token=123ssfsfesfe"
     },
-    "GET /user/:id": {
-      "path": "/api/user.json"
-    },
-    "GET /users /:id+": {
-      "path": "/api/info.json",
-      "ignore": true
-    },
-    "GET /users/user?Id=123": {
-      "path": "/api/user/123.json",
-      "ignore": true
+    "routes":{
+        "GET /j/getSomeData.json":
+        {
+            "path": "/api/get.json"
+        },
+        "POST /p/postData.do":
+        {
+            "path": "/api/post.json"
+        },
+        "GET /user/:id":{
+            "path": "/api/user.json"
+        },
+        "GET /users/:id+":{
+            "path": "/api/info.json",
+            "ignore": true
+        },
+        "GET /users/user?id=123":{
+            "path": "/api/user/123.json",
+            "ignore": true,
+            "delay": 1000
+        },
+         "GET /j/fromjs": {
+            "path": "/api/from.js",
+            "ignore": false,
+            "delay": 900,
+            "validate": {}
+        },
+        "POST /j/validate.json": {
+            "path": "/api/validate.json",
+            "ignore": false,
+            "validate": {
+                "param1": "string",
+                "param2": "number",
+                "param3": "object"
+            }
+        }
     }
-  }
 }
+
 ```
 
 The file pointed to is created in the folder specified by `mockFileName`.

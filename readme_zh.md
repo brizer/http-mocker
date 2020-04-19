@@ -16,6 +16,10 @@
 
 6、支持mock和proxy跨域的接口，通过[service worker](./packages/worker/README_ZH.md)
 
+7、支持js定制复杂的规则。
+
+8、支持对body参数的校验。
+
 ---
 
 ## 安装
@@ -175,6 +179,23 @@ module.exports = function (req) {
 
 有时候你想要保留该配置，但是又不希望其生效，比如说某个接口需要直接调用远端而不是本地mock的结果时，可以用上它。
 
+#### routes.validate 对body进行严格校验
+
+对body参数进行key和type校验：
+
+``` json
+"POST /j/validate.json": {
+    "path": "/api/validate.json",
+    "ignore": false,
+    "validate": {
+        "param1": "string",
+        "param2": "number",
+        "param3": "object"
+    }
+}
+```
+
+
 这里给出一个完整的配置文件例子：
 
 ``` json
@@ -207,6 +228,21 @@ module.exports = function (req) {
             "path": "/api/user/123.json",
             "ignore": true,
             "delay": 1000
+        },
+         "GET /j/fromjs": {
+            "path": "/api/from.js",
+            "ignore": false,
+            "delay": 900,
+            "validate": {}
+        },
+        "POST /j/validate.json": {
+            "path": "/api/validate.json",
+            "ignore": false,
+            "validate": {
+                "param1": "string",
+                "param2": "number",
+                "param3": "object"
+            }
         }
     }
 }
