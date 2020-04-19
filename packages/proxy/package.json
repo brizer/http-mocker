@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs-proxy",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "The core proxy for http-mockjs",
   "keywords": [
     "proxy",
@@ -32,7 +32,7 @@
     "@tomato-js/shared": "^0.0.16",
     "@tomato-js/string": "^0.0.16",
     "chokidar": "^3.3.0",
-    "http-mockjs-util": "^4.3.0",
+    "http-mockjs-util": "^4.4.0",
     "mockjs": "^1.1.0"
   },
   "devDependencies": {
