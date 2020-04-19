@@ -11,7 +11,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fs = require("fs");
 const mock = require("mockjs");
+const express = require("express");
 const color_1 = require("http-mockjs-util/color");
+const shared_1 = require("@tomato-js/shared");
 const matchRoute_1 = require("http-mockjs-util/matchRoute");
 const chokidar_1 = require("chokidar");
 const getConfig_1 = require("http-mockjs-util/getConfig");
@@ -54,6 +56,8 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
         requestHeaders = config.requestHeaders;
         console.log(color_1.default(" The content of http-mockjs'config file has changed").green);
     });
+    app.use(express.json()); // for parsing application/json
+    app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     //filter configed api and map local
     app.all("/*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         const proxyURL = `${req.method} ${req.originalUrl}`;
@@ -63,6 +67,16 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
             if (proxyMatch.delay && typeof proxyMatch.delay === 'number') {
                 yield delay_1.sleep(proxyMatch.delay);
+            }
+            // handle strict validate body
+            if (proxyMatch.validate && !shared_1.isEmptyObject(proxyMatch.validate)) {
+                const { body } = req;
+                shared_1.forEach(body, (bodyK, bodyV) => {
+                    if (!(bodyK in proxyMatch.validate) || (typeof bodyV) !== proxyMatch.validate[bodyK]) {
+                        res.status(400).send('Error:ValidateBody Failed, Please checke body params');
+                        res.end();
+                    }
+                });
             }
             let responseBody;
             // handle js
