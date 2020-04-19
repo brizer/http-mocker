@@ -7,6 +7,7 @@ const pathNode3 = document.querySelector('#j-path-3')
 const pathNode4 = document.querySelector('#j-path-4')
 const pathNode5 = document.querySelector('#j-path-5')
 const pathNode6 = document.querySelector('#j-path-6')
+const pathNode7 = document.querySelector('#j-path-7')
 const sendNode = document.querySelector('#j-send')
 contentNode.innerHTML = 'hello world,anyone'
 
@@ -51,5 +52,14 @@ Axios.get('/j/fromjs?type=1').then(data=>{
 })
 Axios.get('/j/fromjs?type=2').then(data=>{
     pathNode6.innerHTML = data.data.name
+})
+Axios.post('/j/validate.json',{
+    param1:'string',
+    param2:23,
+    param3:{
+        test:'object'
+    }
+}).then(data=>{
+    pathNode7.innerHTML = data.data.name
 })
 

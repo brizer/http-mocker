@@ -1,8 +1,9 @@
 import * as path from "path";
 import * as fs from "fs";
 import * as mock from "mockjs";
+import * as express from "express";
 import color from "http-mockjs-util/color";
-import { substringFromChar } from "@tomato-js/string";
+import { forEach,isEmptyObject } from "@tomato-js/shared";
 import { getMatechedRoute } from "http-mockjs-util/matchRoute";
 import { watch } from "chokidar";
 import {
@@ -60,6 +61,9 @@ const proxy = async (app:Application, config: Config) => {
     requestHeaders = config.requestHeaders;
     console.log(color(" The content of http-mockjs'config file has changed").green);
   });
+  app.use(express.json()) // for parsing application/json
+  app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
   //filter configed api and map local
   app.all("/*",async (req, res, next) => {
     const proxyURL: string = `${req.method} ${req.originalUrl}`;
@@ -74,6 +78,16 @@ const proxy = async (app:Application, config: Config) => {
       );
       if(proxyMatch.delay && typeof proxyMatch.delay === 'number'){
         await sleep(proxyMatch.delay)
+      }
+      // handle strict validate body
+      if(proxyMatch.validate && !isEmptyObject(proxyMatch.validate)){
+        const { body } = req;
+          forEach(body,(bodyK,bodyV)=>{
+            if(!(bodyK in proxyMatch.validate) || (typeof bodyV)!==proxyMatch.validate[bodyK]){
+              res.status(400).send('Error:ValidateBody Failed, Please checke body params');
+              res.end();
+            }
+          })
       }
       let responseBody;
       // handle js

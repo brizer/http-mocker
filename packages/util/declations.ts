@@ -20,7 +20,9 @@ export interface Routes {
     /**
      * Delay to response
      */
-    delay?: number
+    delay?: number,
+
+    validate?: {}
 }
 
 
