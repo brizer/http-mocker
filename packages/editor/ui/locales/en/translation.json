@@ -16,6 +16,7 @@
         "url":"Url",
         "path":"Path",
         "ignore":"Ignore",
+        "validate":"validate",
         "operation":"Operation",
         "sure":"sure",
         "to":"to",

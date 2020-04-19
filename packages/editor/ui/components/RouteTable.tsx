@@ -10,13 +10,15 @@ import {
   Button,
   Affix,
   message,
-  Modal
+  Modal,
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
 import RouteModal from "./RouteModal";
 import { withNamespaces } from "react-i18next";
 import store from "../redux/store/store";
 import { getRouteInfo, setRouteInfo } from "../redux/actions/configActions";
+
+const { TextArea } = Input;
 
 const EditableContext = React.createContext({});
 
@@ -48,10 +50,10 @@ class EditableCell extends React.Component<any, any> {
               rules: [
                 {
                   required: required,
-                  message: `Please Input ${title}!`
-                }
+                  message: `Please Input ${title}!`,
+                },
               ],
-              initialValue: record[dataIndex]
+              initialValue: record[dataIndex],
             })(this.getInput())}
           </Form.Item>
         ) : (
@@ -77,7 +79,7 @@ class EditableTable extends React.Component<any, any> {
       data: [],
       editingKey: "",
       showDetailModal: false,
-      detailRecord: {}
+      detailRecord: {},
     };
   }
 
@@ -89,14 +91,14 @@ class EditableTable extends React.Component<any, any> {
     this.setState(
       Object.assign({}, this.state, {
         data: nextProps.routes,
-        editingKey: ""
+        editingKey: "",
       })
     );
   }
 
-  isEditing = record => record.key === this.state.editingKey;
+  isEditing = (record) => record.key === this.state.editingKey;
 
-  cancel = record => {
+  cancel = (record) => {
     // reback data for select
     this.setState({ editingKey: "" });
     // const newData = [...this.state.data];
@@ -110,12 +112,12 @@ class EditableTable extends React.Component<any, any> {
         return;
       }
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => key === item.key);
+      const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, {
           ...item,
-          ...row
+          ...row,
         });
         this.setState({ data: newData, editingKey: "" });
       } else {
@@ -146,7 +148,7 @@ class EditableTable extends React.Component<any, any> {
     const newData = [...this.state.data];
     newData.push({
       method: "GET",
-      url: +new Date()
+      url: +new Date(),
     });
     this.props.onSave(newData);
   }
@@ -154,20 +156,24 @@ class EditableTable extends React.Component<any, any> {
   onCancel = () => {
     this.setState({ showDetailModal: false });
   };
-  onOk = value => {
+  onOk = (value) => {
     const { t, i18n } = this.props;
     // do not close the dialog
     // this.setState({ showDetailModal: false });
     try {
-      JSON.parse(value)
+      JSON.parse(value);
     } catch (error) {
-      message.error(`${t("action.save")} ${t("txt.fail")}, ${t("action.please")} ${t("action.check")} ${t("txt.format")}`);
+      message.error(
+        `${t("action.save")} ${t("txt.fail")}, ${t("action.please")} ${t(
+          "action.check"
+        )} ${t("txt.format")}`
+      );
       return;
     }
     store.dispatch(
       setRouteInfo({
         record: this.state.detailRecord,
-        content: value || "{}"
+        content: value || "{}",
       }).bind(this)
     );
     message.success(`${t("action.save")} ${t("txt.success")}`);
@@ -177,19 +183,19 @@ class EditableTable extends React.Component<any, any> {
     const { t, i18n } = this.props;
     const components = {
       body: {
-        cell: EditableCell
-      }
+        cell: EditableCell,
+      },
     };
 
     const staticColumns = [
       {
         title: t("txt.method"),
         dataIndex: "method",
-        width: "25%",
+        width: "5%",
         render: (text, record) => {
           const { editingKey, data } = this.state;
           const editable = this.isEditing(record);
-          const changeMethods = value => {
+          const changeMethods = (value) => {
             record.method = value;
           };
           return editable ? (
@@ -211,25 +217,25 @@ class EditableTable extends React.Component<any, any> {
           ) : (
             <div>{text}</div>
           );
-        }
+        },
       },
       {
         title: t("txt.url"),
         dataIndex: "url",
         width: "20%",
-        editable: true
+        editable: true,
       },
       {
         title: t("txt.path"),
         dataIndex: "path",
         width: "15%",
-        editable: true
+        editable: true,
       },
       {
         title: t("txt.delay"),
         dataIndex: "delay",
         width: "10%",
-        editable: true
+        editable: true,
       },
       {
         title: t("txt.ignore"),
@@ -239,7 +245,7 @@ class EditableTable extends React.Component<any, any> {
           const { editingKey, data } = this.state;
           const editable = this.isEditing(record);
 
-          const changeIgnore = checked => {
+          const changeIgnore = (checked) => {
             record.ignore = checked;
           };
           return editable ? (
@@ -253,7 +259,17 @@ class EditableTable extends React.Component<any, any> {
           ) : (
             <div>{text.toString()}</div>
           );
-        }
+        },
+      },
+      {
+        title: t("txt.validate"),
+        dataIndex: "validate",
+        width: "20%",
+        render: (text, record, index) => {
+          const { editingKey, data } = this.state;
+          const editable = this.isEditing(record);
+          return <pre>{JSON.stringify(text, null, 4)}</pre>;
+        },
       },
       {
         title: t("txt.operation"),
@@ -261,11 +277,11 @@ class EditableTable extends React.Component<any, any> {
         render: (text, record) => {
           const { editingKey } = this.state;
           const editable = this.isEditing(record);
-          const disableDetail = /js$/ig.test((record||{}).path);
+          const disableDetail = /js$/gi.test((record || {}).path);
           return editable ? (
             <span>
               <EditableContext.Consumer>
-                {form => (
+                {(form) => (
                   <a
                     href="javascript:;"
                     onClick={() => this.save(form, record.key)}
@@ -297,28 +313,30 @@ class EditableTable extends React.Component<any, any> {
               >
                 <a style={{ marginRight: 8 }}>{t("action.delete")}</a>
               </Popconfirm>
-              {disableDetail || <a onClick={() => this.showDetail(record)}>
-                {t("action.detail")}
-              </a>}
+              {disableDetail || (
+                <a onClick={() => this.showDetail(record)}>
+                  {t("action.detail")}
+                </a>
+              )}
             </div>
           );
-        }
-      }
+        },
+      },
     ];
-    const columns = staticColumns.map(col => {
+    const columns = staticColumns.map((col) => {
       if (!col.editable) {
         return col;
       }
       return {
         ...col,
-        onCell: record => ({
+        onCell: (record) => ({
           record,
           inputType: col.dataIndex === "delay" ? "number" : "text",
           dataIndex: col.dataIndex,
           required: col.dataIndex === "delay" ? false : true,
           title: col.title,
-          editing: this.isEditing(record)
-        })
+          editing: this.isEditing(record),
+        }),
       };
     });
 
@@ -341,14 +359,14 @@ class EditableTable extends React.Component<any, any> {
           rowClassName="editable-row"
           pagination={{
             hideOnSinglePage: true,
-            pageSize: 10000
+            pageSize: 10000,
           }}
         />
         <RouteModal
           visible={this.state.showDetailModal}
           record={this.state.detailRecord}
           onCancel={() => this.onCancel()}
-          onOk={v => this.onOk(v)}
+          onOk={(v) => this.onOk(v)}
         />
       </EditableContext.Provider>
     );

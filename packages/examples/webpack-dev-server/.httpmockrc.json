@@ -37,15 +37,15 @@
             "path": "/api/from.js",
             "ignore": false,
             "delay": 900,
-            "validate":{}
+            "validate": {}
         },
         "POST /j/validate.json": {
             "path": "/api/validate.json",
             "ignore": false,
-            "validate":{
-                "param1":"string",
-                "param2":"number",
-                "param3":"object"
+            "validate": {
+                "param1": "string",
+                "param2": "number",
+                "param3": "object"
             }
         }
     }
