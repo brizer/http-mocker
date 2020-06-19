@@ -146,7 +146,8 @@ class EditableTable extends React.Component<any, any> {
 
   handleAdd() {
     const newData = [...this.state.data];
-    newData.push({
+    // use unshift but not push for easy use in first screen
+    newData.unshift({
       method: "GET",
       url: +new Date(),
     });
