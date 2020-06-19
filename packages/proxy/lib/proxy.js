@@ -88,6 +88,8 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
                 // handle json
                 responseBody = fs.readFileSync(curPath, "utf-8");
             }
+            // transform string to json for mockjs
+            responseBody = shared_1.isString(responseBody) ? JSON.parse(responseBody) : responseBody;
             const result = mock.mock(responseBody);
             // set custom response headers
             res.set(responseHeaders);

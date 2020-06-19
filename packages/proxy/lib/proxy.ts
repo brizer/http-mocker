@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as mock from "mockjs";
 import * as express from "express";
 import color from "http-mockjs-util/color";
-import { forEach,isEmptyObject } from "@tomato-js/shared";
+import { forEach,isEmptyObject,isString } from "@tomato-js/shared";
 import { getMatechedRoute } from "http-mockjs-util/matchRoute";
 import { watch } from "chokidar";
 import {
@@ -98,6 +98,8 @@ const proxy = async (app:Application, config: Config) => {
         // handle json
         responseBody = fs.readFileSync(curPath, "utf-8");
       }
+      // transform string to json for mockjs
+      responseBody = isString(responseBody)?JSON.parse(responseBody):responseBody;
       const result = mock.mock(responseBody);
       // set custom response headers
       res.set(responseHeaders);
