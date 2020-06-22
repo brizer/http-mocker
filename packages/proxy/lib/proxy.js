@@ -12,6 +12,7 @@ const path = require("path");
 const fs = require("fs");
 const mock = require("mockjs");
 const express = require("express");
+const vm2_1 = require("vm2");
 const color_1 = require("http-mockjs-util/color");
 const shared_1 = require("@tomato-js/shared");
 const matchRoute_1 = require("http-mockjs-util/matchRoute");
@@ -44,6 +45,7 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     let proxyLists = config.routes;
     let responseHeaders = config.responseHeaders;
     let requestHeaders = config.requestHeaders;
+    const vm = new vm2_1.NodeVM();
     //print info
     printProxyInfo(config);
     //watch config file changes
@@ -81,8 +83,11 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
             let responseBody;
             // handle js
             if (/js$/ig.test(curPath)) {
-                const jsRule = require(curPath);
-                responseBody = jsRule(req);
+                const jsContent = fs.readFileSync(curPath, 'utf-8');
+                const vmFun = vm.run(jsContent);
+                responseBody = vmFun(req);
+                // const jsRule = require(curPath);
+                // responseBody = jsRule(req);
             }
             else {
                 // handle json
