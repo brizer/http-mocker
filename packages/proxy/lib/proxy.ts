@@ -2,6 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as mock from "mockjs";
 import * as express from "express";
+import { NodeVM } from 'vm2';
 import color from "http-mockjs-util/color";
 import { forEach,isEmptyObject,isString } from "@tomato-js/shared";
 import { getMatechedRoute } from "http-mockjs-util/matchRoute";
@@ -48,6 +49,7 @@ const proxy = async (app:Application, config: Config) => {
   let responseHeaders = config.responseHeaders;
   let requestHeaders = config.requestHeaders;
 
+  const vm = new NodeVM();
   //print info
   printProxyInfo(config);
 
@@ -92,8 +94,11 @@ const proxy = async (app:Application, config: Config) => {
       let responseBody;
       // handle js
       if(/js$/ig.test(curPath) ){
-        const jsRule = require(curPath);
-        responseBody = jsRule(req);
+        const jsContent = fs.readFileSync(curPath,'utf-8');
+        const vmFun = vm.run(jsContent);
+        responseBody = vmFun(req);
+        // const jsRule = require(curPath);
+        // responseBody = jsRule(req);
       }else{
         // handle json
         responseBody = fs.readFileSync(curPath, "utf-8");
