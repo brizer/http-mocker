@@ -1,5 +1,5 @@
 # http-mockjs[![npm](https://img.shields.io/npm/v/http-mockjs.svg?maxAge=2592000)](https://www.npmjs.com/package/http-mockjs)
-
+ 
 The core feature package of [http-mockjs](https://github.com/brizer/http-mocker)
 
 
