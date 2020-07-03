@@ -2,6 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as mock from "mockjs";
 import * as express from "express";
+import { tableContent } from "@tomato-node/ui";
 import { NodeVM } from 'vm2';
 import color from "http-mockjs-util/color";
 import { forEach,isEmptyObject,isString } from "@tomato-js/shared";
@@ -25,6 +26,9 @@ const printProxyInfo = (config: Config) => {
     console.log(color(` Please set some matching rules to routes`).red);
     process.exit(0);
   }
+  const tableInfo = [
+    ['Matched Url(path-to-regexp style)','Map local file path']
+  ];
   Object.keys(proxyLists).forEach(key => {
     const proxyMatch = proxyLists[key];
     const mapLocalPath = path.join(
@@ -32,13 +36,16 @@ const printProxyInfo = (config: Config) => {
       config.mockFileName,
       proxyMatch.path
     );
-    console.log(
-      `${color(key).green} ${color("has been map local to").red} ${
-        color(mapLocalPath).yellow
-      }`
-    );
+    tableInfo.push([
+      key,
+      mapLocalPath
+    ])
   });
+  const result = tableContent(tableInfo);
+  console.log(color(`\nThe Request and Map Local by http-mockjs:`).green);
+  console.log(`\n${result}\n`);
 };
+
 /**
  * Specific proxy operation
  * @param {object} app - app object
