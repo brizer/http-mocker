@@ -31,6 +31,7 @@
   "dependencies": {
     "@tomato-js/shared": "^0.0.16",
     "@tomato-js/string": "^0.0.16",
+    "@tomato-node/ui": "^0.0.4",
     "chokidar": "^3.3.0",
     "http-mockjs-util": "^4.4.0",
     "mockjs": "^1.1.0",
