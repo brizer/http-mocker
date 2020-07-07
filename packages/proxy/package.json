@@ -1,6 +1,6 @@
 {
   "name": "http-mockjs-proxy",
-  "version": "4.4.2",
+  "version": "4.4.3",
   "description": "The core proxy for http-mockjs",
   "keywords": [
     "proxy",
