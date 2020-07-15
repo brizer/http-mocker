@@ -28,6 +28,7 @@
     "semver": "^6.0.0"
   },
   "devDependencies": {
-    "@types/jsonfile": "^5.0.0"
+    "@types/jsonfile": "^5.0.0",
+    "minimist": ">=1.2.3"
   }
 }
