@@ -38,6 +38,7 @@
     "vm2": "^3.9.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.2"
+    "@types/express": "^4.17.2",
+    "minimist": ">=1.2.3"
   }
 }

@@ -22,6 +22,7 @@
     "url": "https://github.com/brizer/http-mocker/issues"
   },
   "devDependencies": {
-    "http-server": "^0.12.0"
+    "http-server": "^0.12.0",
+    "minimist": ">=1.2.3"
   }
 }
