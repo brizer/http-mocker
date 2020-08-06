@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent, useState } from "react";
 import {
   Table,
   Form,
@@ -10,6 +10,7 @@ import {
   Button,
   Affix,
   message,
+  Radio,
   Modal,
 } from "antd";
 import { METHODS } from "../constants/httpMothods";
@@ -21,6 +22,32 @@ import { getRouteInfo, setRouteInfo } from "../redux/actions/configActions";
 const { TextArea } = Input;
 
 const EditableContext = React.createContext({});
+
+function IgnoreTitle() {
+  const onChange = (e) => {
+    const data = this.state.data;
+    const newData = data.map(rule=>{
+      const newRule = {
+        ...rule,
+        ignore:e.target.value===1?true:false
+      };
+      return newRule;
+    });
+    this.props.onSave(newData);
+    this.props.onGet();
+  };
+  return (
+    <div>
+      <span style={{marginRight:1}}>Ignore</span>
+      <span>
+        <Radio.Group onChange={onChange.bind(this)} value={''}>
+          <Radio value={1}>All</Radio>
+          <Radio value={2}>None</Radio>
+        </Radio.Group>
+      </span>
+    </div>
+  );
+}
 
 class EditableCell extends React.Component<any, any> {
   getInput = () => {
@@ -239,7 +266,7 @@ class EditableTable extends React.Component<any, any> {
         editable: true,
       },
       {
-        title: t("txt.ignore"),
+        title: IgnoreTitle.bind(this),
         dataIndex: "ignore",
         width: "15%",
         render: (text, record, index) => {
