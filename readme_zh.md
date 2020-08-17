@@ -113,6 +113,23 @@ app.listen(8002)
 
 ```
 
+### 以中间件形式引用
+
+支持connect及express，部分功能限制（sleep、validate、custom header）
+
+``` js
+const express = require("express");
+const { mockerMiddleware } = require("http-mockjs");
+
+const app = express();
+const port = 3000;
+app.use(mockerMiddleware);
+//
+//...
+```
+
+
+
 
 ### 与http-server等命令行工具使用：
 

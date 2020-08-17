@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json.schemastore.org/httpmockrc",
+    "mockFileName": "mocks",
+    "responseHeaders": {
+        "Content-Type": "application/json",
+        "X-Proxy-By": "http-mockjs"
+    },
+    "routes": {
+        "GET /j/getSomeData.json": {
+            "path": "/api/get.json",
+            "ignore": false,
+            "delay": 600
+        },
+        "POST /p/postData.do": {
+            "path": "/api/post.json",
+            "ignore": false
+        },
+        "GET /user/:id": {
+            "path": "/api/user.json",
+            "ignore": false,
+            "delay": 1200
+        },
+        "GET /users/:id+": {
+            "path": "/api/info.json",
+            "ignore": true
+        },
+        "GET /j/new": {
+            "path": "/api/test.json",
+            "ignore": false
+        },
+        "GET /j/new?id=123": {
+            "path": "/api/123.json",
+            "ignore": false,
+            "delay": 900
+        },
+        "GET /j/fromjs": {
+            "path": "/api/from.js",
+            "ignore": false,
+            "delay": 900,
+            "validate": {}
+        },
+        "POST /j/validate.json": {
+            "path": "/api/validate.json",
+            "ignore": false,
+            "validate": {
+                "param1": "string",
+                "param2": "number",
+                "param3": "object"
+            }
+        }
+    }
+}
