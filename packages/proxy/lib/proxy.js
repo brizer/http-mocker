@@ -32,15 +32,12 @@ const printProxyInfo = (config) => {
         process.exit(0);
     }
     const tableInfo = [
-        ['Matched Url(path-to-regexp style)', 'Map local file path']
+        ["Matched Url(path-to-regexp style)", "Map local file path"],
     ];
-    Object.keys(proxyLists).forEach(key => {
+    Object.keys(proxyLists).forEach((key) => {
         const proxyMatch = proxyLists[key];
         const mapLocalPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
-        tableInfo.push([
-            key,
-            mapLocalPath
-        ]);
+        tableInfo.push([key, mapLocalPath]);
     });
     const result = ui_1.tableContent(tableInfo);
     console.log(color_1.default(`\nThe Request and Map Local by http-mockjs:`).green);
@@ -51,7 +48,7 @@ const printProxyInfo = (config) => {
  * @param {object} app - app object
  * @param {object} config - user config info
  */
-const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
+const proxy = (app, config, isMiddleware = false) => {
     let proxyLists = config.routes;
     let responseHeaders = config.responseHeaders;
     let requestHeaders = config.requestHeaders;
@@ -61,62 +58,113 @@ const proxy = (app, config) => __awaiter(this, void 0, void 0, function* () {
     //watch config file changes
     const configPath = getConfig_1.getConfigPath();
     const watcher = chokidar_1.watch(configPath);
-    watcher.on("all", path => {
+    watcher.on("all", (path) => {
         const config = getConfig_1.default(process.cwd());
         proxyLists = config.routes;
         responseHeaders = config.responseHeaders;
         requestHeaders = config.requestHeaders;
         console.log(color_1.default(" The content of http-mockjs'config file has changed").green);
     });
-    app.use(express.json()); // for parsing application/json
-    app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-    //filter configed api and map local
-    app.all("/*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-        const proxyURL = `${req.method} ${req.originalUrl}`;
-        const proxyMatch = matchRoute_1.getMatechedRoute(proxyLists, proxyURL);
-        //if there is a request config in the config file
-        if (proxyMatch && proxyMatch.ignore !== true) {
-            const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
-            if (proxyMatch.delay && typeof proxyMatch.delay === 'number') {
-                yield delay_1.sleep(proxyMatch.delay);
-            }
-            // handle strict validate body
-            if (proxyMatch.validate && !shared_1.isEmptyObject(proxyMatch.validate)) {
-                const { body } = req;
-                shared_1.forEach(body, (bodyK, bodyV) => {
-                    if (!(bodyK in proxyMatch.validate) || (typeof bodyV) !== proxyMatch.validate[bodyK]) {
-                        res.status(400).send('Error:ValidateBody Failed, Please checke body params');
-                        res.end();
-                    }
-                });
-            }
-            let responseBody;
-            // handle js
-            if (/js$/ig.test(curPath)) {
-                const jsContent = fs.readFileSync(curPath, 'utf-8');
-                const vmFun = vm.run(jsContent);
-                responseBody = vmFun(req);
-                // const jsRule = require(curPath);
-                // responseBody = jsRule(req);
+    // normal mode
+    if (!isMiddleware) {
+        app.use(express.json()); // for parsing application/json
+        app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+        //filter configed api and map local
+        app.all("/*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            const proxyURL = `${req.method} ${req.originalUrl}`;
+            const proxyMatch = matchRoute_1.getMatechedRoute(proxyLists, proxyURL);
+            //if there is a request config in the config file
+            if (proxyMatch && proxyMatch.ignore !== true) {
+                const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
+                if (proxyMatch.delay && typeof proxyMatch.delay === "number") {
+                    yield delay_1.sleep(proxyMatch.delay);
+                }
+                // handle strict validate body
+                if (proxyMatch.validate && !shared_1.isEmptyObject(proxyMatch.validate)) {
+                    const { body } = req;
+                    shared_1.forEach(body, (bodyK, bodyV) => {
+                        if (!(bodyK in proxyMatch.validate) ||
+                            typeof bodyV !== proxyMatch.validate[bodyK]) {
+                            res
+                                .status(400)
+                                .send("Error:ValidateBody Failed, Please checke body params");
+                            res.end();
+                        }
+                    });
+                }
+                let responseBody;
+                // handle js
+                if (/js$/gi.test(curPath)) {
+                    const jsContent = fs.readFileSync(curPath, "utf-8");
+                    const vmFun = vm.run(jsContent);
+                    responseBody = vmFun(req);
+                    // const jsRule = require(curPath);
+                    // responseBody = jsRule(req);
+                }
+                else {
+                    // handle json
+                    responseBody = fs.readFileSync(curPath, "utf-8");
+                }
+                // transform string to json for mockjs
+                // only json file will parse
+                responseBody =
+                    shared_1.isString(responseBody) && /json$/gi.test(curPath)
+                        ? JSON.parse(responseBody)
+                        : responseBody;
+                const result = mock.mock(responseBody);
+                // set custom response headers
+                res.set(responseHeaders);
+                res.send(result);
+                res.end();
             }
             else {
-                // handle json
-                responseBody = fs.readFileSync(curPath, "utf-8");
+                // add custom requestHeaders to matched items.
+                const proxyHeaders = Object.assign({}, req.headers, requestHeaders);
+                req.headers = proxyHeaders;
+                next();
             }
-            // transform string to json for mockjs
-            responseBody = shared_1.isString(responseBody) ? JSON.parse(responseBody) : responseBody;
-            const result = mock.mock(responseBody);
-            // set custom response headers
-            res.set(responseHeaders);
-            res.send(result);
-            res.end();
-        }
-        else {
-            // add custom requestHeaders to matched items.
-            const proxyHeaders = Object.assign({}, req.headers, requestHeaders);
-            req.headers = proxyHeaders;
-            next();
-        }
-    }));
-});
+        }));
+    }
+    else {
+        // middleware mode
+        return (req, res, next) => {
+            const proxyURL = `${req.method} ${req.url}`;
+            const proxyMatch = matchRoute_1.getMatechedRoute(proxyLists, proxyURL);
+            //if there is a request config in the config file
+            if (proxyMatch && proxyMatch.ignore !== true) {
+                const curPath = path.join(process.cwd(), config.mockFileName, proxyMatch.path);
+                // can not async , so sleep can not use
+                // can not get body, so validate can not use
+                let responseBody;
+                // handle js
+                if (/js$/gi.test(curPath)) {
+                    const jsContent = fs.readFileSync(curPath, "utf-8");
+                    const vmFun = vm.run(jsContent);
+                    responseBody = vmFun(req);
+                    // const jsRule = require(curPath);
+                    // responseBody = jsRule(req);
+                }
+                else {
+                    // handle json
+                    responseBody = fs.readFileSync(curPath, "utf-8");
+                }
+                // transform string to json for mockjs
+                // only json file will parse
+                responseBody =
+                    shared_1.isString(responseBody) && /json$/gi.test(curPath)
+                        ? JSON.parse(responseBody)
+                        : responseBody;
+                const result = mock.mock(responseBody);
+                // can not set headers
+                res.end(shared_1.isString(result) ? result : JSON.stringify(result));
+            }
+            else {
+                // add custom requestHeaders to matched items.
+                const proxyHeaders = Object.assign({}, req.headers, requestHeaders);
+                req.headers = proxyHeaders;
+                next();
+            }
+        };
+    }
+};
 exports.default = proxy;

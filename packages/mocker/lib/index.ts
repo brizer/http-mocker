@@ -5,12 +5,15 @@ import { Application } from "express";
 
 const deepmerge = require("deepmerge");
 
-const out = (app:Application, options: Options | unknown = {}) => {
+const out = (app:Application, options: Options | unknown = {}, isMiddleware?:boolean) => {
 
   const config = getConfig(process.cwd());
   const proxyOptions = deepmerge(config, options);
-
-  proxy(app, proxyOptions);
+  if(isMiddleware){
+    return proxy(app, proxyOptions, isMiddleware);
+  }
+  proxy(app, proxyOptions, isMiddleware);
 };
 
 export const mocker = out;
+export const mockerMiddleware = out(undefined,{},true);

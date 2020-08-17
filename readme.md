@@ -114,6 +114,24 @@ mocker(app);
 app.listen(8002);
 ```
 
+
+### Work as middleware for express and connect
+
+Support connect and express，some feature such as sleep, validate, custom header is limit.
+
+``` js
+const express = require("express");
+const { mockerMiddleware } = require("http-mockjs");
+
+const app = express();
+const port = 3000;
+app.use(mockerMiddleware);
+//
+//...
+```
+
+
+
 ### Work with http-server and other command line tools:
 
 By proxying the http-server, the request is proxyed to the proxy server started by `http-mockjs server`.
