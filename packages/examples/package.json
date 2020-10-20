@@ -1,7 +1,6 @@
 {
-  "name": "examples",
-  "version": "1.4.3",
-  "private": true,
+  "name": "http-mockjs-examples",
+  "version": "1.4.4",
   "description": "Examples for http-mocker",
   "keywords": [
     "examples",
