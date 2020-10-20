@@ -15,4 +15,4 @@ const out = (app, options = {}, isMiddleware) => {
     proxy_1.default(app, proxyOptions, isMiddleware);
 };
 exports.mocker = out;
-exports.mockerMiddleware = out(undefined, {}, true);
+exports.mockerMiddleware = () => out(undefined, {}, true);

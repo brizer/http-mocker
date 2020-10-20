@@ -4,7 +4,7 @@ const { mockerMiddleware } = require("../../mocker");
 
 const app = express();
 const port = 3000;
-app.use(mockerMiddleware);
+app.use(mockerMiddleware());
 
 //view engine setup
 app.set('views', path.join(__dirname, './views'));

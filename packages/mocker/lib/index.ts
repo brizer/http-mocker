@@ -16,4 +16,4 @@ const out = (app:Application, options: Options | unknown = {}, isMiddleware?:boo
 };
 
 export const mocker = out;
-export const mockerMiddleware = out(undefined,{},true);
+export const mockerMiddleware = ()=>out(undefined,{},true);
