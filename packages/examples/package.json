@@ -1,6 +1,6 @@
 {
   "name": "examples",
-  "version": "1.4.3",
+  "version": "1.4.3-alpha",
   "private": true,
   "description": "Examples for http-mocker",
   "keywords": [
