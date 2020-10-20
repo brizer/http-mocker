@@ -24,6 +24,7 @@
     "url": "https://github.com/brizer/http-mocker/issues"
   },
   "dependencies": {
+    "@tomato-node/process": "0.0.7",
     "chokidar": "^3.0.0",
     "commander": "^3.0.2",
     "cosmiconfig": "^5.2.0",

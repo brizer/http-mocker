@@ -1,5 +1,5 @@
 import color from "http-mockjs-util/color";
-import { spawn, ChildProcess } from "child_process";
+import { cp } from "@tomato-node/process";
 import { Input } from "../commands";
 import { AbstractAction } from "./abstract.action";
 export class UIAction extends AbstractAction {
@@ -8,19 +8,8 @@ export class UIAction extends AbstractAction {
     await this.initUiProcess();
   }
   private async initUiProcess() {
-    const uiProcess: ChildProcess = spawn("http-mockjs-ui");
 
-    uiProcess.stdout.on("data", data => {
-      console.log(`${data}`);
-    });
-
-    uiProcess.stderr.on("data", data => {
-      console.log(color(`${data}`).red);
-    });
-
-    uiProcess.on("close", code => {
-      console.log(`child process exited with code ${code}`);
-    });
-    
+    const { stdout } = await cp.command('http-mockjs-ui');
+    console.log(stdout)
   }
 }
