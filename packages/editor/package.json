@@ -29,9 +29,9 @@
   "scripts": {
     "dev:ui": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js",
     "dev:server": "cross-env NODE_ENV=development nodemon",
-    "build": "rm -rf dist && npm run build:editor:ui && npm run build:editor:server",
+    "build": "rm -rf dist && npm run build:editor:ui && npm run build:editor:server && cp -r server/views dist/server/views",
     "build:editor:ui": "cd ../editor && cross-env NODE_ENV=production webpack --config ./webpack.config.js",
-    "build:editor:server": "cd server && cross-env NODE_ENV=production tsc --project ../tsconfig.server.json"
+    "build:editor:server": "cd server && cross-env NODE_ENV=production tsc --project ../tsconfig.server.json "
   },
   "bugs": {
     "url": "https://github.com/brizer/http-mocker/issues"
@@ -39,6 +39,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "chokidar": "^3.0.1",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "http-mockjs-util": "^4.4.2",
     "i18next": "^13.1.5",

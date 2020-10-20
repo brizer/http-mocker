@@ -13,7 +13,7 @@ class SocketClient {
     private io :any
     private connected:boolean
     constructor(){
-        this.io = io.connect('http://localhost:4000')
+        this.io = io.connect(`http://localhost:${(window as any).realPort}`)
         this.init()
     }
     private init(){

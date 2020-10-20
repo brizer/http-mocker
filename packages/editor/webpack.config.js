@@ -40,9 +40,9 @@ module.exports = env => ({
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-        template: path.resolve('./ui/index.html')
-    }),
+    // new HtmlWebpackPlugin({
+    //     template: path.resolve('./ui/index.html')
+    // }),
     new CopyPlugin([
       {from:'ui/locales',to:'locales'}
     ]),

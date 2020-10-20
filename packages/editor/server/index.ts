@@ -11,16 +11,16 @@ import { Watcher } from './service/watchService';
 
 
 const defaultPort = 4000
-
+let realPort;
 export const main = async () => {
 
     try {
-        const port = await portfinder.getPortPromise({
+        realPort = await portfinder.getPortPromise({
             port: defaultPort
         })
         
-        const server  = app.listen(port,()=>{
-            console.log(color(`server is launch in url: http://localhost:${port}`).green)
+        const server  = app.listen(realPort,()=>{
+            console.log(color(`server is launch in url: http://localhost:${realPort}`).green)
         })
         socket(io(server))
 
@@ -34,13 +34,23 @@ export const main = async () => {
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
-
+app.engine('.html', require('ejs').__express)
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
 const staticPath = path.resolve(__dirname,'../ui')
 app.use(express.static(staticPath))
+
+main()
+
+app.get('/', function(req, res){
+    res.render('users', {
+      title: "Http-mockjs",
+      realPort
+    });
+  });
 
 app.use('/api',apiRouter)
 new Watcher()
 
 
-main()
 
