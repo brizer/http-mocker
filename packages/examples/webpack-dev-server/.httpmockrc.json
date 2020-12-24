@@ -15,6 +15,10 @@
             "path": "/api/post.json",
             "ignore": false
         },
+        "PUT /p/putData.do": {
+            "path": "/api/put.json",
+            "ignore": false
+        },
         "GET /user/:id": {
             "path": "/api/user.json",
             "ignore": false,

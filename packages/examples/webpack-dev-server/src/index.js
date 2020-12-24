@@ -9,6 +9,7 @@ const pathNode5 = document.querySelector('#j-path-5')
 const pathNode6 = document.querySelector('#j-path-6')
 const pathNode7 = document.querySelector('#j-path-7')
 const sendNode = document.querySelector('#j-send')
+const sendPutNode = document.querySelector('#j-send-put')
 contentNode.innerHTML = 'hello world,anyone'
 
 setTimeout(()=>{
@@ -22,6 +23,14 @@ setTimeout(()=>{
 
 sendNode.addEventListener('click',()=>{
     Axios.post('/p/postData.do').then(data=>{
+        const name = data;
+        contentNode.innerHTML = `hello world,${data.data.name}`
+        console.warn(data)
+    })
+},false)
+
+sendPutNode.addEventListener('click',()=>{
+    Axios.put('/p/putData.do').then(data=>{
         const name = data;
         contentNode.innerHTML = `hello world,${data.data.name}`
         console.warn(data)
