@@ -198,6 +198,14 @@ module.exports = function (req) {
 
 #### routes.validate 对body进行严格校验
 
+首先需要开启对body的解析parseBody:true。
+
+``` json
+{
+    "parseBody": true
+}
+```
+
 对body参数进行key和type校验：
 
 ``` json
@@ -225,6 +233,7 @@ module.exports = function (req) {
     "requestHeaders": {
         "cookie":"Token=123ssfsfesfe"
     },
+    "parseBody": true,
     "routes":{
         "GET /j/getSomeData.json":
         {

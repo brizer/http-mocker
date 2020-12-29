@@ -39,4 +39,5 @@ export interface Config {
     port?:number;
     responseHeaders?:object;
     requestHeaders?:object;
+    parseBody?:boolean;
 }

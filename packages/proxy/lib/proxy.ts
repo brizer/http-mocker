@@ -57,6 +57,7 @@ const proxy = (
   let proxyLists = config.routes;
   let responseHeaders = config.responseHeaders;
   let requestHeaders = config.requestHeaders;
+  let isParseBody = false;
 
   const vm = new NodeVM();
   //print info
@@ -70,14 +71,17 @@ const proxy = (
     proxyLists = config.routes;
     responseHeaders = config.responseHeaders;
     requestHeaders = config.requestHeaders;
+    isParseBody = config.parseBody;
     console.log(
       color(" The content of http-mockjs'config file has changed").green
     );
   });
   // normal mode
   if (!isMiddleware) {
-    app.use(express.json()); // for parsing application/json
-    app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+    if(isParseBody){
+      app.use(express.json()); // for parsing application/json
+      app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+    }
     //filter configed api and map local
     app.all("/*", async (req, res, next) => {
       const proxyURL: string = `${req.method} ${req.originalUrl}`;
@@ -94,7 +98,7 @@ const proxy = (
           await sleep(proxyMatch.delay);
         }
         // handle strict validate body
-        if (proxyMatch.validate && !isEmptyObject(proxyMatch.validate)) {
+        if (isParseBody && proxyMatch.validate && !isEmptyObject(proxyMatch.validate)) {
           const { body } = req;
           forEach(body, (bodyK, bodyV) => {
             if (

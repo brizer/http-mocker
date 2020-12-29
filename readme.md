@@ -214,6 +214,14 @@ Sometimes you want to keep the configuration, but you don't want it to take effe
 
 #### routes.validate 
 
+You have to set `parseBody:true` first:
+
+``` json
+{
+    "parseBody": true
+}
+```
+
 validate params in body by key and typeof value:
 
 ``` json
@@ -240,6 +248,7 @@ Here is an example of a complete configuration file:
     "requestHeaders": {
         "cookie":"Token=123ssfsfesfe"
     },
+    "parseBody": true,
     "routes":{
         "GET /j/getSomeData.json":
         {

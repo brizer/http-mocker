@@ -52,6 +52,7 @@ const proxy = (app, config, isMiddleware = false) => {
     let proxyLists = config.routes;
     let responseHeaders = config.responseHeaders;
     let requestHeaders = config.requestHeaders;
+    let isParseBody = false;
     const vm = new vm2_1.NodeVM();
     //print info
     printProxyInfo(config);
@@ -63,12 +64,15 @@ const proxy = (app, config, isMiddleware = false) => {
         proxyLists = config.routes;
         responseHeaders = config.responseHeaders;
         requestHeaders = config.requestHeaders;
+        isParseBody = config.parseBody;
         console.log(color_1.default(" The content of http-mockjs'config file has changed").green);
     });
     // normal mode
     if (!isMiddleware) {
-        app.use(express.json()); // for parsing application/json
-        app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+        if (isParseBody) {
+            app.use(express.json()); // for parsing application/json
+            app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+        }
         //filter configed api and map local
         app.all("/*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             const proxyURL = `${req.method} ${req.originalUrl}`;
@@ -80,7 +84,7 @@ const proxy = (app, config, isMiddleware = false) => {
                     yield delay_1.sleep(proxyMatch.delay);
                 }
                 // handle strict validate body
-                if (proxyMatch.validate && !shared_1.isEmptyObject(proxyMatch.validate)) {
+                if (isParseBody && proxyMatch.validate && !shared_1.isEmptyObject(proxyMatch.validate)) {
                     const { body } = req;
                     shared_1.forEach(body, (bodyK, bodyV) => {
                         if (!(bodyK in proxyMatch.validate) ||
